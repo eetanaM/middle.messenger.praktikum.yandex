@@ -1,0 +1,1 @@
+// index file to export all pages from one directory
