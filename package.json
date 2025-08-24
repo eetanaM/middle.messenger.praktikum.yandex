@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "vite": "^7.1.2"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8"
   }
 }
