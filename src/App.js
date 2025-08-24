@@ -1,0 +1,1 @@
+// App implementation with handlebars compiler gonna be here
