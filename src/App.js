@@ -3,40 +3,45 @@ import Handlebars from "handlebars";
 import * as Pages from "./pages";
 
 import * as ENV from "./utils/constants/consts.js"
-import { TemplateRenderer } from './utils/templateRenderer.js'
+import { TemplateRenderer } from "./utils/templateRenderer.js"
 
 import Button from "./components/partials/Button.js";
+import MainLink from "./components/partials/MainLink.js";
 
 Handlebars.registerPartial("Button", Button)
+Handlebars.registerPartial("MainLink", MainLink)
 
 // App implementation with handlebars compiler gonna be here
 
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
-            accessToken: '',
-            refreshToken: '',
+            currentPage: ENV.PAGES.AUTH_PAGE,
+            accessToken: "",
+            refreshToken: "",
         }
-        this.appElement = document.getElementById('app')
+        this.appElement = document.getElementById("app")
     }
 
     render() {
         let template;
         let templateData;
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-                template = Handlebars.compile(Pages.PreviewPage);
-                templateData = {  
-                    links: [
-                        { pageSrc: ENV.PAGES.AUTH_PAGE, textContent: TemplateRenderer.escapeHtml("Авторизация")},
-                        { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml("Регистрация")},
-                        { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: TemplateRenderer.escapeHtml("Чаты")},
-                        { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: TemplateRenderer.escapeHtml("404")},
-                        { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml("50*")},
-                    ]
-                }
+            template = Handlebars.compile(Pages.PreviewPage);
+            templateData = {  
+                links: [
+                    { pageSrc: ENV.PAGES.AUTH_PAGE, textContent: TemplateRenderer.escapeHtml("Авторизация")},
+                    { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml("Регистрация")},
+                    { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: TemplateRenderer.escapeHtml("Чаты")},
+                    { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: TemplateRenderer.escapeHtml("404")},
+                    { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml("50*")},
+                ]
+            }
         } else if (this.state.currentPage === ENV.PAGES.AUTH_PAGE) {
             template = Handlebars.compile(Pages.AuthorizationPage);
+            templateData = {
+
+            }
 
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(/* registerPage.hbs link */); // compile register page
@@ -81,11 +86,11 @@ export default class App {
 
     attachEventListeners() {
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            const links = document.querySelectorAll('.preview-page__links li a')
+            const links = document.querySelectorAll(".preview-page__links li a")
             // Attaching event listeners on links for changing pages and rerender
             links.forEach((node) => {
-                const pageSrc = node.getAttribute('data-pagesrc')
-                node.addEventListener('click', (e) => {
+                const pageSrc = node.getAttribute("data-pagesrc")
+                node.addEventListener("click", (e) => {
                     e.preventDefault();
                     this.changePage(pageSrc)
                 })

@@ -1,0 +1,1 @@
+export default `<a href={{href}} class="{{parentClassName}}_main-link">{{text}}</a>`

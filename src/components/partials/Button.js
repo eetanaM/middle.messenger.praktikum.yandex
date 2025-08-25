@@ -1,1 +1,1 @@
-export default `<button id={{ id }}> {{ text }}</button>`
+export default `<button id={{ id }} class="{{parentClassName}}_main-button"> {{ text }}</button>`

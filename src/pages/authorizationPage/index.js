@@ -1,1 +1,1 @@
-export { default as AuthorizationPage } from './authorizationPage.hbs?raw'
+export { default as AuthorizationPage } from "./authorizationPage.hbs?raw"
