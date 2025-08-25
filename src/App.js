@@ -4,12 +4,16 @@ import * as Pages from "./pages";
 
 import * as ENV from "./utils/constants/consts.js"
 
+import Button from "./components/partials/Button.js";
+
+Handlebars.registerPartial("Button", Button)
+
 // App implementation with handlebars compiler gonna be here
 
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
+            currentPage: ENV.PAGES.AUTH_PAGE,
             accessToken: '',
             refreshToken: '',
         }
@@ -19,7 +23,7 @@ export default class App {
     render() {
         let template;
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            template = Handlebars.compile(Pages.PreviewPage); // compile preview page
+            template = Handlebars.compile(Pages.PreviewPage);
             this.appElement.innerHTML = template({
                 links: [
                     { pageSrc: ENV.PAGES.AUTH_PAGE, textContent: "Авторизация"},
@@ -31,54 +35,56 @@ export default class App {
             })
             this.attachEventListeners()
         } else if (this.state.currentPage === ENV.PAGES.AUTH_PAGE) {
-            template = Handlebars.compile(/* authPage.hbs link */); // compile auth page
-            this.appElement.textContent = template({
-                /* 
-                    auth page data
-                */
+            template = Handlebars.compile(Pages.AuthorizationPage);
+            this.appElement.innerHTML = template({
+
             })
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(/* registerPage.hbs link */); // compile register page
-            this.appElement.textContent = template({
+            this.appElement.innerHTML = template({
                 /* 
                     register page data
                 */
             })
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(/* mainContentPage.hbs link */); // compile main content page
-            this.appElement.textContent = template({
+            this.appElement.innerHTML = template({
                 /* 
                     main content page data
                 */
             })
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
             template = Handlebars.compile(/* 404Page.hbs link */); // compile 404 page
-            this.appElement.textContent = template({
+            this.appElement.innerHTML = template({
                 /* 
                     404 page data
                 */
             })
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             template = Handlebars.compile(/* 500Page.hbs link */); // compile 500 page
-            this.appElement.textContent = template({
+            this.appElement.innerHTML = template({
                 /* 
                     500 page data
                 */
             })
         } else {
-            /* 
-                describe logic when app couldn't compile template
-            */
+            template = Handlebars.compile(/* 404Page.hbs link */); // compile 404 page
+            this.appElement.innerHTML = template({
+                /* 
+                    404 page data
+                */
+            })
         }
     }
 
     attachEventListeners() {
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
             const links = document.querySelectorAll('.preview-page__links li a')
-            // Вешаем слушатели событий для перехода на другие страницы и ререндера
+            // Attaching event listeners on links for changing pages and rerender
             links.forEach((node) => {
                 const pageSrc = node.getAttribute('data-pagesrc')
-                node.addEventListener('click', () => {
+                node.addEventListener('click', (e) => {
+                    e.preventDefault();
                     this.changePage(pageSrc)
                 })
             })
