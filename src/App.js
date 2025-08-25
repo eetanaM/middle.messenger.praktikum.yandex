@@ -3,6 +3,7 @@ import Handlebars from "handlebars";
 import * as Pages from "./pages";
 
 import * as ENV from "./utils/constants/consts.js"
+import { TemplateRenderer } from './utils/templateRenderer.js'
 
 import Button from "./components/partials/Button.js";
 
@@ -13,7 +14,7 @@ Handlebars.registerPartial("Button", Button)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.AUTH_PAGE,
+            currentPage: ENV.PAGES.PREVIEW_PAGE,
             accessToken: '',
             refreshToken: '',
         }
@@ -22,23 +23,21 @@ export default class App {
 
     render() {
         let template;
+        let templateData;
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            template = Handlebars.compile(Pages.PreviewPage);
-            this.appElement.innerHTML = template({
-                links: [
-                    { pageSrc: ENV.PAGES.AUTH_PAGE, textContent: "Авторизация"},
-                    { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: "Регистрация"},
-                    { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: "Чаты"},
-                    { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: "404"},
-                    { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: "50*"},
-                ]
-            })
-            this.attachEventListeners()
+                template = Handlebars.compile(Pages.PreviewPage);
+                templateData = {  
+                    links: [
+                        { pageSrc: ENV.PAGES.AUTH_PAGE, textContent: TemplateRenderer.escapeHtml("Авторизация")},
+                        { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml("Регистрация")},
+                        { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: TemplateRenderer.escapeHtml("Чаты")},
+                        { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: TemplateRenderer.escapeHtml("404")},
+                        { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml("50*")},
+                    ]
+                }
         } else if (this.state.currentPage === ENV.PAGES.AUTH_PAGE) {
             template = Handlebars.compile(Pages.AuthorizationPage);
-            this.appElement.innerHTML = template({
 
-            })
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(/* registerPage.hbs link */); // compile register page
             this.appElement.innerHTML = template({
@@ -75,6 +74,9 @@ export default class App {
                 */
             })
         }
+
+        TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+        this.attachEventListeners();
     }
 
     attachEventListeners() {
