@@ -1,0 +1,35 @@
+@import "./variables.less";
+
+.titlePageLayout() {
+    height: 630px;
+    width: 550px;
+    border-radius: 15px;
+    box-shadow: @block-shadow;
+    background-color: @layout-bgc;
+    padding: 10px 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.mainButton() {
+    background-color: @main-bgc;
+    border: 1px solid black;
+    border-radius: 8px;
+    min-width: 150px;
+    min-height: 50px;
+    padding: 10px 45px;
+    
+    font: inherit;
+    color: white;
+    font-weight: 300;
+    font-size: 16px;
+
+    &:hover {
+        cursor: pointer;
+        color: @link-hover-font-color;
+    }
+}
