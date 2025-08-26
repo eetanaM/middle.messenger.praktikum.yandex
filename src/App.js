@@ -20,7 +20,7 @@ Handlebars.registerPartial("AuthForm", AuthForm)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
+            currentPage: ENV.PAGES.REGISTER_PAGE,
             accessToken: "",
             refreshToken: "",
         }
@@ -63,6 +63,23 @@ export default class App {
             template = Handlebars.compile(Pages.RegisterPage);
             templateData = {
                 logoUrl: logo,
+                inputs: [
+                    { type: "email", name: "email", placeholder: "Email"},
+                    { type: "login", name: "login", placeholder: "Логин"},
+                    { type: "text", name: "firstname", placeholder: "Имя"},
+                    { type: "text", name: "lastname", placeholder: "Фамилия"},
+                    { type: "tel", name: "phone", placeholder: "Телефон"},
+                    { type: "password", name: "password", placeholder: "Пароль"},
+                    { type: "password", name: "password-confirm", placeholder: "Подтвердите пароль"},
+                ],
+                button: {
+                    ID: 'register-button',
+                    textContent: TemplateRenderer.escapeHtml("Зарегистрироваться")
+                },
+                link: {
+                    href: "#",
+                    textContent: TemplateRenderer.escapeHtml("Уже есть аккаунт?")
+                }
             }
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(/* mainContentPage.hbs link */); // compile main content page
