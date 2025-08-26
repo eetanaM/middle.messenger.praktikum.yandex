@@ -1,11 +1,14 @@
 @import "./variables.less";
 @import "./mixins.less";
 
-body {
+*{
     box-sizing: border-box;
+    font-family: @main-font-family;
+}
+
+body {
     margin: 0;
     padding: 0;
-    font-family: @main-font-family;
 }
 
 #app {
@@ -16,6 +19,8 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+// basic components
 
 .app__main-button {
     .mainButton;
@@ -33,6 +38,10 @@ body {
     margin-top: 30px;
 }
 
+// **basic components
+
+// authorization page
+
 .authorization {
     .titlePageLayout;
 }
@@ -45,5 +54,103 @@ body {
     align-items: center;
 }
 
+// **authorization page
+
+// main-content page
+
+.main-content {
+    height: 100%;
+    width: 100%;
+    background-color: @main-layout-bgc;
+    display: flex;
+
+    &__menu {
+        height: 100%;
+        width: 350px;
+        border-right: 1px solid rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        
+        &_header {
+            .mainContentMenuBlock;
+
+            &_avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 30px;
+                background-color: @auth-layout-bgc;
+                border: 1px solid @components-bgc;
+
+                & img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &_profile-name {
+                margin-left: 36px;
+                font-size: 20px;
+                font-style: italic;
+                font-weight: 500;
+            }
+        }
+
+        &_search {
+            .mainContentMenuBlock;
+            height: 40px;
+            min-height: 40px;
+            padding: 4px 8px;
+
+            & .app__main-input {
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                font-size: 18px;
+            }
+        }
+
+        &_chat-item {
+            .mainContentMenuBlock;
+            height: 80px;
+            min-height: 80px;
+
+            &_avatar {
+                width: 50px;
+                height: 50px;
+                border-radius: 30px;
+                background-color: @auth-layout-bgc;
+                border: 1px solid @components-bgc;
+
+                & img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: @chat-item-hover-bgc;
+            }
+        }
+
+        & > .app__main-link {
+            align-self: center;
+        }
+    }
+
+    &__chat {
+        flex-grow: 1;
+        background-color: @chat-overlay-bgc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+// **main-content page
+
 @import '../pages/previewPage/styles/previewPage.less';
-@import '../pages/authorizationPage/styles/authorizationPage.less';

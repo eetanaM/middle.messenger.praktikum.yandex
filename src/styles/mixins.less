@@ -5,7 +5,7 @@
     width: 550px;
     border-radius: 15px;
     box-shadow: @block-shadow;
-    background-color: @layout-bgc;
+    background-color: @auth-layout-bgc;
     padding: 10px 30px;
 
     display: flex;
@@ -15,7 +15,7 @@
 }
 
 .mainButton() {
-    background-color: @main-bgc;
+    background-color: @components-bgc;
     border: 1px solid black;
     border-radius: 8px;
     min-width: 150px;
@@ -67,4 +67,16 @@
     &:focus {
         outline: none;
     }
+}
+
+.mainContentMenuBlock() {
+    width: 100%;
+    height: 100px;
+    min-height: 100px;
+    box-shadow: @chat-component-shadow;
+    border-radius: 0 0 5px 5px;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
 }

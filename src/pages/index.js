@@ -1,4 +1,5 @@
 // index file to export all pages from one directory
 export { PreviewPage } from "./previewPage"
-export { AuthorizationPage } from "./authorizationPage"
-export { RegisterPage } from './registerPage'
+export { LoginPage } from "./authorization/loginPage"
+export { RegisterPage } from "./authorization/registerPage"
+export { MainContentPage } from "./mainContentPage"

@@ -20,7 +20,7 @@ Handlebars.registerPartial("AuthForm", AuthForm)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.REGISTER_PAGE,
+            currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
             accessToken: "",
             refreshToken: "",
         }
@@ -42,7 +42,7 @@ export default class App {
                 ]
             }
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            template = Handlebars.compile(Pages.AuthorizationPage);
+            template = Handlebars.compile(Pages.LoginPage);
             templateData = {
                 logoUrl: logo,
                 inputs: [
@@ -82,33 +82,27 @@ export default class App {
                 }
             }
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
-            template = Handlebars.compile(/* mainContentPage.hbs link */); // compile main content page
-            this.appElement.innerHTML = template({
-                /* 
-                    main content page data
-                */
-            })
-        } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
-            template = Handlebars.compile(/* 404Page.hbs link */); // compile 404 page
-            this.appElement.innerHTML = template({
-                /* 
-                    404 page data
-                */
-            })
+            template = Handlebars.compile(Pages.MainContentPage);
+            templateData = {
+                link: {
+                    href: "#",
+                    text: TemplateRenderer.escapeHtml("Назад к превью")
+                }
+            }
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
-            template = Handlebars.compile(/* 500Page.hbs link */); // compile 500 page
-            this.appElement.innerHTML = template({
+            template = Handlebars.compile(/* 50* page template */);
+            templateData = {
                 /* 
-                    500 page data
+                    50* page data
                 */
-            })
+            }
         } else {
-            template = Handlebars.compile(/* 404Page.hbs link */); // compile 404 page
-            this.appElement.innerHTML = template({
+            template = Handlebars.compile(/* 404 page template */);
+            templateData = {
                 /* 
                     404 page data
                 */
-            })
+            }
         }
 
         TemplateRenderer.renderTemplate(this.appElement, template, templateData);
@@ -120,25 +114,42 @@ export default class App {
             const links = document.querySelectorAll(".preview-page__links li a")
             // Attaching event listeners on links for changing pages and rerender
             links.forEach((node) => {
-                const pageSrc = node.getAttribute("data-pagesrc")
+                const pageSrc = node.dataset.pagesrc
                 node.addEventListener("click", (e) => {
                     e.preventDefault();
                     this.changePage(pageSrc)
                 })
             })
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            /* 
-                add buttons and set event listeners with callback which executes this.changePage() and others
-            */
+            const signInButton = document.querySelector("#login-button")
+    
+            // Attaching event listener to go back to preview page. Temporary
+            const pageSrc = ENV.PAGES.PREVIEW_PAGE
+            signInButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.changePage(pageSrc)
+            })
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            /* 
-                add buttons and set event listeners with callback which executes this.changePage() and others
-            */
+            const signInButton = document.querySelector("#register-button")
+    
+            // Attaching event listener to go back to preview page. Temporary
+            const pageSrc = ENV.PAGES.PREVIEW_PAGE
+            signInButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.changePage(pageSrc)
+            })
         }
          else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
-            /* 
-                add buttons and set event listeners with callback which executes this.changePage() and others
-            */
+            const homeLink = document.querySelector(".main-content__menu > .app__main-link")
+
+            // Attaching event listener to go back to preview page. Temporary
+            const pageSrc = ENV.PAGES.PREVIEW_PAGE
+
+            homeLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.changePage(pageSrc)
+            })
+
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
             /* 
                 add buttons and set event listeners with callback which executes this.changePage() and others
