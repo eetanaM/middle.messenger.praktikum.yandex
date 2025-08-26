@@ -1,8 +1,9 @@
 <main class="authorization">
     <form action="" class="authorization__auth-form">
-        <img src="../../../images/logo/logo.png" alt="Логотип">
-        {{> Button id="sign-in" parentClassName="authorization__auth-form" text="Войти" }}
-        {{> Button id="register" parentClassName="authorization__auth-form" text="Зарегистрироваться" }}
-        {{> MainLink href="#" parentClassName="authorization__auth-form" text="Нет аккаунта?" }}
+        <img src="../../../images/logo/logo.png" class="app__main-logo" alt="Логотип">
+        {{> FormInput type="login" name="login" placeholder="Email/login"}}
+        {{> FormInput type="password" name="password" placeholder="Пароль"}}
+        {{> Button id="sign-in" text="Войти" }}
+        {{> MainLink href="#" text="Нет аккаунта?" }}
     </form>
 </main>

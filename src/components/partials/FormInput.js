@@ -1,0 +1,1 @@
+export default `<input type="{{type}}" name="{{name}}" placeholder="{{placeholder}}" class="app__main-input"/>`

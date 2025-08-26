@@ -7,11 +7,11 @@ import { TemplateRenderer } from "./utils/templateRenderer.js"
 
 import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
+import FormInput from "./components/partials/FormInput.js";
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
-
-// App implementation with handlebars compiler gonna be here
+Handlebars.registerPartial("FormInput", FormInput)
 
 export default class App {
     constructor() {

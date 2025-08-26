@@ -1,1 +1,1 @@
-export default `<a href={{href}} class="{{parentClassName}}_main-link">{{text}}</a>`
+export default `<a href="{{href}}" class="app__main-link">{{text}}</a>`
