@@ -8,12 +8,14 @@ import { TemplateRenderer } from "./utils/templateRenderer.js"
 import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
+import AuthForm from "./components/partials/AuthForm.js";
 
 import logo from "../images/logo/logo.png"
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
 Handlebars.registerPartial("FormInput", FormInput)
+Handlebars.registerPartial("AuthForm", AuthForm)
 
 export default class App {
     constructor() {
@@ -43,6 +45,18 @@ export default class App {
             template = Handlebars.compile(Pages.AuthorizationPage);
             templateData = {
                 logoUrl: logo,
+                inputs: [
+                    { type: "text", name: "login", placeholder: "Email/Login"},
+                    { type: "password", name: "password", placeholder: "Пароль"},
+                ],
+                button: {
+                    ID: 'login-button',
+                    textContent: TemplateRenderer.escapeHtml("Войти")
+                },
+                link: {
+                    href: "#",
+                    textContent: TemplateRenderer.escapeHtml("Нет аккаунта?")
+                }
             }
 
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
