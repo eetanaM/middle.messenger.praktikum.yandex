@@ -9,6 +9,8 @@ import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
 
+import logo from "../images/logo/logo.png"
+
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
 Handlebars.registerPartial("FormInput", FormInput)
@@ -40,18 +42,14 @@ export default class App {
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
             template = Handlebars.compile(Pages.AuthorizationPage);
             templateData = {
-                /* 
-                    login page data
-                */
+                logoUrl: logo,
             }
 
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(Pages.RegisterPage);
-            this.appElement.innerHTML = template({
-                /* 
-                    register page data
-                */
-            })
+            templateData = {
+                logoUrl: logo,
+            }
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(/* mainContentPage.hbs link */); // compile main content page
             this.appElement.innerHTML = template({
