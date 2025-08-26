@@ -3,6 +3,8 @@
 
 .preview-page__links {
     .titlePageLayout;
+    justify-content: center;
+    gap: 20px;
 
     & li {
         list-style-type: none;
@@ -14,6 +16,10 @@
             &:hover {
                 color: #02561E;
                 cursor: pointer;
+            }
+            &:focus {
+                outline: none;
+                text-decoration: underline;
             }
         }
     }

@@ -1,4 +1,5 @@
 @import "./variables.less";
+@import "./mixins.less";
 
 body {
     box-sizing: border-box;
@@ -30,6 +31,18 @@ body {
 
 .app__main-logo {
     margin-top: 30px;
+}
+
+.authorization {
+    .titlePageLayout;
+}
+
+.authorization__auth-form {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 @import '../pages/previewPage/styles/previewPage.less';

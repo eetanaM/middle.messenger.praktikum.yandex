@@ -16,7 +16,7 @@ Handlebars.registerPartial("FormInput", FormInput)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.AUTH_PAGE,
+            currentPage: ENV.PAGES.PREVIEW_PAGE,
             accessToken: "",
             refreshToken: "",
         }
@@ -30,21 +30,23 @@ export default class App {
             template = Handlebars.compile(Pages.PreviewPage);
             templateData = {  
                 links: [
-                    { pageSrc: ENV.PAGES.AUTH_PAGE, textContent: TemplateRenderer.escapeHtml("Авторизация")},
+                    { pageSrc: ENV.PAGES.LOGIN_PAGE, textContent: TemplateRenderer.escapeHtml("Вход")},
                     { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml("Регистрация")},
                     { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: TemplateRenderer.escapeHtml("Чаты")},
                     { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: TemplateRenderer.escapeHtml("404")},
                     { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml("50*")},
                 ]
             }
-        } else if (this.state.currentPage === ENV.PAGES.AUTH_PAGE) {
+        } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
             template = Handlebars.compile(Pages.AuthorizationPage);
             templateData = {
-
+                /* 
+                    login page data
+                */
             }
 
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            template = Handlebars.compile(/* registerPage.hbs link */); // compile register page
+            template = Handlebars.compile(Pages.RegisterPage);
             this.appElement.innerHTML = template({
                 /* 
                     register page data
@@ -95,7 +97,7 @@ export default class App {
                     this.changePage(pageSrc)
                 })
             })
-        } else if (this.state.currentPage === ENV.PAGES.AUTH_PAGE) {
+        } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
             /* 
                 add buttons and set event listeners with callback which executes this.changePage() and others
             */
