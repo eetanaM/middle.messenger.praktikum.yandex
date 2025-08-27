@@ -178,7 +178,7 @@
                     align-items: center;
 
                     font-size: 14px;
-                    font-weight:500;
+                    font-weight: 600;
                     color: #FFFFFF;
 
                     &[class*=disabled]{
@@ -194,6 +194,11 @@
 
             &[class*=active] {
                 background-color: @components-bgc;
+
+                & .main-content__menu_chat-item_messages-count_counter  {
+                    background-color: #fff;
+                    color: black;
+                }
             }
         }
 
