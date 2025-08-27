@@ -1,4 +1,4 @@
-export default `<div class="main-content__menu_chat-item" tabindex="1">
+export default `<div id={{chatItemId}} class="main-content__menu_chat-item" tabindex="1">
             <div class="main-content__menu_chat-item_avatar">
                 <img src={{avatarSrc}} alt="Profile photo">
             </div>

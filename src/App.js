@@ -3,6 +3,7 @@ import Handlebars from "handlebars";
 import * as Pages from "./pages";
 
 import * as ENV from "./utils/constants/consts.js"
+import * as MOCK from "./mocks/mockData.js"
 import { TemplateRenderer } from "./utils/templateRenderer.js"
 
 import Button from "./components/partials/Button.js";
@@ -10,8 +11,6 @@ import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
 import AuthForm from "./components/partials/AuthForm.js";
 import ChatItem from "./components/partials/ChatItem.js";
-
-import logo from "../images/logo/logo.png"
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
@@ -23,6 +22,7 @@ export default class App {
     constructor() {
         this.state = {
             currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
+            currentChatItemId: null,
             accessToken: "",
             refreshToken: "",
         }
@@ -34,113 +34,16 @@ export default class App {
         let templateData;
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
             template = Handlebars.compile(Pages.PreviewPage);
-            templateData = {  
-                links: [
-                    { pageSrc: ENV.PAGES.LOGIN_PAGE, textContent: TemplateRenderer.escapeHtml("Вход")},
-                    { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml("Регистрация")},
-                    { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: TemplateRenderer.escapeHtml("Чаты")},
-                    { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: TemplateRenderer.escapeHtml("404")},
-                    { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml("50*")},
-                ]
-            }
+            templateData = MOCK.PREVIEW_TEMPLATE_DATA;
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
             template = Handlebars.compile(Pages.LoginPage);
-            templateData = {
-                logoUrl: logo,
-                inputs: [
-                    { type: "text", name: "login", placeholder: "Email/Login"},
-                    { type: "password", name: "password", placeholder: "Пароль"},
-                ],
-                button: {
-                    ID: 'login-button',
-                    textContent: TemplateRenderer.escapeHtml("Войти")
-                },
-                link: {
-                    href: "#",
-                    textContent: TemplateRenderer.escapeHtml("Нет аккаунта?")
-                }
-            }
-
+            templateData = MOCK.LOGIN_TEMPLATE_DATA;
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(Pages.RegisterPage);
-            templateData = {
-                logoUrl: logo,
-                inputs: [
-                    { type: "email", name: "email", placeholder: "Email"},
-                    { type: "login", name: "login", placeholder: "Логин"},
-                    { type: "text", name: "firstname", placeholder: "Имя"},
-                    { type: "text", name: "lastname", placeholder: "Фамилия"},
-                    { type: "tel", name: "phone", placeholder: "Телефон"},
-                    { type: "password", name: "password", placeholder: "Пароль"},
-                    { type: "password", name: "password-confirm", placeholder: "Подтвердите пароль"},
-                ],
-                button: {
-                    ID: 'register-button',
-                    textContent: TemplateRenderer.escapeHtml("Зарегистрироваться")
-                },
-                link: {
-                    href: "#",
-                    textContent: TemplateRenderer.escapeHtml("Уже есть аккаунт?")
-                }
-            }
+            templateData = MOCK.REGISTER_TEMPLATE_DATA;
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(Pages.MainContentPage);
-            templateData = {
-                link: {
-                    href: "#",
-                    text: TemplateRenderer.escapeHtml("Назад к превью")
-                },
-                chatItems: [
-                    {
-                        avatarSrc: "../../../images/profile/avatar.png",
-                        chatName: "Chat Name",
-                        lastMessage: "Any text typed in last message column of the chat item",
-                        timeStamp: "15:35",
-                        disabled: "",
-                        unreadMessagesCount: 1,
-                    },
-                    {
-                        avatarSrc: "../../../images/profile/avatar.png",
-                        chatName: "Chat Name",
-                        lastMessage: "Last message",
-                        timeStamp: "14:12",
-                        disabled: "disabled",
-                        unreadMessagesCount: 0,
-                    },
-                    {
-                        avatarSrc: "../../../images/profile/avatar.png",
-                        chatName: "Chat Name",
-                        lastMessage: "Last message",
-                        timeStamp: "Вчера",
-                        disabled: "disabled",
-                        unreadMessagesCount: 0,
-                    },
-                    {
-                        avatarSrc: "../../../images/profile/avatar.png",
-                        chatName: "Chat Name",
-                        lastMessage: "Last message",
-                        timeStamp: "Пн",
-                        disabled: "",
-                        unreadMessagesCount: 4,
-                    },
-                    {
-                        avatarSrc: "../../../images/profile/avatar.png",
-                        chatName: "Chat Name",
-                        lastMessage: "Last message",
-                        timeStamp: "Вс",
-                        disabled: "disabled",
-                        unreadMessagesCount: 0,
-                    },
-                    {
-                        avatarSrc: "../../../images/profile/avatar.png",
-                        chatName: "Chat Name",
-                        lastMessage: "Last message",
-                        timeStamp: "01 авг.",
-                        disabled: "disabled",
-                        unreadMessagesCount: 0,
-                    },
-                ]
-            }
+            templateData = MOCK.MAIN_CONTENT_TEMPLATE_DATA;
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             template = Handlebars.compile(/* 50* page template */);
             templateData = {
@@ -193,9 +96,23 @@ export default class App {
         }
          else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             const homeLink = document.querySelector(".main-content__menu > .app__main-link")
+            const chatItems = document.querySelectorAll(".main-content__menu_chat-item")
+            const baseClass = "main-content__menu_chat-item"
 
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
+
+            chatItems.forEach((node) => {
+                node.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    let id = node.getAttribute("id");
+                    chatItems.forEach((node) => {
+                        node.setAttribute("class", baseClass)
+                    })
+                    node.setAttribute("class", baseClass + " active")
+                    this.state.currentChatItemId = id;
+                })
+            })
 
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
