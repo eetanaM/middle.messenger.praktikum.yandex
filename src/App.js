@@ -9,6 +9,7 @@ import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
 import AuthForm from "./components/partials/AuthForm.js";
+import ChatItem from "./components/partials/ChatItem.js";
 
 import logo from "../images/logo/logo.png"
 
@@ -16,6 +17,7 @@ Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
 Handlebars.registerPartial("FormInput", FormInput)
 Handlebars.registerPartial("AuthForm", AuthForm)
+Handlebars.registerPartial("ChatItem", ChatItem)
 
 export default class App {
     constructor() {
@@ -87,7 +89,57 @@ export default class App {
                 link: {
                     href: "#",
                     text: TemplateRenderer.escapeHtml("Назад к превью")
-                }
+                },
+                chatItems: [
+                    {
+                        avatarSrc: "../../../images/profile/avatar.png",
+                        chatName: "Chat Name",
+                        lastMessage: "Any text typed in last message column of the chat item",
+                        timeStamp: "15:35",
+                        disabled: "",
+                        unreadMessagesCount: 1,
+                    },
+                    {
+                        avatarSrc: "../../../images/profile/avatar.png",
+                        chatName: "Chat Name",
+                        lastMessage: "Last message",
+                        timeStamp: "14:12",
+                        disabled: "disabled",
+                        unreadMessagesCount: 0,
+                    },
+                    {
+                        avatarSrc: "../../../images/profile/avatar.png",
+                        chatName: "Chat Name",
+                        lastMessage: "Last message",
+                        timeStamp: "Вчера",
+                        disabled: "disabled",
+                        unreadMessagesCount: 0,
+                    },
+                    {
+                        avatarSrc: "../../../images/profile/avatar.png",
+                        chatName: "Chat Name",
+                        lastMessage: "Last message",
+                        timeStamp: "Пн",
+                        disabled: "",
+                        unreadMessagesCount: 4,
+                    },
+                    {
+                        avatarSrc: "../../../images/profile/avatar.png",
+                        chatName: "Chat Name",
+                        lastMessage: "Last message",
+                        timeStamp: "Вс",
+                        disabled: "disabled",
+                        unreadMessagesCount: 0,
+                    },
+                    {
+                        avatarSrc: "../../../images/profile/avatar.png",
+                        chatName: "Chat Name",
+                        lastMessage: "Last message",
+                        timeStamp: "01 авг.",
+                        disabled: "disabled",
+                        unreadMessagesCount: 0,
+                    },
+                ]
             }
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             template = Handlebars.compile(/* 50* page template */);

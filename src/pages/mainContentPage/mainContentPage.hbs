@@ -9,46 +9,17 @@
         <div class="main-content__menu_search">
             {{> FormInput type="text" name="search" placeholder="Поиск"}}
         </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
-        <div class="main-content__menu_chat-item" tabindex="1">
-            <div class="main-content__menu_chat-item_avatar">
-                <img src="../../../images/profile/avatar.png" alt="Profile photo">
-            </div>
-        </div>
+        {{#each chatItems}}
+            {{> ChatItem 
+                avatarSrc=avatarSrc 
+                chatName=chatName 
+                lastMessage=lastMessage 
+                timeStamp=timeStamp
+                disabled=disabled
+                unreadMessagesCount=unreadMessagesCount
+            }}
+        {{/each}}
+        
         {{> MainLink href=link.href text=link.text}}
     </section>
     <section class="main-content__chat">
