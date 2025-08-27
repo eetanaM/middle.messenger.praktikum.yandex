@@ -1,0 +1,39 @@
+{{#if currentChatItemId}}
+<header class="main-content__chat_header">
+    <h1>Chat Name {{currentChatItemId}}</h1>
+</header>
+<div class="main-content__chat_messages-container">
+    <div class="main-content__chat_messages-container_day-messages">
+        <h3 class="main-content__chat_messages-container_day-messages_date-stamp">
+            19 июня
+        </h3>
+        <p class="main-content__chat_messages-container_day-messages_message opponent">
+            Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
+            
+            Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
+            <span class="app-timestamp">11:56</span>
+        </p>
+        <p class="main-content__chat_messages-container_day-messages_message opponent image">
+            <img src="../../../../images/chat/mockimage.png" alt="Attached image">
+            <span class="app-timestamp">11:56</span>
+        </p>
+        <p class="main-content__chat_messages-container_day-messages_message user">
+            Круто!
+            <span class="app-timestamp">12:00</span>
+        </p>
+    </div>
+</div>
+<footer class="main-content__chat_footer">
+    <form action="" class="main-content__chat_footer_send-message-form">
+        <button type="button" class="main-content__chat_footer_send-message-form_attach-file-button">
+            <img src="../../../../images/chat/paperclip.png" alt="Clip">
+        </button>
+        {{> FormInput type=form.type name=form.name placeholder=form.placeholder}}
+        <button type="submit" class="main-content__chat_footer_send-message-form_send-button">
+            <img src="../../../../images/chat/send.png" alt="Arrow">
+        </button>
+    </form>
+</footer>
+{{else}}
+<p>Выберите чат, чтобы отправить сообщение</p>
+{{/if}}

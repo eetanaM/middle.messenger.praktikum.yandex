@@ -1,14 +1,14 @@
 <main class="main-content">
-    <section class="main-content__menu">
+    <nav class="main-content__menu">
         <div class="main-content__menu_header">
             <div class="main-content__menu_header_avatar">
                 <img src="../../../images/profile/avatar.png" alt="Profile photo">
             </div>
             <span class="main-content__menu_header_profile-name">Profile Name</span>
         </div>
-        <div class="main-content__menu_search">
+        <form class="main-content__menu_search">
             {{> FormInput type="text" name="search" placeholder="Поиск"}}
-        </div>
+        </form>
         {{#each chatItems}}
             {{> ChatItem 
                 avatarSrc=avatarSrc 
@@ -19,10 +19,9 @@
                 unreadMessagesCount=unreadMessagesCount
             }}
         {{/each}}
-        
         {{> MainLink href=link.href text=link.text}}
-    </section>
+    </nav>
     <section class="main-content__chat">
-        <p>Выберите чат, чтобы отправить сообщение</p>
+            
     </section>
 </main>

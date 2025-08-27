@@ -35,6 +35,14 @@
     margin-top: 30px;
 }
 
+.app-timestamp {
+    color: @date-stamp-font-color;
+    position: absolute;
+    font-size: 9px;
+    bottom: 10px;
+    right: 10px;
+}
+
 // **basic components
 
 // authorization page
@@ -76,7 +84,7 @@
                 width: 60px;
                 height: 60px;
                 border-radius: 5px;
-                background-color: @auth-layout-bgc;
+                background-color: @light-layout-bgc;
                 border: 1px solid @components-bgc;
 
                 & img {
@@ -118,7 +126,7 @@
                 width: 50px;
                 height: 50px;
                 border-radius: 5px;
-                background-color: @auth-layout-bgc;
+                background-color: @light-layout-bgc;
                 border: 1px solid @components-bgc;
                 margin-right: 20px;
 
@@ -209,12 +217,123 @@
 
     &__chat {
         flex-grow: 1;
-        background-color: @chat-overlay-bgc;
+        background-color: @light-layout-bgc;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+
+        &_header {
+            background-color: @dark-layout-bgc;
+            height: 100px;
+            width: 100%;
+            text-align: center;
+            line-height: 100px;
+            border-radius: 0 0 5px 5px;
+            box-shadow: @chat-component-shadow;
+
+            & > h1 {
+                font-size: 20px;
+                font-style: italic;
+                font-weight: 500;
+            }
+        }
+
+        &_messages-container {
+            flex-grow: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            padding: 0 45px;
+
+            &_day-messages {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                &_date-stamp {
+                    align-self: center;
+                    color: @date-stamp-font-color;
+                    font-size: 12px;
+                    font-weight: 500;
+                    margin-bottom: 30px;
+                }
+
+                &_message {
+                    position: relative;
+                    height: fit-content;
+                    min-width: 125px;
+                    max-width: 600px;
+                    padding: 15px 15px;
+                    background-color: @main-layout-bgc;
+                    margin-bottom: 35px;
+                    font-size: 12px;
+                    text-wrap: balance;
+                    text-align: start;
+                }
+                .opponent {
+                    align-self: flex-start;
+                    border-radius: 0 25px 5px 25px;
+                }
+
+                .user {
+                    align-self: flex-end;
+                    border-radius: 5px 25px 0 25px;
+                }
+                
+                .image {
+                    padding: 0;
+                    background-color: transparent;
+                }
+            }
+        }
+
+        &_footer {
+            height: 70px;
+            width: 100%;
+            background: @dark-layout-bgc;
+            border-radius: 5px 5px 0 0;
+            padding: 0 30px;
+
+            &_send-message-form {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+
+                &_attach-file-button {
+                    background-color: transparent;
+                    border: none;
+                    margin-right: 35px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                & .app__main-input {
+                    flex-grow: 1;
+                    height: 45px;
+                    margin-top: 0;
+                    margin-right: 35px;
+                    font-size: 16px;
+                }
+
+                &_send-button {
+                    background-color: transparent;
+                    border: none;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
     }
 }
+
 
 // **main-content page
 

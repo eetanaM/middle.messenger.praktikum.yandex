@@ -22,7 +22,8 @@ export default class App {
     constructor() {
         this.state = {
             currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
-            currentChatItemId: null,
+            // currentChatItemId - временно для псевдонавигации по чатам
+            currentChatItemId: 1,
             accessToken: "",
             refreshToken: "",
         }
@@ -62,6 +63,27 @@ export default class App {
 
         TemplateRenderer.renderTemplate(this.appElement, template, templateData);
         this.attachEventListeners();
+    }
+
+    renderChatDetails() {
+        if (this.state.currentPage !== ENV.PAGES.MAIN_CONTENT_PAGE) {
+            return
+        } else {
+            const mainContentNode = document.querySelector(".main-content__chat");
+            const chatDetailsTemplate = Handlebars.compile(Pages.ChatDetails);
+
+            TemplateRenderer
+                .renderTemplate(mainContentNode, chatDetailsTemplate, 
+                    {
+                        currentChatItemId: this.state.currentChatItemId,
+                        form: {
+                            type: "text", 
+                            name: "send-message", 
+                            placeholder: "Введите сообщение...",
+                        },
+                    }
+                )
+        }
     }
 
     attachEventListeners() {
@@ -111,11 +133,13 @@ export default class App {
                     })
                     node.setAttribute("class", baseClass + " active")
                     this.state.currentChatItemId = id;
+                    this.renderChatDetails();
                 })
             })
 
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
+                this.state.currentChatItemId = null;
                 this.changePage(pageSrc)
             })
 
@@ -133,5 +157,6 @@ export default class App {
     changePage(page) {
         this.state.currentPage = page;
         this.render();
+        this.renderChatDetails();
     }
 }
