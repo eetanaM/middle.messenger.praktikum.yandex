@@ -1,17 +1,21 @@
 export class TemplateRenderer {
     static renderTemplate(container, template, data) {
+        const htmlString = template(data);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+        
         const fragment = document.createDocumentFragment();
-        const tempDiv = document.createElement("div");
-
-        tempDiv.innerHTML = template(data);
-
-        while (tempDiv.firstChild) {
-            fragment.appendChild(tempDiv.firstChild)
-        }
-
+        
+        Array.from(doc.body.childNodes).forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+            fragment.appendChild(document.createTextNode(node.textContent));
+            } else {
+            fragment.appendChild(node.cloneNode(true));
+            }
+        });
+        
         container.innerHTML = "";
         container.appendChild(fragment);
-
         return container
     }
 
