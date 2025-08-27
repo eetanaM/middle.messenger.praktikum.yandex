@@ -23,7 +23,7 @@ export default class App {
         this.state = {
             currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
-            currentChatItemId: 1,
+            currentChatItemId: null,
             accessToken: "",
             refreshToken: "",
         }
