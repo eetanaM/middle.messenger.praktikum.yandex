@@ -2,6 +2,7 @@ import logo from "../../images/logo/logo.png"
 import avatar from "../../images/profile/avatar.png"
 import profileDefault from "../../images/profile/profileDefault.png"
 import navButtonSrc from "../../images/nav-button.png"
+import notFoundLogoSrc from "../../images/logo/logo404.png"
 import * as ENV from "../utils/constants/consts"
 import { TemplateRenderer } from "../utils/templateRenderer"
 
@@ -27,7 +28,13 @@ export const LOGIN_TEMPLATE_DATA = {
     },
     link: {
         href: "#",
+        id: "no-acc",
         textContent: TemplateRenderer.escapeHtml("Нет аккаунта?")
+    },
+    preview: {
+        href: "#",
+        id: "preview",
+        textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
     }
 }
 
@@ -48,14 +55,20 @@ export const REGISTER_TEMPLATE_DATA = {
     },
     link: {
         href: "#",
+        id: "no-acc",
         textContent: TemplateRenderer.escapeHtml("Уже есть аккаунт?")
+    },
+    preview: {
+        href: "#",
+        id: "preview",
+        textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
     }
 }
 
 export const MAIN_CONTENT_TEMPLATE_DATA = {
     link: {
         href: "#",
-        text: TemplateRenderer.escapeHtml("Назад к превью")
+        text: TemplateRenderer.escapeHtml("Вернуться к превью")
     },
     chatItems: [
         {
@@ -119,4 +132,12 @@ export const PROFILE_TEMPLATE_DATA = {
     profileImg: profileDefault,
     profileName: TemplateRenderer.escapeHtml("Иван"),
     navButtonSrc,
+}
+
+export const NOT_FOUND_TEMPLATE_DATA = {
+    notFoundLogoSrc,
+    link: {
+        href: "/",
+        textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
+    }
 }

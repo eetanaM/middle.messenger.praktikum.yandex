@@ -1,1 +1,1 @@
-export default `<a href="{{href}}" class="app__main-link">{{text}}</a>`
+export default `<a href="{{href}}" id="{{id}}" class="app__main-link">{{text}}</a>`

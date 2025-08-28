@@ -60,13 +60,9 @@ export default class App {
                     50* page data
                 */
             }
-        } else {
-            template = Handlebars.compile(/* 404 page template */);
-            templateData = {
-                /* 
-                    404 page data
-                */
-            }
+        } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
+            template = Handlebars.compile(Pages.NotFoundPage);
+            templateData = MOCK.NOT_FOUND_TEMPLATE_DATA;
         }
 
         TemplateRenderer.renderTemplate(this.appElement, template, templateData);
@@ -112,20 +108,20 @@ export default class App {
                 })
             })
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            const signInButton = document.querySelector("#login-button")
+            const homeLink = document.querySelector("#preview")
     
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
-            signInButton.addEventListener("click", (e) => {
+            homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.changePage(pageSrc)
             })
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            const signInButton = document.querySelector("#register-button")
+            const homeLink = document.querySelector("#preview")
     
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
-            signInButton.addEventListener("click", (e) => {
+            homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.changePage(pageSrc)
             })
@@ -157,10 +153,24 @@ export default class App {
                 this.changePage(pageSrc)
             })
 
+        } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
+            const homeLink = document.querySelector(".profile > .app__nav-button");
+            const pageSrc = ENV.PAGES.PREVIEW_PAGE;
+            homeLink.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            this.state.currentChatItemId = null;
+                            this.changePage(pageSrc)
+                        })
+
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
-            /* 
-                add buttons and set event listeners with callback which executes this.changePage() and others
-            */
+            const homeLink = document.querySelector(".not-found > nav > .app__main-link");
+            const pageSrc = ENV.PAGES.PREVIEW_PAGE;
+            homeLink.addEventListener("click", (e) => {
+                            e.preventDefault();
+                            this.state.currentChatItemId = null;
+                            this.changePage(pageSrc)
+                        })
+
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             /* 
                 add buttons and set event listeners with callback which executes this.changePage() and others

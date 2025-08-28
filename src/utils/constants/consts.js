@@ -4,7 +4,7 @@ export const PAGES = {
     REGISTER_PAGE: "registration",
     MAIN_CONTENT_PAGE: "mainContent",
     PROFILE_PAGE: "profile",
-    NOT_FOUND_PAGE: "404",
-    BAD_SERVER_PAGE: "500",
+    NOT_FOUND_PAGE: "notFound",
+    BAD_SERVER_PAGE: "badServer",
 } 
 
