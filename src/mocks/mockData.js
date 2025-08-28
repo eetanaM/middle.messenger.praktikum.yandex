@@ -43,11 +43,10 @@ export const REGISTER_TEMPLATE_DATA = {
     inputs: [
         { type: "email", name: "email", placeholder: "Email"},
         { type: "login", name: "login", placeholder: "Логин"},
-        { type: "text", name: "firstname", placeholder: "Имя"},
-        { type: "text", name: "lastname", placeholder: "Фамилия"},
+        { type: "text", name: "first_name", placeholder: "Имя"},
+        { type: "text", name: "second_name", placeholder: "Фамилия"},
         { type: "tel", name: "phone", placeholder: "Телефон"},
         { type: "password", name: "password", placeholder: "Пароль"},
-        { type: "password", name: "password-confirm", placeholder: "Подтвердите пароль"},
     ],
     button: {
         ID: 'register-button',

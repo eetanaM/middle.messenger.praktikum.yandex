@@ -26,7 +26,7 @@ Handlebars.registerPartial("ChatItem", ChatItem)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.BAD_SERVER_PAGE,
+            currentPage: ENV.PAGES.PREVIEW_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
             accessToken: "",
@@ -79,7 +79,7 @@ export default class App {
                         currentChatItemId: this.state.currentChatItemId,
                         form: {
                             type: "text", 
-                            name: "send-message", 
+                            name: "message", 
                             placeholder: "Введите сообщение...",
                         },
                         icons: {
