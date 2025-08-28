@@ -26,7 +26,7 @@ Handlebars.registerPartial("ChatItem", ChatItem)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
+            currentPage: ENV.PAGES.BAD_SERVER_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
             accessToken: "",
@@ -38,6 +38,7 @@ export default class App {
     render() {
         let template;
         let templateData;
+
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
             template = Handlebars.compile(Pages.PreviewPage);
             templateData = MOCK.PREVIEW_TEMPLATE_DATA;
@@ -54,12 +55,8 @@ export default class App {
             template = Handlebars.compile(Pages.ProfilePage);
             templateData = MOCK.PROFILE_TEMPLATE_DATA;
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
-            template = Handlebars.compile(/* 50* page template */);
-            templateData = {
-                /* 
-                    50* page data
-                */
-            }
+            template = Handlebars.compile(Pages.BadServerPage);
+            templateData = MOCK.BAD_SERVER_TEMPLATE_DATA;
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
             template = Handlebars.compile(Pages.NotFoundPage);
             templateData = MOCK.NOT_FOUND_TEMPLATE_DATA;
@@ -91,8 +88,7 @@ export default class App {
                             sendButton,
                             paperClip
                         }
-                    }
-                )
+                    })
         }
     }
 
@@ -127,7 +123,7 @@ export default class App {
             })
         }
          else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
-            const homeLink = document.querySelector(".main-content__menu > .app__main-link")
+            const homeLink = document.querySelector("#preview")
             const chatItems = document.querySelectorAll(".main-content__menu_chat-item")
             const baseClass = "main-content__menu_chat-item"
 
@@ -157,24 +153,28 @@ export default class App {
             const homeLink = document.querySelector(".profile > .app__nav-button");
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
             homeLink.addEventListener("click", (e) => {
-                            e.preventDefault();
-                            this.state.currentChatItemId = null;
-                            this.changePage(pageSrc)
-                        })
+                e.preventDefault();
+                this.state.currentChatItemId = null;
+                this.changePage(pageSrc)
+            })
 
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
-            const homeLink = document.querySelector(".not-found > nav > .app__main-link");
+            const homeLink = document.querySelector("#preview");
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
             homeLink.addEventListener("click", (e) => {
-                            e.preventDefault();
-                            this.state.currentChatItemId = null;
-                            this.changePage(pageSrc)
-                        })
+                e.preventDefault();
+                this.state.currentChatItemId = null;
+                this.changePage(pageSrc)
+            })
 
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
-            /* 
-                add buttons and set event listeners with callback which executes this.changePage() and others
-            */
+            const homeLink = document.querySelector("#preview");
+            const pageSrc = ENV.PAGES.PREVIEW_PAGE;
+            homeLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.state.currentChatItemId = null;
+                this.changePage(pageSrc)
+            })
         }
     }
 

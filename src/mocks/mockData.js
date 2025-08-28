@@ -66,8 +66,9 @@ export const REGISTER_TEMPLATE_DATA = {
 }
 
 export const MAIN_CONTENT_TEMPLATE_DATA = {
-    link: {
+    preview: {
         href: "#",
+        id: "preview",
         text: TemplateRenderer.escapeHtml("Вернуться к превью")
     },
     chatItems: [
@@ -136,8 +137,18 @@ export const PROFILE_TEMPLATE_DATA = {
 
 export const NOT_FOUND_TEMPLATE_DATA = {
     notFoundLogoSrc,
-    link: {
+    preview: {
         href: "/",
+        id: "preview",
+        textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
+    }
+}
+
+export const BAD_SERVER_TEMPLATE_DATA = {
+    notFoundLogoSrc,
+    preview: {
+        href: "/",
+        id: "preview",
         textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
     }
 }
