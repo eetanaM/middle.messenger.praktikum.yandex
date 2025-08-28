@@ -6,6 +6,11 @@ import * as ENV from "./utils/constants/consts.js"
 import * as MOCK from "./mocks/mockData.js"
 import { TemplateRenderer } from "./utils/templateRenderer.js"
 
+import menuButton from "../images/chat/menu1.png"
+import mockImg from "../images/chat/mockimage.png"
+import paperClip from "../images/chat/paperclip.png"
+import sendButton from "../images/chat/send.png"
+
 import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
@@ -21,7 +26,7 @@ Handlebars.registerPartial("ChatItem", ChatItem)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
+            currentPage: ENV.PAGES.PREVIEW_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
             accessToken: "",
@@ -45,6 +50,9 @@ export default class App {
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(Pages.MainContentPage);
             templateData = MOCK.MAIN_CONTENT_TEMPLATE_DATA;
+        } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
+            template = Handlebars.compile(Pages.ProfilePage);
+            templateData = MOCK.PROFILE_TEMPLATE_DATA;
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             template = Handlebars.compile(/* 50* page template */);
             templateData = {
@@ -81,6 +89,12 @@ export default class App {
                             name: "send-message", 
                             placeholder: "Введите сообщение...",
                         },
+                        icons: {
+                            menuButton,
+                            mockImg,
+                            sendButton,
+                            paperClip
+                        }
                     }
                 )
         }

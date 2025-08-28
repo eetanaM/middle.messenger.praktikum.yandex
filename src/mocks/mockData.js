@@ -1,4 +1,7 @@
 import logo from "../../images/logo/logo.png"
+import avatar from "../../images/profile/avatar.png"
+import profileDefault from "../../images/profile/profileDefault.png"
+import navButtonSrc from "../../images/nav-button.png"
 import * as ENV from "../utils/constants/consts"
 import { TemplateRenderer } from "../utils/templateRenderer"
 
@@ -7,6 +10,7 @@ export const PREVIEW_TEMPLATE_DATA = {
         { pageSrc: ENV.PAGES.LOGIN_PAGE, textContent: TemplateRenderer.escapeHtml("Вход")},
         { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml("Регистрация")},
         { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: TemplateRenderer.escapeHtml("Чаты")},
+        { pageSrc: ENV.PAGES.PROFILE_PAGE, textContent: TemplateRenderer.escapeHtml("Профиль")},
         { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: TemplateRenderer.escapeHtml("404")},
         { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml("50*")},
     ]
@@ -55,7 +59,7 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
     },
     chatItems: [
         {
-            avatarSrc: "../../../images/profile/avatar.png",
+            avatarSrc: avatar,
             chatName: TemplateRenderer.escapeHtml("Chat Name"),
             lastMessage: TemplateRenderer.escapeHtml("Any text typed in last message column of the chat item"),
             timeStamp: TemplateRenderer.escapeHtml("15:35"),
@@ -64,7 +68,7 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
             chatItemId: "1",
         },
         {
-            avatarSrc: "../../../images/profile/avatar.png",
+            avatarSrc: avatar,
             chatName: TemplateRenderer.escapeHtml("Chat Name"),
             lastMessage: TemplateRenderer.escapeHtml("Last message"),
             timeStamp: TemplateRenderer.escapeHtml("14:12"),
@@ -73,7 +77,7 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
             chatItemId: "2",
         },
         {
-            avatarSrc: "../../../images/profile/avatar.png",
+            avatarSrc: avatar,
             chatName: TemplateRenderer.escapeHtml("Chat Name"),
             lastMessage: TemplateRenderer.escapeHtml("Last message"),
             timeStamp: TemplateRenderer.escapeHtml("Вчера"),
@@ -82,7 +86,7 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
             chatItemId: "3",
         },
         {
-            avatarSrc: "../../../images/profile/avatar.png",
+            avatarSrc: avatar,
             chatName: TemplateRenderer.escapeHtml("Chat Name"),
             lastMessage: TemplateRenderer.escapeHtml("Last message"),
             timeStamp: TemplateRenderer.escapeHtml("Пн"),
@@ -91,7 +95,7 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
             chatItemId: "4",
         },
         {
-            avatarSrc: "../../../images/profile/avatar.png",
+            avatarSrc: avatar,
             chatName: TemplateRenderer.escapeHtml("Chat Name"),
             lastMessage: TemplateRenderer.escapeHtml("Last message"),
             timeStamp: TemplateRenderer.escapeHtml("Вс"),
@@ -100,7 +104,7 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
             chatItemId: "5",
         },
         {
-            avatarSrc: "../../../images/profile/avatar.png",
+            avatarSrc: avatar,
             chatName: TemplateRenderer.escapeHtml("Chat Name"),
             lastMessage: TemplateRenderer.escapeHtml("Last message"),
             timeStamp: TemplateRenderer.escapeHtml("01 авг."),
@@ -109,4 +113,10 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
             chatItemId: "6",
         },
     ]
+}
+
+export const PROFILE_TEMPLATE_DATA = {
+    profileImg: profileDefault,
+    profileName: TemplateRenderer.escapeHtml("Иван"),
+    navButtonSrc,
 }

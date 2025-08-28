@@ -1,0 +1,42 @@
+<main class="profile">
+    <div class="profile__header">
+        <img class="profile__header_avatar" src={{ profileImg }} alt="Profile image">
+        <h1 class="profile__header_profile-name">{{ profileName }}</h1>
+    </div>
+    <div class="profile__credentials">
+        <ul>
+            <li class="profile__credentials_item">
+                <span class="profile__credentials_label">Почта</span>
+                <span class="profile__credentials_value">pochta@yandex.ru</span>
+            </li>
+            <li class="profile__credentials_item">
+                <span class="profile__credentials_label">Логин</span>
+                <span class="profile__credentials_value">ivanivanov</span>
+            </li>
+            <li class="profile__credentials_item">
+                <span class="profile__credentials_label">Имя</span>
+                <span class="profile__credentials_value">Иван</span>
+            </li>
+            <li class="profile__credentials_item">
+                <span class="profile__credentials_label">Фамилия</span>
+                <span class="profile__credentials_value">Иванов</span>
+            </li>
+            <li class="profile__credentials_item">
+                <span class="profile__credentials_label">Имя в чате</span>
+                <span class="profile__credentials_value">Иван</span>
+            </li>
+            <li class="profile__credentials_item">
+                <span class="profile__credentials_label">Телефон</span>
+                <span class="profile__credentials_value">+7 (909) 967 30 30</span>
+            </li>
+        </ul>
+    </div>
+    <nav class="profile__menu">
+        <button>Изменить данные</button>
+        <button>Изменить пароль</button>
+        <button class="red">Выйти</button>
+    </nav>
+    <button class="app__nav-button">
+        <img src={{ navButtonSrc }} alt="Back arrow">
+    </button>
+</main>
