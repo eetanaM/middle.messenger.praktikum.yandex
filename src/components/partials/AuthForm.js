@@ -1,4 +1,4 @@
-export default `<form action="" class="authorization__auth-form">
+export default `<form class="authorization__auth-form">
         <img src={{ logoUrl }} class="app__main-logo" alt="Логотип">
         {{#each inputs}}
             {{> FormInput type=type name=name placeholder=placeholder }}

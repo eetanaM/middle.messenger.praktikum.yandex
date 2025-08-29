@@ -9,6 +9,7 @@ import { TemplateRenderer } from "./utils/templateRenderer.js"
 import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
+import FileInput from "./components/partials/FileInput.js"
 import AuthForm from "./components/partials/AuthForm.js";
 import ChatItem from "./components/partials/ChatItem.js";
 import CredentialsForm from "./components/partials/CredentialsForm.js";
@@ -16,6 +17,7 @@ import CredentialsForm from "./components/partials/CredentialsForm.js";
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
 Handlebars.registerPartial("FormInput", FormInput)
+Handlebars.registerPartial("FileInput", FileInput)
 Handlebars.registerPartial("AuthForm", AuthForm)
 Handlebars.registerPartial("ChatItem", ChatItem)
 Handlebars.registerPartial("CredentialsForm", CredentialsForm)
@@ -23,7 +25,7 @@ Handlebars.registerPartial("CredentialsForm", CredentialsForm)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PROFILE_PAGE,
+            currentPage: ENV.PAGES.PREVIEW_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
             accessToken: "",
@@ -84,7 +86,7 @@ export default class App {
 
         if (modalContentEl.childElementCount !== 0) {
             modalContentEl.innerHTML = "";
-            modalRoot.removeAttribute("class")
+            modalRoot.removeAttribute("class");
         } else {
             let modalTemplate = Handlebars.compile(CredentialsForm);
             const modalOverlay = document.querySelector(".modal__overlay");
@@ -155,7 +157,8 @@ export default class App {
 
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
             const homeLink = document.querySelector(".profile > .app__nav-button");
-            const changeCredsButton = document.querySelector("#change-credentials")
+            const changeCredsButton = document.querySelector("#change-credentials");
+            const changePasswordButton = document.querySelector("#change-password")
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
 
             homeLink.addEventListener("click", (e) => {
@@ -163,18 +166,44 @@ export default class App {
                 this.state.currentChatItemId = null;
                 this.changePage(pageSrc)
             })
+
             changeCredsButton.addEventListener("click", () => {
                 this.toggleModal({
+                    fileInputs: [
+                        { type: "file", name: "display_image", id: "display_image", src: MOCK.PROFILE_TEMPLATE_DATA.profileImg},
+                    ],
                     inputs: [
-                        { type: "file", name: "display_image"},
+                        
                         { type: "email", name: "email", placeholder: "Email"},
                         { type: "login", name: "login", placeholder: "Логин"},
                         { type: "text", name: "first_name", placeholder: "Имя"},
                         { type: "text", name: "second_name", placeholder: "Фамилия"},
                         { type: "text", name: "display_name", placeholder: "Имя в чате"},
                         { type: "tel", name: "phone", placeholder: "Телефон"},
+                    ],
+                    button: [
+                        { id: "confirm", type:"submit", textContent: TemplateRenderer.escapeHtml("Подтвердить")},
+                        { id: "reset", type:"reset", textContent: TemplateRenderer.escapeHtml("Отменить")},
                     ]
                 });
+
+                const resetFormButton = document.querySelector("#reset");
+                resetFormButton.addEventListener("click", this.toggleModal)
+            })
+
+            changePasswordButton.addEventListener("click", () => {
+                this.toggleModal({
+                    inputs: [
+                        { type: "password", name: "oldPassword", placeholder: "Старый пароль"},
+                        { type: "password", name: "newPassword", placeholder: "Новый пароль"},
+                    ],
+                    button: [
+                        { id: "confirm", type:"submit", textContent: TemplateRenderer.escapeHtml("Подтвердить")},
+                        { id: "reset", type:"reset", textContent: TemplateRenderer.escapeHtml("Отменить")},
+                    ]
+                });
+                const resetFormButton = document.querySelector("#reset");
+                resetFormButton.addEventListener("click", this.toggleModal)
             })
 
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
