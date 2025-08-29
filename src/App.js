@@ -6,29 +6,26 @@ import * as ENV from "./utils/constants/consts.js"
 import * as MOCK from "./mocks/mockData.js"
 import { TemplateRenderer } from "./utils/templateRenderer.js"
 
-import menuButton from "../images/chat/menu1.png"
-import mockImg from "../images/chat/mockimage.png"
-import paperClip from "../images/chat/paperclip.png"
-import sendButton from "../images/chat/send.png"
-
 import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
 import AuthForm from "./components/partials/AuthForm.js";
 import ChatItem from "./components/partials/ChatItem.js";
+import Modal from "./components/partials/Modal.js";
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
 Handlebars.registerPartial("FormInput", FormInput)
 Handlebars.registerPartial("AuthForm", AuthForm)
 Handlebars.registerPartial("ChatItem", ChatItem)
+Handlebars.registerPartial("Modal", Modal)
 
 export default class App {
     constructor() {
         this.state = {
             currentPage: ENV.PAGES.PROFILE_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
-            currentChatItemId: 1,
+            currentChatItemId: null,
             accessToken: "",
             refreshToken: "",
         }
@@ -66,29 +63,34 @@ export default class App {
         this.attachEventListeners();
     }
 
-    renderChatDetails() {
+    renderChatDetails(currentChatItemId) {
         if (this.state.currentPage !== ENV.PAGES.MAIN_CONTENT_PAGE) {
             return
         } else {
+            const chatDetailsData = {
+                currentChatItemId,
+                ...MOCK.CHAT_DETAILS_TEMPLATE_DATA
+            }
             const mainContentNode = document.querySelector(".chat");
             const chatDetailsTemplate = Handlebars.compile(Pages.ChatDetails);
 
-            TemplateRenderer
-                .renderTemplate(mainContentNode, chatDetailsTemplate, 
-                    {
-                        currentChatItemId: this.state.currentChatItemId,
-                        form: {
-                            type: "text", 
-                            name: "message", 
-                            placeholder: "Введите сообщение...",
-                        },
-                        icons: {
-                            menuButton,
-                            mockImg,
-                            sendButton,
-                            paperClip
-                        }
-                    })
+            TemplateRenderer.renderTemplate(mainContentNode, chatDetailsTemplate, chatDetailsData)
+        }
+    }
+
+    toggleModal(modalTemplateData) {
+        const modalRoot = document.querySelector("#modal")
+        if (modalRoot.childElementCount !== 0) {
+            modalRoot.innerHTML = ""
+        } else {
+            let modalTemplate = Handlebars.compile(Modal);
+    
+            TemplateRenderer.renderTemplate(modalRoot, modalTemplate, modalTemplateData)
+            
+            const modalOverlay = document.querySelector(".modal__overlay");
+            modalOverlay.addEventListener("click", () => {
+                this.toggleModal();
+            })
         }
     }
 
@@ -139,7 +141,7 @@ export default class App {
                     })
                     node.setAttribute("class", baseClass + " active")
                     this.state.currentChatItemId = id;
-                    this.renderChatDetails();
+                    this.renderChatDetails(this.state.currentChatItemId);
                 })
             })
 
@@ -151,11 +153,15 @@ export default class App {
 
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
             const homeLink = document.querySelector(".profile > .app__nav-button");
+            const changeCredsButton = document.querySelector("#change-credentials")
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.state.currentChatItemId = null;
                 this.changePage(pageSrc)
+            })
+            changeCredsButton.addEventListener("click", () => {
+                this.toggleModal();
             })
 
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
@@ -181,6 +187,6 @@ export default class App {
     changePage(page) {
         this.state.currentPage = page;
         this.render();
-        this.renderChatDetails();
+        this.renderChatDetails(this.state.currentChatItemId);
     }
 }

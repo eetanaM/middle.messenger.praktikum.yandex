@@ -3,6 +3,12 @@ import avatar from "../../images/profile/avatar.png"
 import profileDefault from "../../images/profile/profileDefault.png"
 import navButtonSrc from "../../images/nav-button.png"
 import notFoundLogoSrc from "../../images/logo/logo404.png"
+import menuButton from "../../images/chat/menu1.png"
+import mockImg from "../../images/chat/mockimage.png"
+import paperClip from "../../images/chat/paperclip.png"
+import sendButton from "../../images/chat/send.png"
+
+
 import * as ENV from "../utils/constants/consts"
 import { TemplateRenderer } from "../utils/templateRenderer"
 
@@ -126,6 +132,20 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
             chatItemId: "6",
         },
     ]
+}
+
+export const CHAT_DETAILS_TEMPLATE_DATA = {
+    form: {
+        type: "text", 
+        name: "message", 
+        placeholder: "Введите сообщение...",
+    },
+    icons: {
+        menuButton,
+        mockImg,
+        sendButton,
+        paperClip
+    }
 }
 
 export const PROFILE_TEMPLATE_DATA = {
