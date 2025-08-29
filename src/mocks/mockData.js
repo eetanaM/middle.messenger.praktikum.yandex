@@ -71,6 +71,7 @@ export const REGISTER_TEMPLATE_DATA = {
 }
 
 export const MAIN_CONTENT_TEMPLATE_DATA = {
+    profileImgSrc: avatar,
     preview: {
         href: "#",
         id: "preview",
