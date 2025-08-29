@@ -14,7 +14,7 @@
     &__header {
         margin-top: 170px;
 
-        &_profile-name {
+        .header__profile-name {
             margin-top: 48px;
             font-size: 20px;
             font-weight: 600;
@@ -33,20 +33,23 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-        }
 
-        &_item {
-            display: flex;
-            justify-content: space-between;
+            .credentials__credentials-item {
+                display: flex;
+                justify-content: space-between;
+    
+                .credentials-item__value {
+                    color: #999999
+                }
 
-            & > span {
-                font-size: 16px;
+                & > span {
+                    font-size: 16px;
+                }
             }
         }
 
-        &_value {
-            color: #999999
-        }
+
+        
     }
 
     &__menu {

@@ -26,9 +26,9 @@ Handlebars.registerPartial("ChatItem", ChatItem)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
+            currentPage: ENV.PAGES.PROFILE_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
-            currentChatItemId: null,
+            currentChatItemId: 1,
             accessToken: "",
             refreshToken: "",
         }
@@ -70,7 +70,7 @@ export default class App {
         if (this.state.currentPage !== ENV.PAGES.MAIN_CONTENT_PAGE) {
             return
         } else {
-            const mainContentNode = document.querySelector(".main-content__chat");
+            const mainContentNode = document.querySelector(".chat");
             const chatDetailsTemplate = Handlebars.compile(Pages.ChatDetails);
 
             TemplateRenderer
@@ -124,8 +124,8 @@ export default class App {
         }
          else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             const homeLink = document.querySelector("#preview")
-            const chatItems = document.querySelectorAll(".main-content__menu_chat-item")
-            const baseClass = "main-content__menu_chat-item"
+            const chatItems = document.querySelectorAll(".chat-item")
+            const baseClass = "chat-item"
 
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
