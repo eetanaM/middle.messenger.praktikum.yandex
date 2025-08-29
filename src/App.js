@@ -11,14 +11,14 @@ import MainLink from "./components/partials/MainLink.js";
 import FormInput from "./components/partials/FormInput.js";
 import AuthForm from "./components/partials/AuthForm.js";
 import ChatItem from "./components/partials/ChatItem.js";
-import Modal from "./components/partials/Modal.js";
+import CredentialsForm from "./components/partials/CredentialsForm.js";
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
 Handlebars.registerPartial("FormInput", FormInput)
 Handlebars.registerPartial("AuthForm", AuthForm)
 Handlebars.registerPartial("ChatItem", ChatItem)
-Handlebars.registerPartial("Modal", Modal)
+Handlebars.registerPartial("CredentialsForm", CredentialsForm)
 
 export default class App {
     constructor() {
@@ -79,18 +79,20 @@ export default class App {
     }
 
     toggleModal(modalTemplateData) {
-        const modalRoot = document.querySelector("#modal")
-        if (modalRoot.childElementCount !== 0) {
-            modalRoot.innerHTML = ""
+        const modalContentEl = document.querySelector(".modal__content");
+        const modalRoot = document.getElementById("modal");
+
+        if (modalContentEl.childElementCount !== 0) {
+            modalContentEl.innerHTML = "";
+            modalRoot.removeAttribute("class")
         } else {
-            let modalTemplate = Handlebars.compile(Modal);
-    
-            TemplateRenderer.renderTemplate(modalRoot, modalTemplate, modalTemplateData)
-            
+            let modalTemplate = Handlebars.compile(CredentialsForm);
             const modalOverlay = document.querySelector(".modal__overlay");
-            modalOverlay.addEventListener("click", () => {
-                this.toggleModal();
-            })
+    
+            TemplateRenderer.renderTemplate(modalContentEl, modalTemplate, modalTemplateData);
+        
+            modalRoot.setAttribute("class", "opened")
+            modalOverlay.addEventListener("click", this.toggleModal)
         }
     }
 
@@ -155,13 +157,24 @@ export default class App {
             const homeLink = document.querySelector(".profile > .app__nav-button");
             const changeCredsButton = document.querySelector("#change-credentials")
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
+
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.state.currentChatItemId = null;
                 this.changePage(pageSrc)
             })
             changeCredsButton.addEventListener("click", () => {
-                this.toggleModal();
+                this.toggleModal({
+                    inputs: [
+                        { type: "file", name: "display_image"},
+                        { type: "email", name: "email", placeholder: "Email"},
+                        { type: "login", name: "login", placeholder: "Логин"},
+                        { type: "text", name: "first_name", placeholder: "Имя"},
+                        { type: "text", name: "second_name", placeholder: "Фамилия"},
+                        { type: "text", name: "display_name", placeholder: "Имя в чате"},
+                        { type: "tel", name: "phone", placeholder: "Телефон"},
+                    ]
+                });
             })
 
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {

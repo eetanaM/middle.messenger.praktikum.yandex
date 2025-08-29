@@ -53,6 +53,8 @@
 }
 
 #modal {
+    visibility: hidden;
+    opacity: 0;
 
     .modal__overlay {
         position: absolute;
@@ -62,6 +64,7 @@
         left: 50%;
         background-color: #00000039;
         z-index: 9900;
+       
 
         transform: translate(-50%, -50%);
 
@@ -87,6 +90,24 @@
 
         transform: translate(-50%, -50%)
     }
+}
+
+#modal.opened {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: opacity 200ms ease-in; 
+    -moz-transition: opacity 200ms ease-in;
+    transition: opacity 200ms ease-in;
+    
+}
+
+.credentials__form {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
 
 // **basic components
