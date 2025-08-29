@@ -110,7 +110,8 @@ export default class App {
                 })
             })
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            const homeLink = document.querySelector("#preview")
+            const homeLink = document.querySelector("#preview");
+            const submitButton = document.querySelector("#login-button");
     
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
@@ -118,14 +119,34 @@ export default class App {
                 e.preventDefault();
                 this.changePage(pageSrc)
             })
+
+            // Temporary attaching event listener to show incorrect inputs
+            submitButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                const incorrectInputs = document.querySelectorAll(".app__invalid-input");
+                incorrectInputs.forEach((node) => {
+                    node.setAttribute("class", "app__invalid-input shown")
+                })
+            })
+
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            const homeLink = document.querySelector("#preview")
+            const homeLink = document.querySelector("#preview");
+            const submitButton = document.querySelector("#register-button");
     
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
                 this.changePage(pageSrc)
+            })
+
+            // Temporary attaching event listener to show incorrect inputs
+            submitButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                const incorrectInputs = document.querySelectorAll(".app__invalid-input");
+                incorrectInputs.forEach((node) => {
+                    node.setAttribute("class", "app__invalid-input shown")
+                })
             })
         }
          else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
