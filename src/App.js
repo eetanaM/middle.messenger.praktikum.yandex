@@ -191,7 +191,7 @@ export default class App {
             changeCredsButton.addEventListener("click", () => {
                 this.toggleModal({
                     fileInputs: [
-                        { type: "file", name: "display_image", id: "display_image", src: MOCK.PROFILE_TEMPLATE_DATA.profileImg},
+                        { type: "file", name: "avatar", id: "avatar", src: MOCK.PROFILE_TEMPLATE_DATA.profileImg},
                     ],
                     inputs: [
                         
