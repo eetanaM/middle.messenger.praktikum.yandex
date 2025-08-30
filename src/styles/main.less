@@ -1,0 +1,194 @@
+@import "./variables.less";
+@import "./mixins.less";
+
+*{
+    box-sizing: border-box;
+    font-family: @main-font-family;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// basic components
+
+.app__main-button {
+    .mainButton;
+}
+
+.app__main-link {
+    .mainLink;
+}
+
+.app__main-input {
+    .mainInput;
+}
+
+.app__invalid-input {
+    width: 220px;
+    padding-left: 14px;
+    margin-top: 2px;
+    font-size: 11px;
+    color: red;
+}
+
+.shown {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+}
+
+.app__main-logo {
+    margin-top: 30px;
+}
+
+.app-timestamp {
+    color: @date-stamp-font-color;
+    position: absolute;
+    font-size: 9px;
+    bottom: 10px;
+    right: 10px;
+}
+
+.app__nav-button {
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+#modal {
+    visibility: hidden;
+    opacity: 0;
+
+    .modal__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        background-color: #00000039;
+        z-index: 9900;
+       
+
+        transform: translate(-50%, -50%);
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .modal__content {
+        .mainContentMenuBlock;
+
+        width: fit-content;
+        height: fit-content;
+        min-width: 100px;
+        min-height: 100px;
+        background-color: @light-layout-bgc;
+        border-radius: 10px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 9999;
+
+        transform: translate(-50%, -50%)
+    }
+}
+
+#modal.opened {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition: opacity 200ms ease-in; 
+    -moz-transition: opacity 200ms ease-in;
+    transition: opacity 200ms ease-in;
+    
+}
+
+.credentials__form {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    & .app__main-button {
+        font-size: 13px;
+        min-width: 100px;
+        min-height: 30px;
+    }
+
+    & .app__file-input {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+    }
+
+    & .app__file-input-button:hover {
+        cursor: pointer;
+    }
+}
+
+// **basic components
+
+// authorization page
+
+.authorization {
+    .titlePageLayout;
+}
+
+.authorization__auth-form {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+// **authorization page
+
+// main-content page
+
+@import "../pages/mainContentPage/styles/mainContentPage.less";
+
+// **main-content page
+
+// profile-page
+
+@import "../pages/profilePage/styles/profilePage.less";
+
+// **profile-page
+
+// not-found page
+
+@import "../pages/notFoundPage/styles/notFoundPage.less";
+
+// **not-found page
+
+// bad-server page
+
+@import "../pages/badServerPage/styles/badServerPage.less";
+
+// **bad-server page
+
+// preview-page
+
+@import '../pages/previewPage/styles/previewPage.less';
+
+// **preview-page
+

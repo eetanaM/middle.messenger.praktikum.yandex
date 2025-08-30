@@ -1,0 +1,128 @@
+@import "./variables.less";
+
+.titlePageLayout() {
+    min-height: fit-content;
+    height: 630px;
+    width: 630px;
+    border-radius: 15px;
+    box-shadow: @block-shadow;
+    background-color: @light-layout-bgc;
+    padding: 10px 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.mainButton() {
+    background-color: @components-bgc;
+    border: 1px solid black;
+    border-radius: 8px;
+    min-width: 150px;
+    min-height: 50px;
+    padding: 10px 45px;
+    margin-top: 20px;
+    
+    font: inherit;
+    color: white;
+    font-weight: 300;
+    font-size: 16px;
+
+    &:hover {
+        cursor: pointer;
+        color: @link-hover-font-color;
+    }
+    &:focus {
+        outline: 1px solid black;
+    }
+}
+
+.mainLink() {
+    color: @main-link-color;
+    font-size: 13px;
+    text-decoration: none;
+    margin-top: 10px;
+
+    &:hover {
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    &:focus {
+        outline: none;
+        text-decoration: underline;
+    }
+}
+
+.mainInput() {
+    height: 35px;
+    width: 220px;
+    border-radius: 25px;
+    border: none;
+    padding: 5px 15px;
+    margin-top: 10px;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.mainContentMenuBlock() {
+    width: 100%;
+    height: 100px;
+    min-height: 100px;
+    box-shadow: @chat-component-shadow;
+    border-radius: 0 0 5px 5px;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.plugStyles() {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: @light-layout-bgc;
+
+    &__logo {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        & > h1 {
+            font-style: italic;
+            font-weight: 500;
+            margin-top: 48px;
+        }
+    }
+
+    &__500, &__404 {
+        color: #999999;
+        & > h2 {
+            font-size: 128px;
+            font-weight: 600;
+        }
+
+        & > p {
+            font-size: 64px;
+            font-weight: 600;
+        }
+    }
+
+    & > nav {
+        margin-top: 48px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+
