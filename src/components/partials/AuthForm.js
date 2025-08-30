@@ -7,3 +7,4 @@ export default `<form class="authorization__auth-form">
         {{> MainLink href=link.href id=link.id text=link.textContent }}
         {{> MainLink href=preview.href id=preview.id text=preview.textContent }}
     </form>`
+

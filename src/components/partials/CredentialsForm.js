@@ -9,3 +9,4 @@ export default `<form class="credentials__form">
             {{> Button id=id text=textContent }}
         {{/each}}
     </form>`
+

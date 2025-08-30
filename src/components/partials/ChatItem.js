@@ -15,3 +15,4 @@ export default `<div id={{chatItemId}} class="chat-item" tabindex="1">
                 </div>
             </div>
         </div>`
+

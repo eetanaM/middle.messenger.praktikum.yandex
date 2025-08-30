@@ -172,3 +172,4 @@ export const BAD_SERVER_TEMPLATE_DATA = {
         textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
     }
 }
+

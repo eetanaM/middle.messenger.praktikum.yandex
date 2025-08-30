@@ -1,1 +1,2 @@
-export { default as ChatDetails } from "./chatDetails.hbs?raw"
+export { default as ChatDetails } from "./chatDetails.hbs?raw";
+

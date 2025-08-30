@@ -253,3 +253,4 @@ export default class App {
         this.renderChatDetails(this.state.currentChatItemId);
     }
 }
+
