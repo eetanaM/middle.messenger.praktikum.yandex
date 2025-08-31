@@ -3,12 +3,21 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "start": "vite build && node server.cjs",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "less": "^4.4.1",
     "vite": "^7.1.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "handlebars": "^4.7.8"
   }
 }
