@@ -1,10 +1,11 @@
 import Handlebars from "handlebars";
 
-import * as Pages from "./pages";
+import * as Pages from "./pages/index.js";
 
-import * as ENV from "./utils/constants/consts.js"
 import * as MOCK from "./mocks/mockData.js"
+import * as ENV from "./utils/constants/consts.js"
 import { TemplateRenderer } from "./utils/templateRenderer.js"
+import type { IApp, IAppState, IModalTemplateData } from "./utils/types/app.js";
 
 import Button from "./components/partials/Button.js";
 import MainLink from "./components/partials/MainLink.js";
@@ -22,14 +23,17 @@ Handlebars.registerPartial("AuthForm", AuthForm)
 Handlebars.registerPartial("ChatItem", ChatItem)
 Handlebars.registerPartial("CredentialsForm", CredentialsForm)
 
-export default class App {
+export default class App implements IApp {
+    state: IAppState;
+    appElement: HTMLElement;
+
     constructor() {
         this.state = {
             currentPage: ENV.PAGES.PREVIEW_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
-            accessToken: "",
-            refreshToken: "",
+            accessToken: null,
+            refreshToken: null,
         }
         this.appElement = document.getElementById("app")
     }
@@ -80,7 +84,7 @@ export default class App {
         }
     }
 
-    toggleModal(modalTemplateData) {
+    toggleModal(modalTemplateData: Event | IModalTemplateData) {
         const modalContentEl = document.querySelector(".modal__content");
         const modalRoot = document.getElementById("modal");
 
@@ -100,7 +104,7 @@ export default class App {
 
     attachEventListeners() {
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            const links = document.querySelectorAll(".preview-page__links li a")
+            const links = document.querySelectorAll(".preview-page__links li a") as NodeListOf<HTMLElement>
             // Attaching event listeners on links for changing pages and rerender
             links.forEach((node) => {
                 const pageSrc = node.dataset.pagesrc
@@ -148,8 +152,7 @@ export default class App {
                     node.setAttribute("class", "app__invalid-input shown")
                 })
             })
-        }
-         else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
+        } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             const homeLink = document.querySelector("#preview")
             const chatItems = document.querySelectorAll(".chat-item")
             const baseClass = "chat-item"
