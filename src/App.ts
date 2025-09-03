@@ -1,19 +1,19 @@
 import Handlebars from "handlebars";
 
-import * as Pages from "./pages/index.js";
+import * as Pages from "./pages/index.ts";
 
-import * as MOCK from "./mocks/mockData.js"
-import * as ENV from "./utils/constants/consts.js"
-import { TemplateRenderer } from "./utils/templateRenderer.js"
-import type { IApp, IAppState, IModalTemplateData } from "./utils/types/app.js";
+import * as MOCK from "./mocks/mockData.ts"
+import * as ENV from "./utils/constants/consts.ts"
+import { TemplateRenderer } from "./utils/templateRenderer.ts"
+import type { IApp, IAppState, IModalTemplateData } from "./utils/types/app.ts";
 
-import Button from "./components/partials/Button.js";
-import MainLink from "./components/partials/MainLink.js";
-import FormInput from "./components/partials/FormInput.js";
-import FileInput from "./components/partials/FileInput.js"
-import AuthForm from "./components/partials/AuthForm.js";
-import ChatItem from "./components/partials/ChatItem.js";
-import CredentialsForm from "./components/partials/CredentialsForm.js";
+import Button from "./components/partials/Button.ts";
+import MainLink from "./components/partials/MainLink.ts";
+import FormInput from "./components/partials/FormInput.ts";
+import FileInput from "./components/partials/FileInput.ts"
+import AuthForm from "./components/partials/AuthForm.ts";
+import ChatItem from "./components/partials/ChatItem.ts";
+import CredentialsForm from "./components/partials/CredentialsForm.ts";
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
