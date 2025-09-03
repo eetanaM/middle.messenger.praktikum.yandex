@@ -1,0 +1,43 @@
+{
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        ".github"
+    ],
+    "compilerOptions": {
+        "target": "ES2022",
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
+        "skipLibCheck": true,
+        "outDir": "dist",
+
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": true,
+        "moduleDetection": "force",
+        "noEmit": true,
+
+        /* Linting */
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedSideEffectImports": true,
+        "forceConsistentCasingInFileNames":true,
+
+        /* Strict Checks */
+        "strictFunctionTypes": true,
+        "noImplicitThis": true,
+        "strictPropertyInitialization": false,
+        
+        // required for sprint 2
+        "noImplicitAny": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "sourceMap": true,
+        "strictNullChecks": false,
+        // **required for sprint 2
+    }
+}
