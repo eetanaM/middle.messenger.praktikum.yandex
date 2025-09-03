@@ -5,6 +5,7 @@ import * as Pages from "./pages/index.ts";
 import * as MOCK from "./mocks/mockData.ts"
 import * as ENV from "./utils/constants/consts.ts"
 import { TemplateRenderer } from "./utils/templateRenderer.ts"
+
 import type { IApp, IAppState, IModalTemplateData } from "./utils/types/app.ts";
 
 import Button from "./components/partials/Button.ts";
@@ -69,7 +70,7 @@ export default class App implements IApp {
         this.attachEventListeners();
     }
 
-    renderChatDetails(currentChatItemId) {
+    renderChatDetails(currentChatItemId?: string) {
         if (this.state.currentPage !== ENV.PAGES.MAIN_CONTENT_PAGE) {
             return
         } else {

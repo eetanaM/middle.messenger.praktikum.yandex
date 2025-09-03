@@ -12,7 +12,9 @@ import sendButton from "../../images/chat/send.png"
 import * as ENV from "../utils/constants/consts"
 import { TemplateRenderer } from "../utils/templateRenderer"
 
-export const PREVIEW_TEMPLATE_DATA = {  
+import type { AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate } from "../utils/types/api/mock-data"
+
+export const PREVIEW_TEMPLATE_DATA: PreviewDataTemplate = {  
     links: [
         { pageSrc: ENV.PAGES.LOGIN_PAGE, textContent: TemplateRenderer.escapeHtml("Вход")},
         { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml("Регистрация")},
@@ -22,7 +24,7 @@ export const PREVIEW_TEMPLATE_DATA = {
         { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml("50*")},
     ]
 }
-export const LOGIN_TEMPLATE_DATA = {
+export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
     logoUrl: logo,
     inputs: [
         { type: "text", name: "login", placeholder: "Email/Login"},
@@ -44,7 +46,7 @@ export const LOGIN_TEMPLATE_DATA = {
     }
 }
 
-export const REGISTER_TEMPLATE_DATA = {
+export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
     logoUrl: logo,
     inputs: [
         { type: "email", name: "email", placeholder: "Email"},
@@ -70,12 +72,12 @@ export const REGISTER_TEMPLATE_DATA = {
     }
 }
 
-export const MAIN_CONTENT_TEMPLATE_DATA = {
+export const MAIN_CONTENT_TEMPLATE_DATA: MainContentDataTemplate = {
     profileImgSrc: avatar,
     preview: {
         href: "#",
         id: "preview",
-        text: TemplateRenderer.escapeHtml("Вернуться к превью")
+        textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
     },
     chatItems: [
         {
@@ -135,7 +137,7 @@ export const MAIN_CONTENT_TEMPLATE_DATA = {
     ]
 }
 
-export const CHAT_DETAILS_TEMPLATE_DATA = {
+export const CHAT_DETAILS_TEMPLATE_DATA: ChatDetailsDataTemplate = {
     form: {
         type: "text", 
         name: "message", 
@@ -149,13 +151,13 @@ export const CHAT_DETAILS_TEMPLATE_DATA = {
     }
 }
 
-export const PROFILE_TEMPLATE_DATA = {
+export const PROFILE_TEMPLATE_DATA: ProfileDataTemplate = {
     profileImg: profileDefault,
     profileName: TemplateRenderer.escapeHtml("Иван"),
     navButtonSrc,
 }
 
-export const NOT_FOUND_TEMPLATE_DATA = {
+export const NOT_FOUND_TEMPLATE_DATA: ErrorPageDataTemplate = {
     notFoundLogoSrc,
     preview: {
         href: "/",
@@ -164,7 +166,7 @@ export const NOT_FOUND_TEMPLATE_DATA = {
     }
 }
 
-export const BAD_SERVER_TEMPLATE_DATA = {
+export const BAD_SERVER_TEMPLATE_DATA: ErrorPageDataTemplate = {
     notFoundLogoSrc,
     preview: {
         href: "/",
