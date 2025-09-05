@@ -1,5 +1,7 @@
-export class TemplateRenderer {
-    static renderTemplate(container, template, data) {
+import type { ITemplateRenderer } from "./types/template-renderer";
+
+export class TemplateRenderer implements ITemplateRenderer {
+    static renderTemplate(container: HTMLElement, template:HandlebarsTemplateDelegate<any>, data?:unknown) {
         const htmlString = template(data);
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
@@ -8,7 +10,9 @@ export class TemplateRenderer {
         
         Array.from(doc.body.childNodes).forEach(node => {
             if (node.nodeType === Node.TEXT_NODE) {
-            fragment.appendChild(document.createTextNode(node.textContent));
+                if (node.textContent) {
+                    fragment.appendChild(document.createTextNode(node.textContent));
+                }
             } else {
             fragment.appendChild(node.cloneNode(true));
             }
@@ -19,7 +23,7 @@ export class TemplateRenderer {
         return container
     }
 
-    static escapeHtml(unsafe) {
+    static escapeHtml(unsafe: string | number) {
         if (typeof unsafe !== "string") {
             return unsafe
         } else {

@@ -36,7 +36,13 @@ export default class App implements IApp {
             accessToken: null,
             refreshToken: null,
         }
-        this.appElement = document.getElementById("app")
+        const appEl = document.getElementById("app");
+
+        if (!appEl) {
+            throw new Error("There is no app element in DOM")
+        }
+
+        this.appElement = appEl;
     }
 
     render() {
@@ -70,7 +76,7 @@ export default class App implements IApp {
         this.attachEventListeners();
     }
 
-    renderChatDetails(currentChatItemId?: string) {
+    renderChatDetails(currentChatItemId?: string | null) {
         if (this.state.currentPage !== ENV.PAGES.MAIN_CONTENT_PAGE) {
             return
         } else {
@@ -78,7 +84,7 @@ export default class App implements IApp {
                 currentChatItemId,
                 ...MOCK.CHAT_DETAILS_TEMPLATE_DATA
             }
-            const mainContentNode = document.querySelector(".chat");
+            const mainContentNode = document.querySelector(".chat") as HTMLElement;
             const chatDetailsTemplate = Handlebars.compile(Pages.ChatDetails);
 
             TemplateRenderer.renderTemplate(mainContentNode, chatDetailsTemplate, chatDetailsData)
@@ -86,8 +92,12 @@ export default class App implements IApp {
     }
 
     toggleModal(modalTemplateData: Event | IModalTemplateData) {
-        const modalContentEl = document.querySelector(".modal__content");
+        const modalContentEl = document.querySelector(".modal__content") as HTMLElement;
         const modalRoot = document.getElementById("modal");
+
+        if (!modalRoot) {
+            throw new Error("There is no modal root element in DOM")
+        }
 
         if (modalContentEl.childElementCount !== 0) {
             modalContentEl.innerHTML = "";
@@ -99,13 +109,27 @@ export default class App implements IApp {
             TemplateRenderer.renderTemplate(modalContentEl, modalTemplate, modalTemplateData);
         
             modalRoot.setAttribute("class", "opened")
+            if (!modalOverlay) {
+                throw new Error ("There is no modal__overlay element in DOM")
+            }
             modalOverlay.addEventListener("click", this.toggleModal)
         }
     }
 
     attachEventListeners() {
+        const links = document.querySelectorAll(".preview-page__links li a") as NodeListOf<HTMLElement>
+        const homeLink = document.querySelector("#preview");
+        const submitButton = document.querySelector("#login-button");
+
+        if (!homeLink) {
+            throw new Error("There is no homelink element in DOM")
+        }
+
+        if (!submitButton) {
+            throw new Error("There is no submit button element in DOM")
+        }
+
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            const links = document.querySelectorAll(".preview-page__links li a") as NodeListOf<HTMLElement>
             // Attaching event listeners on links for changing pages and rerender
             links.forEach((node) => {
                 const pageSrc = node.dataset.pagesrc
@@ -115,8 +139,6 @@ export default class App implements IApp {
                 })
             })
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            const homeLink = document.querySelector("#preview");
-            const submitButton = document.querySelector("#login-button");
     
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
@@ -135,9 +157,7 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            const homeLink = document.querySelector("#preview");
-            const submitButton = document.querySelector("#register-button");
-    
+
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
             homeLink.addEventListener("click", (e) => {
@@ -154,7 +174,6 @@ export default class App implements IApp {
                 })
             })
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
-            const homeLink = document.querySelector("#preview")
             const chatItems = document.querySelectorAll(".chat-item")
             const baseClass = "chat-item"
 
@@ -181,10 +200,17 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
-            const homeLink = document.querySelector(".profile > .app__nav-button");
             const changeCredsButton = document.querySelector("#change-credentials");
             const changePasswordButton = document.querySelector("#change-password")
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
+
+            if (!changeCredsButton) {
+                throw new Error("There is no change-credentials element in DOM")
+            }
+
+            if (!changePasswordButton) {
+                throw new Error("There is no change-password element in DOM")
+            }
 
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -213,6 +239,11 @@ export default class App implements IApp {
                 });
 
                 const resetFormButton = document.querySelector("#reset");
+
+                if (!resetFormButton) {
+                    throw new Error("There is no #reset element in DOM")
+                }
+
                 resetFormButton.addEventListener("click", this.toggleModal)
             })
 
@@ -228,11 +259,15 @@ export default class App implements IApp {
                     ]
                 });
                 const resetFormButton = document.querySelector("#reset");
+                
+                if (!resetFormButton) {
+                    throw new Error("There is no #reset element in DOM")
+                }
+
                 resetFormButton.addEventListener("click", this.toggleModal)
             })
 
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
-            const homeLink = document.querySelector("#preview");
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -241,7 +276,6 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
-            const homeLink = document.querySelector("#preview");
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();

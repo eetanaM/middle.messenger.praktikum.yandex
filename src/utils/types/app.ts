@@ -20,19 +20,19 @@ interface IModalTemplateData {
     button: Array<{
         id: string;
         type: string;
-        textContent: string;
+        textContent: string | number;
     }>;
 }
 
-interface IApp {
-    state: IAppState,
-    appElement: HTMLElement | null,
+abstract class IApp {
+    state: IAppState;
+    appElement: HTMLElement | null;
 
-    render(): void;
-    renderChatDetails(currentChatItemId: string | null): void;
-    toggleModal(modalTemplateData: IModalTemplateData): void;
-    attachEventListeners(): void;
-    changePage(page: string): void;
+    render:() => void;
+    renderChatDetails: (currentChatItemId?: string | null) => void;
+    toggleModal: (modalTemplateData: IModalTemplateData) => void;
+    attachEventListeners: () => void;
+    changePage: (page: string) => void;
 }
 
 export type {

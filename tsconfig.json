@@ -37,7 +37,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "sourceMap": true,
-        "strictNullChecks": false,
+        "strictNullChecks": true,
         // **required for sprint 2
     }
 }

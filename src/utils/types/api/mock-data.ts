@@ -1,13 +1,13 @@
 type LinkData = {
     href: string,
     id: string,
-    textContent: string,
+    textContent: string | number,
 }
 
 type PreviewDataTemplate = {
     links: Array<{
         pageSrc: string,
-        textContent: string
+        textContent: string | number
     }>
 }
 
@@ -20,7 +20,7 @@ type AuthDataTemplate = {
     }>,
     button: {
         ID: string,
-        textContent: string
+        textContent: string | number
     },
     link: LinkData,
     preview: LinkData,
@@ -31,11 +31,11 @@ type MainContentDataTemplate = {
     preview: LinkData,
     chatItems: Array<{
         avatarSrc: string,
-        chatName: string,
-        lastMessage: string,
-        timeStamp: string,
+        chatName: string | number,
+        lastMessage: string | number,
+        timeStamp: string | number,
         disabled: string | null,
-        unreadMessagesCount: number,
+        unreadMessagesCount: string | number,
         chatItemId: string
     }>
 }
@@ -53,7 +53,7 @@ type ChatDetailsDataTemplate = {
 
 type ProfileDataTemplate = {
     profileImg: string,
-    profileName: string,
+    profileName: string | number,
     navButtonSrc: string,
 }
 
