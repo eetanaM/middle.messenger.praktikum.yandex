@@ -46,7 +46,7 @@ export default class App implements IApp {
     }
 
     render() {
-        let template;
+        let template: HandlebarsTemplateDelegate<any>;
         let templateData;
 
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
@@ -67,7 +67,7 @@ export default class App implements IApp {
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             template = Handlebars.compile(Pages.BadServerPage);
             templateData = MOCK.BAD_SERVER_TEMPLATE_DATA;
-        } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
+        } else {
             template = Handlebars.compile(Pages.NotFoundPage);
             templateData = MOCK.NOT_FOUND_TEMPLATE_DATA;
         }
@@ -132,11 +132,13 @@ export default class App implements IApp {
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
             // Attaching event listeners on links for changing pages and rerender
             links.forEach((node) => {
-                const pageSrc = node.dataset.pagesrc
-                node.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    this.changePage(pageSrc)
-                })
+                if (node.dataset.pagesrc) {
+                    const pageSrc = node.dataset.pagesrc
+                    node.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        this.changePage(pageSrc)
+                    })
+                }
             })
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
     
@@ -285,7 +287,7 @@ export default class App implements IApp {
         }
     }
 
-    changePage(page) {
+    changePage(page: string) {
         this.state.currentPage = page;
         this.render();
         this.renderChatDetails(this.state.currentChatItemId);
