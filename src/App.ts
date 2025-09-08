@@ -4,7 +4,7 @@ import * as Pages from "./pages/index.ts";
 
 import * as MOCK from "./mocks/mockData.ts"
 import * as ENV from "./utils/constants/consts.ts"
-import { TemplateRenderer } from "./utils/templateRenderer.ts"
+import { TemplateRenderer } from "./utils/TemplateRenderer.ts"
 
 import type { IApp, IAppState, IModalTemplateData } from "./utils/types/app.ts";
 
@@ -122,11 +122,11 @@ export default class App implements IApp {
         const submitButton = document.querySelector("#login-button");
 
         if (!homeLink) {
-            throw new Error("There is no homelink element in DOM")
+            throw new Error("There is no #preview element in DOM")
         }
 
         if (!submitButton) {
-            throw new Error("There is no submit button element in DOM")
+            throw new Error("There is no #login-button element in DOM")
         }
 
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
@@ -207,11 +207,11 @@ export default class App implements IApp {
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
 
             if (!changeCredsButton) {
-                throw new Error("There is no change-credentials element in DOM")
+                throw new Error("There is no #change-credentials element in DOM")
             }
 
             if (!changePasswordButton) {
-                throw new Error("There is no change-password element in DOM")
+                throw new Error("There is no #change-password element in DOM")
             }
 
             homeLink.addEventListener("click", (e) => {

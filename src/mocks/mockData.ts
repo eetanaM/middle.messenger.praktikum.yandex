@@ -10,9 +10,9 @@ import sendButton from "../../images/chat/send.png"
 
 
 import * as ENV from "../utils/constants/consts"
-import { TemplateRenderer } from "../utils/templateRenderer"
+import { TemplateRenderer } from "../utils/TemplateRenderer"
 
-import type { AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate } from "../utils/types/api/mock-data"
+import type { AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate } from "../utils/types/api/mockData"
 
 export const PREVIEW_TEMPLATE_DATA: PreviewDataTemplate = {  
     links: [
