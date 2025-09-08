@@ -1,4 +1,4 @@
-import type { ITemplateRenderer } from "./types/templateRenderer";
+import type { ITemplateRenderer } from "./types/TemplateRenderer";
 
 export class TemplateRenderer implements ITemplateRenderer {
     static renderTemplate(container: HTMLElement, template:HandlebarsTemplateDelegate<any>, data?:unknown) {

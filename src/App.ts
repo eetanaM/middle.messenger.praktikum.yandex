@@ -6,7 +6,7 @@ import * as MOCK from "./mocks/mockData.ts"
 import * as ENV from "./utils/constants/consts.ts"
 import { TemplateRenderer } from "./utils/TemplateRenderer.ts"
 
-import type { IApp, IAppState, IModalTemplateData } from "./utils/types/app.ts";
+import type { IApp, IAppState, IModalTemplateData } from "./utils/types/App.ts";
 
 import Button from "./components/partials/Button.ts";
 import MainLink from "./components/partials/MainLink.ts";
@@ -118,16 +118,6 @@ export default class App implements IApp {
 
     attachEventListeners() {
         const links = document.querySelectorAll(".preview-page__links li a") as NodeListOf<HTMLElement>
-        const homeLink = document.querySelector("#preview");
-        const submitButton = document.querySelector("#login-button");
-
-        if (!homeLink) {
-            throw new Error("There is no #preview element in DOM")
-        }
-
-        if (!submitButton) {
-            throw new Error("There is no #login-button element in DOM")
-        }
 
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
             // Attaching event listeners on links for changing pages and rerender
@@ -141,6 +131,16 @@ export default class App implements IApp {
                 }
             })
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
+            const homeLink = document.querySelector("#preview");
+            const submitButton = document.querySelector("#login-button");
+
+            if (!homeLink) {
+                throw new Error("There is no #preview element in DOM")
+            }
+
+            if (!submitButton) {
+                throw new Error("There is no #login-button element in DOM")
+            }
     
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
@@ -159,6 +159,16 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
+            const homeLink = document.querySelector("#preview");
+            const submitButton = document.querySelector("#register-button");
+
+            if (!homeLink) {
+                throw new Error("There is no #preview element in DOM")
+            }
+
+            if (!submitButton) {
+                throw new Error("There is no #register-button element in DOM")
+            }
 
             // Attaching event listener to go back to preview page. Temporary
             const pageSrc = ENV.PAGES.PREVIEW_PAGE
@@ -176,6 +186,10 @@ export default class App implements IApp {
                 })
             })
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
+            const homeLink = document.querySelector("#preview");
+            if (!homeLink) {
+                throw new Error("There is no #preview element in DOM")
+            }
             const chatItems = document.querySelectorAll(".chat-item")
             const baseClass = "chat-item"
 
@@ -202,6 +216,10 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
+            const homeLink = document.querySelector("#preview");
+            if (!homeLink) {
+                throw new Error("There is no #preview element in DOM")
+            }
             const changeCredsButton = document.querySelector("#change-credentials");
             const changePasswordButton = document.querySelector("#change-password")
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
@@ -270,6 +288,10 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.NOT_FOUND_PAGE) {
+            const homeLink = document.querySelector("#preview");
+            if (!homeLink) {
+                throw new Error("There is no #preview element in DOM")
+            }
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -278,6 +300,10 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
+            const homeLink = document.querySelector("#preview");
+            if (!homeLink) {
+                throw new Error("There is no #preview element in DOM")
+            }
             const pageSrc = ENV.PAGES.PREVIEW_PAGE;
             homeLink.addEventListener("click", (e) => {
                 e.preventDefault();
