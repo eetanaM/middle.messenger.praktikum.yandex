@@ -1,9 +1,16 @@
 import { type IBlock } from "./types/Block";
+import type { Callback } from "./types/EventBus";
+
 import { v4 as uuidv4 } from "uuid";
 import EventBus from "./EventBus";
 
 interface BlockProps {
-    [key: string]: Record<string, Block>[] | unknown[]
+    [key: string]: 
+        Record<string, Block> 
+        | Record<string, Block>[] 
+        | Record<string, string>
+        | string
+        | Callback
 }
 class Block implements IBlock {
     private static EVENTS: {[key: string]: string} = {
@@ -23,29 +30,40 @@ class Block implements IBlock {
     constructor(propsWithChildren: BlockProps = {}) {
         const uid = uuidv4();
         const eventBus = new EventBus();
-        const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren)
+        const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
+        
 
         this.props = props;
         this.children = children;
         this.lists = lists;
+        
+        this._id = uid;
+        this.eventBus = () => eventBus;
 
-        this._id = uid
-        this.eventBus = () => eventBus
+        this._registerEvents();
+        eventBus.emit(Block.EVENTS.FLOW_INIT);
     }
 
     protected get element(): HTMLElement{
-        return this._element
+        return this._element;
     }
 
-    protected _getChildrenPropsAndProps(propsWithChildren: BlockProps): 
+    private _registerEvents(): void {
+        this.eventBus().on(Block.EVENTS.FLOW_INIT, this.init.bind(this) as Callback);
+        this.eventBus().on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this) as Callback);
+        this.eventBus().on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this) as Callback);
+        this.eventBus().on(Block.EVENTS.FLOW_RENDER, this._render.bind(this) as Callback);
+    }
+
+    private _getChildrenPropsAndProps(propsWithChildren: BlockProps): 
         { 
             props: BlockProps, 
             children: Record<string, Block>, 
             lists: Record<string, unknown[]>
         } {
-            const props: BlockProps = {}
-            const children: Record<string, Block> = {}
-            const lists: Record<string, unknown[]> = {}
+            const props: BlockProps = {};
+            const children: Record<string, Block> = {};
+            const lists: Record<string, unknown[]> = {};
 
             Object.entries(propsWithChildren).forEach(([key, value]) => {
                 if (value instanceof Block) {
@@ -57,28 +75,66 @@ class Block implements IBlock {
                 }
             });
 
-        return { props, children, lists }
+        return { props, children, lists };
     }
 
-    public init() {
+    private _addEvents(): void {
+        const { events = {} } = this.props;
+
+        Object.keys(events).forEach((eventName) => {
+            if (this._element) {
+                this._element.addEventListener(eventName, events[eventName])
+            }
+        })
+    }
+
+    protected addAttributes(): void {
+        const { attr= {} } = this.props;
+
+        Object.entries(attr).forEach(([key, value]) => {
+            if (this._element) {
+                this._element.setAttribute(key, value)
+            }
+        })
+    }
+
+    protected init(): void {
         // this._createResources();
-        this.eventBus().emit(Block.EVENTS.FLOW_RENDER)
+        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    public componentDidMount(oldProps: BlockProps) {
-        console.log(oldProps)
+    private _componentDidMount(): void {
+        this.componentDidMount();
     }
 
-    public dispatchComponentDidMount() {
-        this.eventBus().emit(Block.EVENTS.FLOW_CDM)
+    protected componentDidMount(): void {
+        console.log();
     }
 
-    public componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
-        console.log(oldProps, newProps)
-        return true
+    public dispatchComponentDidMount(): void {
+        this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    public setProps = (nextProps?: BlockProps) => {
+    private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
+        const response = this.componentDidUpdate(oldProps, newProps);
+
+        if (!response) {
+            return
+        }
+
+        this._render()
+    }
+
+    protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
+        console.log(oldProps, newProps);
+        return true;
+    }
+
+    private _createDocumentElement(type: string): HTMLTemplateElement {
+        return document.createElement(type) as HTMLTemplateElement
+    }
+
+    public setProps = (nextProps?: BlockProps): void => {
         if (!nextProps) {
             return;
         }
@@ -86,19 +142,66 @@ class Block implements IBlock {
         Object.assign(this.props, nextProps);
     }
 
-    public render(): string | void {
+    private _render() {
+        console.log('Render'); 
+        const propsAndStubs = { ...this.props };
+        Object.entries(this.children).forEach(([key, child]) => {
+            propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+        });
+
+        Object.entries(this.lists).forEach(([key]) => {
+            const tmpId = uuidv4(); // пересмотреть определение идентификатора для списков
+            propsAndStubs[key] = `<div data-id="__l_${tmpId}"></div>`;
+        });
+
+        const fragment = this._createDocumentElement('template');
+        fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
+
+        Object.values(this.children).forEach(child => {
+        const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+        if (stub) {
+            stub.replaceWith(child.getContent());
+        }
+        });
+
+        Object.entries(this.lists).forEach(([, child]) => {
+            const tmpId = uuidv4(); // пересмотреть определение идентификатора для списков
+            const listCont = this._createDocumentElement('template');
+            child.forEach(item => {
+                if (item instanceof Block) {
+                listCont.content.append(item.getContent());
+                } else {
+                listCont.content.append(`${item}`);
+                }
+            });
+            const stub = fragment.content.querySelector(`[data-id="__l_${tmpId}"]`);
+            if (stub) {
+                stub.replaceWith(listCont.content);
+            }
+        });
+
+        const newElement = fragment.content.firstElementChild as HTMLElement;
+        if (this._element && newElement) {
+            this._element.replaceWith(newElement);
+        }
+        this._element = newElement;
+        this._addEvents();
+        this.addAttributes();
+    }
+
+    protected render(): string | void {
         
     }
 
     public getContent(): HTMLElement {
-        return this.element
+        return this.element;
     }
 
-    public show() {
+    public show(): void {
         this.getContent().style.display = "block";
     }
 
-    public hide() {
+    public hide(): void {
         this.getContent().style.display = "none";
     }
 }
