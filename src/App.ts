@@ -15,6 +15,7 @@ import FileInput from "./components/partials/FileInput.ts"
 import AuthForm from "./components/partials/AuthForm.ts";
 import ChatItem from "./components/partials/ChatItem.ts";
 import CredentialsForm from "./components/partials/CredentialsForm.ts";
+import { NotFoundPage } from "./pages/notFoundPage/notFoundPage.ts";
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
@@ -52,28 +53,39 @@ export default class App implements IApp {
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
             template = Handlebars.compile(Pages.PreviewPage);
             templateData = MOCK.PREVIEW_TEMPLATE_DATA;
+            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
             template = Handlebars.compile(Pages.LoginPage);
             templateData = MOCK.LOGIN_TEMPLATE_DATA;
+            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(Pages.RegisterPage);
             templateData = MOCK.REGISTER_TEMPLATE_DATA;
+            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(Pages.MainContentPage);
             templateData = MOCK.MAIN_CONTENT_TEMPLATE_DATA;
+            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
             template = Handlebars.compile(Pages.ProfilePage);
             templateData = MOCK.PROFILE_TEMPLATE_DATA;
+            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             template = Handlebars.compile(Pages.BadServerPage);
             templateData = MOCK.BAD_SERVER_TEMPLATE_DATA;
+            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            this.attachEventListeners();
         } else {
-            template = Handlebars.compile(Pages.NotFoundPage);
-            templateData = MOCK.NOT_FOUND_TEMPLATE_DATA;
+            const notFoundPage = new NotFoundPage();
+            if (this.appElement) {
+                this.appElement.replaceWith(notFoundPage.getContent())
+            }
         }
-
-        TemplateRenderer.renderTemplate(this.appElement, template, templateData);
-        this.attachEventListeners();
     }
 
     renderChatDetails(currentChatItemId?: string | null) {

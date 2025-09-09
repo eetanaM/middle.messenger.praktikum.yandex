@@ -1,8 +1,9 @@
-import { type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList } from "./types/Block";
+import { type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList} from "./types/Block";
 import type { Callback } from "./types/EventBus";
 
 import { v4 as uuidv4 } from "uuid";
 import EventBus from "./EventBus";
+import Handlebars from "handlebars";
 class Block implements IBlock {
     private static EVENTS: IBlockEvents = {
         FLOW_INIT: "init",
@@ -14,7 +15,7 @@ class Block implements IBlock {
     protected _element: HTMLElement
     protected props: IBlockProps
     protected children: Record<string, Block>
-    protected lists: Record<string, Block[] | any []>
+    protected lists: Record<string, any[]> // разобраться с any[]
     protected eventBus: () => EventBus
     protected _id: string
 
@@ -24,9 +25,9 @@ class Block implements IBlock {
         const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
         
 
-        this.props = props;
+        this.props = this._makePropsProxy({...props});
         this.children = children;
-        this.lists = lists;
+        this.lists = this._makePropsProxy({...lists}) as Record<string, any[]>; // разобраться с any[]
         
         this._id = uid;
         this.eventBus = () => eventBus;
@@ -50,11 +51,11 @@ class Block implements IBlock {
         { 
             props: IBlockProps, 
             children: Record<string, Block>, 
-            lists: Record<string, unknown[]>
+            lists: Record<string, any[]>
         } {
             const props: IBlockProps = {};
             const children: Record<string, Block> = {};
-            const lists: Record<string, unknown[]> = {};
+            const lists: Record<string, any[]> = {}; // разобраться с any[]
 
             Object.entries(propsWithChildren).forEach(([key, value]) => {
                 if (value instanceof Block) {
@@ -130,6 +131,26 @@ class Block implements IBlock {
         return document.createElement(type) as HTMLTemplateElement
     }
 
+    private _makePropsProxy(props: IBlockProps): IBlockProps | Record<string, Block[] | any []> {
+    const self = this;
+
+    return new Proxy(props, {
+      get(target: any, prop: string) {
+        const value = target[prop];
+        return typeof value === 'function' ? value.bind(target) : value;
+      },
+      set(target: any, prop: string, value: any) {
+        const oldTarget = { ...target };
+        target[prop] = value;
+        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+        return true;
+      },
+      deleteProperty() {
+        throw new Error('No access');
+      },
+    });
+  }
+
     public setProps = (nextProps?: IBlockProps): void => {
         if (!nextProps) {
             return;
@@ -160,14 +181,14 @@ class Block implements IBlock {
         }
         });
 
-        Object.entries(this.lists).forEach(([, child]) => {
+        Object.entries(this.lists).forEach((child) => {
             const tmpId = uuidv4(); // пересмотреть определение идентификатора для списков
             const listCont = this._createDocumentElement('template');
             child.forEach(item => {
                 if (item instanceof Block) {
-                listCont.content.append(item.getContent());
+                    listCont.content.append(item.getContent());
                 } else {
-                listCont.content.append(`${item}`);
+                    listCont.content.append(`${item}`);
                 }
             });
             const stub = fragment.content.querySelector(`[data-id="__l_${tmpId}"]`);

@@ -24,6 +24,7 @@ interface IBlockProps {
     | Block[] 
     | TAttributes
     | string
+    | number
     | TEventHandlersList
 }
 
