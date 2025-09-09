@@ -1,19 +1,10 @@
-import { type IBlock } from "./types/Block";
+import { type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList } from "./types/Block";
 import type { Callback } from "./types/EventBus";
 
 import { v4 as uuidv4 } from "uuid";
 import EventBus from "./EventBus";
-
-interface BlockProps {
-    [key: string]: 
-        Record<string, Block> 
-        | Record<string, Block>[] 
-        | Record<string, string>
-        | string
-        | Callback
-}
 class Block implements IBlock {
-    private static EVENTS: {[key: string]: string} = {
+    private static EVENTS: IBlockEvents = {
         FLOW_INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
         FLOW_CDU: "flow:component-did-update",
@@ -21,13 +12,13 @@ class Block implements IBlock {
     }
 
     protected _element: HTMLElement
-    protected props: BlockProps
+    protected props: IBlockProps
     protected children: Record<string, Block>
-    protected lists: Record<string, unknown[]>
+    protected lists: Record<string, Block[] | any []>
     protected eventBus: () => EventBus
     protected _id: string
 
-    constructor(propsWithChildren: BlockProps = {}) {
+    constructor(propsWithChildren: IBlockProps = {}) {
         const uid = uuidv4();
         const eventBus = new EventBus();
         const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
@@ -55,13 +46,13 @@ class Block implements IBlock {
         this.eventBus().on(Block.EVENTS.FLOW_RENDER, this._render.bind(this) as Callback);
     }
 
-    private _getChildrenPropsAndProps(propsWithChildren: BlockProps): 
+    private _getChildrenPropsAndProps(propsWithChildren: IBlockProps): 
         { 
-            props: BlockProps, 
+            props: IBlockProps, 
             children: Record<string, Block>, 
             lists: Record<string, unknown[]>
         } {
-            const props: BlockProps = {};
+            const props: IBlockProps = {};
             const children: Record<string, Block> = {};
             const lists: Record<string, unknown[]> = {};
 
@@ -79,11 +70,16 @@ class Block implements IBlock {
     }
 
     private _addEvents(): void {
-        const { events = {} } = this.props;
+        const events = this.props.events as TEventHandlersList;
 
         Object.keys(events).forEach((eventName) => {
-            if (this._element) {
-                this._element.addEventListener(eventName, events[eventName])
+            const handler = events[eventName];
+            if (this._element && (typeof handler === 'function' || Array.isArray(handler))) {
+                if (Array.isArray(handler)) {
+                handler.forEach(h => this._element!.addEventListener(eventName, h));
+            } else {
+                this._element.addEventListener(eventName, handler);
+            }
             }
         })
     }
@@ -93,7 +89,7 @@ class Block implements IBlock {
 
         Object.entries(attr).forEach(([key, value]) => {
             if (this._element) {
-                this._element.setAttribute(key, value)
+                this._element.setAttribute(key, value as string)
             }
         })
     }
@@ -115,7 +111,7 @@ class Block implements IBlock {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): void {
+    private _componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps): void {
         const response = this.componentDidUpdate(oldProps, newProps);
 
         if (!response) {
@@ -125,7 +121,7 @@ class Block implements IBlock {
         this._render()
     }
 
-    protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps): boolean {
+    protected componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps): boolean {
         console.log(oldProps, newProps);
         return true;
     }
@@ -134,7 +130,7 @@ class Block implements IBlock {
         return document.createElement(type) as HTMLTemplateElement
     }
 
-    public setProps = (nextProps?: BlockProps): void => {
+    public setProps = (nextProps?: IBlockProps): void => {
         if (!nextProps) {
             return;
         }
