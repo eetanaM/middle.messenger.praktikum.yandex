@@ -5,6 +5,9 @@ export class TemplateRenderer implements ITemplateRenderer {
         const htmlString = template(data);
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
+        if (!container) {
+            container = document.createElement("div")
+        }
         
         const fragment = document.createDocumentFragment();
         
@@ -18,13 +21,9 @@ export class TemplateRenderer implements ITemplateRenderer {
             }
         });
         
-        if (container) {
-            container.innerHTML = "";
-            container.appendChild(fragment);
-            return container
-        } else {
-            return fragment
-        }
+        container.innerHTML = "";
+        container.appendChild(fragment);
+        return container
     }
 
     static escapeHtml(unsafe: string | number) {

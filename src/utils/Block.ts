@@ -73,6 +73,9 @@ class Block implements IBlock {
 
     private _addEvents(): void {
         const events = this.props.events as TEventHandlersList;
+        console.log("Events attaching")
+        console.log(events)
+        console.log(this._element, "element")
 
         Object.keys(events).forEach((eventName) => {
             const handler = events[eventName];
@@ -172,11 +175,12 @@ class Block implements IBlock {
             propsAndStubs[key] = `<div data-id="__l_${tmpId}"></div>`;
         });
 
+        const fragment = this._createDocumentElement("template");
         const template = Handlebars.compile(this.render())
-        const fragment = TemplateRenderer.renderTemplate(template, undefined, propsAndStubs) as HTMLTemplateElement
+        fragment.content.appendChild(TemplateRenderer.renderTemplate(template, undefined, propsAndStubs))
 
         Object.values(this.children).forEach(child => {
-        const stub = fragment.querySelector(`[data-id="${child._id}"]`);
+        const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
         if (stub) {
             stub.replaceWith(child.getContent());
         }
@@ -192,13 +196,13 @@ class Block implements IBlock {
                     listCont.content.append(`${item}`);
                 }
             });
-            const stub = fragment.querySelector(`[data-id="__l_${tmpId}"]`);
+            const stub = fragment.content.querySelector(`[data-id="${tmpId}"]`);
             if (stub) {
                 stub.replaceWith(listCont.content);
             }
         });
 
-        const newElement = fragment as HTMLElement;
+        const newElement = fragment.content.firstElementChild as HTMLElement;
         if (this._element && newElement) {
             this._element.replaceWith(newElement);
         }

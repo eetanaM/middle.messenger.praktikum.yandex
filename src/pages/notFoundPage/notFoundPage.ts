@@ -10,14 +10,15 @@ export class NotFoundPage extends Block {
             events: {},
             MainLink: new MainLink({
                 href: "#",
-                id: "test-id",
+                id: "#preview",
                 text: TemplateRenderer.escapeHtml("Домой")
             })
         })
     }
 
     override render() {
-        return `<main class="not-found">
+        return `<div id="app">
+        <main class="not-found">
     <div class="not-found__logo">
         <img src={{ notFoundLogoSrc }} alt="logo">
         <h1>Упс, кажется Вы сбились с курса...</h1>
@@ -36,6 +37,7 @@ export class NotFoundPage extends Block {
         <div class="modal__content">
             
         </div> 
+    </div>
     </div>`
     }
 }
