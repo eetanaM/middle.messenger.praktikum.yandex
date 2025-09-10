@@ -1,2 +1,2 @@
-export { default as BadServerPage } from "./badServerPage.hbs?raw";
+export { default as BadServerPage } from "./BadServerPage";
 

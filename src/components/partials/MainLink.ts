@@ -5,6 +5,7 @@ export default `<a href="{{href}}" id="{{id}}" class="app__main-link">{{text}}</
 
 export class MainLink extends Block {
     constructor(props: IBlockProps) {
+        console.log("Rendering Main Link")
         super({
             ...props,
             events: {
@@ -18,6 +19,7 @@ export class MainLink extends Block {
     }
 
     override render() {
-        return `<a href="{{ href }}" id="{{ id }}" class="app__main-link">{{ text }}</a>`
+        return `<a href="{{ href }}" id="{{ id }}" class="app__main-link">{{ textContent }}</a>`
     }
 }
+

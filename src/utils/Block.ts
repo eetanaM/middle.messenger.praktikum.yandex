@@ -73,9 +73,6 @@ class Block implements IBlock {
 
     private _addEvents(): void {
         const events = this.props.events as TEventHandlersList;
-        console.log("Events attaching")
-        console.log(events)
-        console.log(this._element, "element")
 
         Object.keys(events).forEach((eventName) => {
             const handler = events[eventName];
@@ -164,7 +161,7 @@ class Block implements IBlock {
     }
 
     private _render() {
-        console.log('Render', this); 
+        console.log('Rendered', this); 
         const propsAndStubs = { ...this.props };
         Object.entries(this.children).forEach(([key, child]) => {
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
@@ -174,16 +171,16 @@ class Block implements IBlock {
             const tmpId = uuidv4(); // пересмотреть определение идентификатора для списков
             propsAndStubs[key] = `<div data-id="__l_${tmpId}"></div>`;
         });
-
         const fragment = this._createDocumentElement("template");
         const template = Handlebars.compile(this.render())
         fragment.content.appendChild(TemplateRenderer.renderTemplate(template, undefined, propsAndStubs))
+        console.log(fragment.content.firstElementChild?.innerHTML)
 
         Object.values(this.children).forEach(child => {
-        const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-        if (stub) {
-            stub.replaceWith(child.getContent());
-        }
+            const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+            if (stub) {
+                stub.replaceWith(child.getContent());
+            }
         });
 
         Object.entries(this.lists).forEach((child) => {

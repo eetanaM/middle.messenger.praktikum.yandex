@@ -12,11 +12,10 @@ import Button from "./components/partials/Button.ts";
 import MainLink from "./components/partials/MainLink.ts";
 import FormInput from "./components/partials/FormInput.ts";
 import FileInput from "./components/partials/FileInput.ts"
-import AuthForm from "./components/partials/AuthForm.ts";
-import ChatItem from "./components/partials/ChatItem.ts";
-import CredentialsForm from "./components/partials/CredentialsForm.ts";
-import { NotFoundPage } from "./pages/notFoundPage/notFoundPage.ts";
-import { BadServerPage } from "./pages/badServerPage/badServerPage.ts";
+import AuthForm from "./components/blocks/AuthForm.ts";
+import ChatItem from "./components/blocks/ChatItem.ts";
+import CredentialsForm from "./components/blocks/CredentialsForm.ts";
+import { LoginPage, NotFoundPage, BadServerPage } from "./pages"
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
@@ -57,10 +56,10 @@ export default class App implements IApp {
             TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            template = Handlebars.compile(Pages.LoginPage);
-            templateData = MOCK.LOGIN_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
-            this.attachEventListeners();
+            const loginPage = new LoginPage();
+            if (this.appElement) {
+                this.appElement.replaceWith(loginPage.getContent())
+            }
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(Pages.RegisterPage);
             templateData = MOCK.REGISTER_TEMPLATE_DATA;
@@ -79,12 +78,12 @@ export default class App implements IApp {
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             const badServerPage = new BadServerPage();
             if (this.appElement) {
-                this.appElement.firstElementChild?.replaceWith(badServerPage.getContent())
+                this.appElement.replaceWith(badServerPage.getContent())
             }
         } else {
             const notFoundPage = new NotFoundPage();
             if (this.appElement) {
-                this.appElement.firstElementChild?.replaceWith(notFoundPage.getContent())
+                this.appElement.replaceWith(notFoundPage.getContent())
             }
         }
     }
@@ -229,7 +228,7 @@ export default class App implements IApp {
             })
 
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
-            const homeLink = document.querySelector("#preview");
+            const homeLink = document.querySelector(".app__nav-button");
             if (!homeLink) {
                 throw new Error("There is no #preview element in DOM")
             }

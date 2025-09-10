@@ -3,7 +3,7 @@ import notFoundLogoSrc from "../../../images/logo/logo404.png"
 import { MainLink } from "../../components/partials/MainLink";
 import { TemplateRenderer } from "../../utils/TemplateRenderer";
 
-export class BadServerPage extends Block {
+export default class BadServerPage extends Block {
     constructor() {
         super({
             notFoundLogoSrc: notFoundLogoSrc, 
@@ -11,7 +11,7 @@ export class BadServerPage extends Block {
             MainLink: new MainLink({
                 href: "#",
                 id: "#preview",
-                text: TemplateRenderer.escapeHtml("Домой")
+                textContent: TemplateRenderer.escapeHtml("Домой")
             })
         })
     }
@@ -33,11 +33,8 @@ export class BadServerPage extends Block {
                 </nav>
             </main>
             <div id="modal">
-                <div class="modal__overlay">
-                </div>
-                <div class="modal__content">
-                    
-                </div> 
+                <div class="modal__overlay"></div>
+                <div class="modal__content"></div> 
             </div>
         </div>
         `
