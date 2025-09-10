@@ -31,7 +31,7 @@ export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
         { type: "password", name: "password", placeholder: "Пароль"},
     ],
     button: {
-        ID: 'login-button',
+        id: 'login-button',
         textContent: TemplateRenderer.escapeHtml("Войти")
     },
     link: {
@@ -57,7 +57,7 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
         { type: "password", name: "password", placeholder: "Пароль"},
     ],
     button: {
-        ID: 'register-button',
+        id: 'register-button',
         textContent: TemplateRenderer.escapeHtml("Зарегистрироваться")
     },
     link: {

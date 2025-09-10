@@ -16,10 +16,10 @@ type AuthDataTemplate = {
     inputs: Array<{
         type: string,
         name: string,
-        placeholder?: string,
+        placeholder: string,
     }>,
     button: {
-        ID: string,
+        id: string,
         textContent: string | number
     },
     link: LinkData,
