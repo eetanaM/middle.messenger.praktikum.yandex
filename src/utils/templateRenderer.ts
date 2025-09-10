@@ -1,7 +1,7 @@
 import type { ITemplateRenderer } from "./types/TemplateRenderer";
 
 export class TemplateRenderer implements ITemplateRenderer {
-    static renderTemplate(container: HTMLElement, template:HandlebarsTemplateDelegate<any>, data?:unknown) {
+    static renderTemplate(template:HandlebarsTemplateDelegate<any>, container?: HTMLElement, data?:unknown) {
         const htmlString = template(data);
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');
@@ -18,9 +18,13 @@ export class TemplateRenderer implements ITemplateRenderer {
             }
         });
         
-        container.innerHTML = "";
-        container.appendChild(fragment);
-        return container
+        if (container) {
+            container.innerHTML = "";
+            container.appendChild(fragment);
+            return container
+        } else {
+            return fragment
+        }
     }
 
     static escapeHtml(unsafe: string | number) {

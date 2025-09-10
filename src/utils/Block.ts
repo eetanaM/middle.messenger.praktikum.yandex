@@ -4,6 +4,7 @@ import type { Callback } from "./types/EventBus";
 import { v4 as uuidv4 } from "uuid";
 import EventBus from "./EventBus";
 import Handlebars from "handlebars";
+import { TemplateRenderer } from "./TemplateRenderer";
 class Block implements IBlock {
     private static EVENTS: IBlockEvents = {
         FLOW_INIT: "init",
@@ -160,7 +161,7 @@ class Block implements IBlock {
     }
 
     private _render() {
-        console.log('Render'); 
+        console.log('Render', this); 
         const propsAndStubs = { ...this.props };
         Object.entries(this.children).forEach(([key, child]) => {
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
@@ -171,11 +172,11 @@ class Block implements IBlock {
             propsAndStubs[key] = `<div data-id="__l_${tmpId}"></div>`;
         });
 
-        const fragment = this._createDocumentElement('template');
-        fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
+        const template = Handlebars.compile(this.render())
+        const fragment = TemplateRenderer.renderTemplate(template, undefined, propsAndStubs) as HTMLTemplateElement
 
         Object.values(this.children).forEach(child => {
-        const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+        const stub = fragment.querySelector(`[data-id="${child._id}"]`);
         if (stub) {
             stub.replaceWith(child.getContent());
         }
@@ -191,13 +192,13 @@ class Block implements IBlock {
                     listCont.content.append(`${item}`);
                 }
             });
-            const stub = fragment.content.querySelector(`[data-id="__l_${tmpId}"]`);
+            const stub = fragment.querySelector(`[data-id="__l_${tmpId}"]`);
             if (stub) {
                 stub.replaceWith(listCont.content);
             }
         });
 
-        const newElement = fragment.content.firstElementChild as HTMLElement;
+        const newElement = fragment as HTMLElement;
         if (this._element && newElement) {
             this._element.replaceWith(newElement);
         }

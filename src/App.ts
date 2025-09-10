@@ -53,37 +53,37 @@ export default class App implements IApp {
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
             template = Handlebars.compile(Pages.PreviewPage);
             templateData = MOCK.PREVIEW_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
             template = Handlebars.compile(Pages.LoginPage);
             templateData = MOCK.LOGIN_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
             template = Handlebars.compile(Pages.RegisterPage);
             templateData = MOCK.REGISTER_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(Pages.MainContentPage);
             templateData = MOCK.MAIN_CONTENT_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
             template = Handlebars.compile(Pages.ProfilePage);
             templateData = MOCK.PROFILE_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
             template = Handlebars.compile(Pages.BadServerPage);
             templateData = MOCK.BAD_SERVER_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(this.appElement, template, templateData);
+            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else {
             const notFoundPage = new NotFoundPage();
             if (this.appElement) {
-                this.appElement.replaceWith(notFoundPage.getContent())
+                this.appElement.firstElementChild?.replaceWith(notFoundPage.getContent())
             }
         }
     }
@@ -99,7 +99,7 @@ export default class App implements IApp {
             const mainContentNode = document.querySelector(".chat") as HTMLElement;
             const chatDetailsTemplate = Handlebars.compile(Pages.ChatDetails);
 
-            TemplateRenderer.renderTemplate(mainContentNode, chatDetailsTemplate, chatDetailsData)
+            TemplateRenderer.renderTemplate(chatDetailsTemplate, mainContentNode, chatDetailsData)
         }
     }
 
@@ -118,7 +118,7 @@ export default class App implements IApp {
             let modalTemplate = Handlebars.compile(CredentialsForm);
             const modalOverlay = document.querySelector(".modal__overlay");
     
-            TemplateRenderer.renderTemplate(modalContentEl, modalTemplate, modalTemplateData);
+            TemplateRenderer.renderTemplate(modalTemplate, modalContentEl, modalTemplateData);
         
             modalRoot.setAttribute("class", "opened")
             if (!modalOverlay) {

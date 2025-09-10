@@ -18,6 +18,6 @@ export class MainLink extends Block {
     }
 
     override render() {
-        return `<a href="{{href}}" id="{{id}}" class="app__main-link">{{text}}</a>`
+        return `<a href="{{ href }}" id="{{ id }}" class="app__main-link">{{ text }}</a>`
     }
 }
