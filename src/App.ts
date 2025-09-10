@@ -16,6 +16,7 @@ import AuthForm from "./components/partials/AuthForm.ts";
 import ChatItem from "./components/partials/ChatItem.ts";
 import CredentialsForm from "./components/partials/CredentialsForm.ts";
 import { NotFoundPage } from "./pages/notFoundPage/notFoundPage.ts";
+import { BadServerPage } from "./pages/badServerPage/badServerPage.ts";
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
@@ -76,10 +77,10 @@ export default class App implements IApp {
             TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
-            template = Handlebars.compile(Pages.BadServerPage);
-            templateData = MOCK.BAD_SERVER_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
-            this.attachEventListeners();
+            const badServerPage = new BadServerPage();
+            if (this.appElement) {
+                this.appElement.firstElementChild?.replaceWith(badServerPage.getContent())
+            }
         } else {
             const notFoundPage = new NotFoundPage();
             if (this.appElement) {
