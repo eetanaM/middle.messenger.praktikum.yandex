@@ -25,6 +25,7 @@ export class AuthForm extends Block {
                     {{{ inputs }}}
                     {{{ SubmitButton }}}
                     {{{ NoAccLink }}}
+                    {{{ AlreadyHasAccLink }}}
                     {{{ PreviewLink }}}
                 </form>`
     }

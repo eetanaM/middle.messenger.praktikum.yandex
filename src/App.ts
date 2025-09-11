@@ -15,7 +15,7 @@ import FileInput from "./components/partials/FileInput.ts"
 import AuthForm from "./components/blocks/AuthForm.ts";
 import ChatItem from "./components/blocks/ChatItem.ts";
 import CredentialsForm from "./components/blocks/CredentialsForm.ts";
-import { LoginPage, NotFoundPage, BadServerPage } from "./pages"
+import { LoginPage, NotFoundPage, BadServerPage, RegisterPage } from "./pages"
 
 Handlebars.registerPartial("Button", Button)
 Handlebars.registerPartial("MainLink", MainLink)
@@ -61,10 +61,10 @@ export default class App implements IApp {
                 this.appElement.replaceWith(loginPage.getContent())
             }
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            template = Handlebars.compile(Pages.RegisterPage);
-            templateData = MOCK.REGISTER_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
-            this.attachEventListeners();
+            const registerPage = new RegisterPage();
+            if (this.appElement) {
+                this.appElement.replaceWith(registerPage.getContent())
+            }
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
             template = Handlebars.compile(Pages.MainContentPage);
             templateData = MOCK.MAIN_CONTENT_TEMPLATE_DATA;
