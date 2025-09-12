@@ -1,7 +1,7 @@
 import type { ITemplateRenderer } from "./types/TemplateRenderer";
 
 export class TemplateRenderer implements ITemplateRenderer {
-    static renderTemplate(template:HandlebarsTemplateDelegate<any>, container?: HTMLElement, data?:unknown) {
+    static renderTemplate(template:HandlebarsTemplateDelegate<any>, data?:unknown, container?: HTMLElement) {
         const htmlString = template(data);
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlString, 'text/html');

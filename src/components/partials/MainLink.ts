@@ -4,13 +4,6 @@ export default class MainLink extends Block {
     constructor(props: IBlockProps) {
         super({
             ...props,
-            events: {
-                click: (e: Event) => {
-                    console.log("ClICKED");
-                    e.preventDefault();
-                    e.stopPropagation();
-                }
-            }
         })
     }
 

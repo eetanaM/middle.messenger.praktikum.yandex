@@ -79,6 +79,11 @@ export const MAIN_CONTENT_TEMPLATE_DATA: MainContentDataTemplate = {
         id: "preview",
         textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
     },
+    searchInput: {
+        type: "text",
+        name: "search",
+        placeholder: "Поиск"
+    },
     chatItems: [
         {
             avatarSrc: avatar,

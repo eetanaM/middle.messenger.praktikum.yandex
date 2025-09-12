@@ -1,4 +1,5 @@
 import type Block from "../Block"
+import type { IApp } from "./App"
 
 type TEventHandler = (event: Event) => void
 type TEventHandlersList = {
@@ -27,7 +28,7 @@ interface IBlockProps {
     | number
     | boolean
     | TEventHandlersList
-    | { _stub: string }[]
+    | IApp
 }
 
 export type {

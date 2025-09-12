@@ -4,6 +4,12 @@ type LinkData = {
     textContent: string | number,
 }
 
+type FormData = {
+    type: string,
+    name: string,
+    placeholder: string,
+}
+
 type PreviewDataTemplate = {
     links: Array<{
         pageSrc: string,
@@ -13,11 +19,7 @@ type PreviewDataTemplate = {
 
 type AuthDataTemplate = {
     logoUrl: string,
-    inputs: Array<{
-        type: string,
-        name: string,
-        placeholder: string,
-    }>,
+    inputs: Array<FormData>,
     button: {
         id: string,
         textContent: string | number
@@ -29,6 +31,7 @@ type AuthDataTemplate = {
 type MainContentDataTemplate = {
     profileImgSrc: string,
     preview: LinkData,
+    searchInput: FormData,
     chatItems: Array<{
         avatarSrc: string,
         chatName: string | number,
@@ -41,11 +44,7 @@ type MainContentDataTemplate = {
 }
 
 type ChatDetailsDataTemplate = {
-    form: {
-        type: string, 
-        name: string, 
-        placeholder: string,
-    },
+    form: FormData,
     icons: {
         [key: string]: string,
     }

@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList} from "./types/Block";
 import type { Callback } from "./types/EventBus";
+import type { IApp } from "./types/App";
 
 class Block implements IBlock {
     private static EVENTS: IBlockEvents = {
@@ -20,6 +21,7 @@ class Block implements IBlock {
     protected lists: Record<string, any[]> // разобраться с any[]
     protected eventBus: () => EventBus
     protected _id: string
+    protected _appElement: IApp
 
     constructor(propsWithChildren: IBlockProps = {}) {
         const uid = uuidv4();
@@ -32,6 +34,7 @@ class Block implements IBlock {
         this.lists = this._makePropsProxy({...lists}) as Record<string, any[]>; // разобраться с any[]
         
         this._id = uid;
+        this._appElement = this.props.appEl as IApp
 
         this.eventBus = () => eventBus;
 
@@ -74,16 +77,16 @@ class Block implements IBlock {
     }
 
     private _addEvents(): void {
-        const events = this.props.events as TEventHandlersList;
+        const events = this.props.events as TEventHandlersList || {};
 
         Object.keys(events).forEach((eventName) => {
             const handler = events[eventName];
             if (this._element && (typeof handler === 'function' || Array.isArray(handler))) {
                 if (Array.isArray(handler)) {
-                handler.forEach(h => this._element!.addEventListener(eventName, h));
-            } else {
-                this._element.addEventListener(eventName, handler);
-            }
+                    handler.forEach(h => this._element!.addEventListener(eventName, h));
+                } else {
+                    this._element.addEventListener(eventName, handler);
+                }
             }
         })
     }
@@ -175,7 +178,7 @@ class Block implements IBlock {
 
         const fragment = this._createDocumentElement("template");
         const template = Handlebars.compile(this.render())
-        fragment.content.appendChild(TemplateRenderer.renderTemplate(template, undefined, propsAndStubs))
+        fragment.content.appendChild(TemplateRenderer.renderTemplate(template, propsAndStubs))
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
@@ -220,3 +223,4 @@ class Block implements IBlock {
 }
 
 export default Block
+

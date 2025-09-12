@@ -4,11 +4,12 @@ import { AuthForm } from "../../../components/blocks";
 import { Button, FormInput, MainLink } from "../../../components/partials";
 
 import { LOGIN_TEMPLATE_DATA as MOCK } from "../../../mocks/mockData";
+import * as ENV from "../../../utils/constants/consts"
 
-import logoUrl from "../../../../images/logo/logo.png";
+import type { IBlockProps } from "../../../utils/types/Block";
 
 export default class LoginPage extends Block {
-    constructor() {
+    constructor(props: IBlockProps) {
         const inputs = MOCK.inputs.map((input) => {
             return new FormInput({
                 type: input.type,
@@ -16,29 +17,43 @@ export default class LoginPage extends Block {
                 placeholder: input.placeholder
             })
         })
+        
         super({
+            ...props,
             events: {},
             AuthForm: new AuthForm({
-                logoUrl: logoUrl,
+                logoUrl: MOCK.logoUrl,
                 inputs: inputs,
                 SubmitButton: new Button(MOCK.button),
-                NoAccLink: new MainLink(MOCK.link),
-                PreviewLink: new MainLink(MOCK.preview),
+                NoAccLink: new MainLink({
+                    ...MOCK.link,
+                    appEl: props.appEl,
+                    events: {
+                        click: (e: Event) => {
+                            e.preventDefault();
+                            this._appElement.changePage(ENV.PAGES.REGISTER_PAGE)
+                        },
+                    }
+                }),
+                PreviewLink: new MainLink({
+                    ...MOCK.preview,
+                    appEl: props.appEl,
+                    events: {
+                        click: (e: Event) => {
+                            e.preventDefault();
+                           this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE)
+                        }
+                    }
+                }),
                 events: {}
             })
         })
     }
 
     override render() {
-        return `<div id="app">
-                <main class="authorization">
+        return `<main class="authorization">
                     {{{ AuthForm }}}
-                </main>
-                <div id="modal">
-                    <div class="modal__overlay"></div>
-                    <div class="modal__content"></div> 
-                </div>
-            </div>`
+                </main>`
     }
 }
 

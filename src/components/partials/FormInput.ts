@@ -16,15 +16,17 @@ export default class FormInput extends Block {
     }
 
     override render() {
-        return `<input 
-                    type="{{ type }}" 
-                    name="{{ name }}" 
-                    placeholder="{{ placeholder }}"
-                    class="app__main-input"
-                />
-                <p id="{{ name }}" class="app__invalid-input hidden">
-                    Невалидный input
-                </p>`
+        return `<div>
+                    <input 
+                        type="{{ type }}" 
+                        name="{{ name }}" 
+                        placeholder="{{ placeholder }}"
+                        class="app__main-input"
+                    />
+                    <p id="{{ name }}" class="app__invalid-input hidden">
+                        Невалидный input
+                    </p>
+                </div>`
     }
 }
 

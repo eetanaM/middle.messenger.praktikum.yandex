@@ -1,4 +1,5 @@
 import Block from "../../utils/Block"
+
 import type { IBlockProps } from "../../utils/types/Block"
 
 export default class Button extends Block {
