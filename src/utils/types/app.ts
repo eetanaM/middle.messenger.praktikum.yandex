@@ -29,7 +29,6 @@ abstract class IApp {
     appElement: HTMLElement | null;
 
     render:() => void;
-    renderChatDetails: (currentChatItemId?: string | null) => void;
     toggleModal: (modalTemplateData: IModalTemplateData) => void;
     attachEventListeners: () => void;
     changePage: (page: string) => void;

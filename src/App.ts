@@ -55,10 +55,10 @@ export default class App implements IApp {
                 this.appElement.replaceWith(registerPage.getContent())
             }
         } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
-            template = Handlebars.compile(Pages.MainContentPage);
-            templateData = MOCK.MAIN_CONTENT_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
-            this.attachEventListeners();
+            const mainContentPage = new Pages.MainContentPage()
+            if (this.appElement) {
+                this.appElement.replaceWith(mainContentPage.getContent())
+            }
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
             const profilePage = new Pages.ProfilePage();
             if (this.appElement) {
@@ -74,21 +74,6 @@ export default class App implements IApp {
             if (this.appElement) {
                 this.appElement.replaceWith(notFoundPage.getContent())
             }
-        }
-    }
-
-    renderChatDetails(currentChatItemId?: string | null) {
-        if (this.state.currentPage !== ENV.PAGES.MAIN_CONTENT_PAGE) {
-            return
-        } else {
-            const chatDetailsData = {
-                currentChatItemId,
-                ...MOCK.CHAT_DETAILS_TEMPLATE_DATA
-            }
-            const mainContentNode = document.querySelector(".chat") as HTMLElement;
-            const chatDetailsTemplate = Handlebars.compile(Pages.ChatDetails);
-
-            TemplateRenderer.renderTemplate(chatDetailsTemplate, mainContentNode, chatDetailsData)
         }
     }
 
@@ -206,7 +191,6 @@ export default class App implements IApp {
                     })
                     node.setAttribute("class", baseClass + " active")
                     this.state.currentChatItemId = id;
-                    this.renderChatDetails(this.state.currentChatItemId);
                 })
             })
 
@@ -317,7 +301,6 @@ export default class App implements IApp {
     changePage(page: string) {
         this.state.currentPage = page;
         this.render();
-        this.renderChatDetails(this.state.currentChatItemId);
     }
 }
 

@@ -1,2 +1,2 @@
-export { default as MainContentPage } from "./mainContentPage.hbs?raw";
+export { default as MainContentPage } from "./MainContentPage.ts";
 
