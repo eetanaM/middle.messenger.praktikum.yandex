@@ -53,8 +53,13 @@ type ChatDetailsDataTemplate = {
 
 type ProfileDataTemplate = {
     profileImg: string,
-    profileName: string | number,
     navButtonSrc: string,
+    profileName: string | number,
+    userLastName: string | number,
+    displayName: string | number,
+    email: string | number,
+    login: string | number,
+    phoneNumber: string | number,
 }
 
 type ErrorPageDataTemplate = {

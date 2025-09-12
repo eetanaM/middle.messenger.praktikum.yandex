@@ -1,7 +1,9 @@
 import Block from "../../utils/Block";
-import notFoundLogoSrc from "../../../images/logo/logo404.png"
-import { MainLink } from "../../components/partials/MainLink";
 import { TemplateRenderer } from "../../utils/TemplateRenderer";
+
+import { MainLink } from "../../components/partials/MainLink";
+
+import notFoundLogoSrc from "../../../images/logo/logo404.png"
 
 export default class NotFoundPage extends Block {
     constructor() {

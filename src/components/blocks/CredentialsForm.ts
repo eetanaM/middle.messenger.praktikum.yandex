@@ -22,18 +22,16 @@ export class CredentialsForm extends Block {
     }
 
     override render() {
-        return `
-        <form class="credentials__form">
-            {{ #each fileInputs }}
-                {{{ FileInput }}}
-            {{ /each }}
-            {{ #each inputs }}
-                {{{ FormInput }}}
-            {{ /each }}
-            {{ #each button }}
-                {{{ Button }}}
-            {{ /each }}
-        </form>
-        `
+        return `<form class="credentials__form">
+                    {{ #each fileInputs }}
+                        {{{ FileInput }}}
+                    {{ /each }}
+                    {{ #each inputs }}
+                        {{{ FormInput }}}
+                    {{ /each }}
+                    {{ #each button }}
+                        {{{ Button }}}
+                    {{ /each }}
+                </form>`
     }
 }

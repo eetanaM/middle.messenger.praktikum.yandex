@@ -153,8 +153,13 @@ export const CHAT_DETAILS_TEMPLATE_DATA: ChatDetailsDataTemplate = {
 
 export const PROFILE_TEMPLATE_DATA: ProfileDataTemplate = {
     profileImg: profileDefault,
-    profileName: TemplateRenderer.escapeHtml("Иван"),
     navButtonSrc,
+    profileName: TemplateRenderer.escapeHtml("Иван"),
+    userLastName: TemplateRenderer.escapeHtml("Иванов"),
+    displayName: TemplateRenderer.escapeHtml("Ivan1234"),
+    email: TemplateRenderer.escapeHtml("pochta@yandex.ru"),
+    login: TemplateRenderer.escapeHtml("ivanivanov"),
+    phoneNumber: TemplateRenderer.escapeHtml("+7 (909) 967 30 30"),
 }
 
 export const NOT_FOUND_TEMPLATE_DATA: ErrorPageDataTemplate = {

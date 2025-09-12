@@ -1,10 +1,9 @@
 // index file to export all pages from one directory
-export { PreviewPage } from "./previewPage"
-export { LoginPage } from "./authorization/loginPage"
-export { RegisterPage } from "./authorization/registerPage"
-export { MainContentPage } from "./mainContentPage"
-export { ChatDetails } from "./mainContentPage/chatDetails"
-export { ProfilePage } from "./profilePage"
-export { BadServerPage } from "./badServerPage"
-export { NotFoundPage } from "./notFoundPage"
+export { PreviewPage } from "./PreviewPage"
+export { LoginPage } from "./Authorization/LoginPage"
+export { RegisterPage } from "./Authorization/RegisterPage"
+export { MainContentPage } from "./MainContentPage"
+export { ProfilePage } from "./ProfilePage"
+export { BadServerPage } from "./BadServerPage"
+export { NotFoundPage } from "./NotFoundPage"
 

@@ -1,27 +1,16 @@
 import Handlebars from "handlebars";
+import { TemplateRenderer } from "./utils/TemplateRenderer.ts"
 
 import * as Pages from "./pages/index.ts";
 
 import * as MOCK from "./mocks/mockData.ts"
 import * as ENV from "./utils/constants/consts.ts"
-import { TemplateRenderer } from "./utils/TemplateRenderer.ts"
 
 import type { IApp, IAppState, IModalTemplateData } from "./utils/types/App.ts";
 
-import Button from "./components/partials/Button.ts";
-import MainLink from "./components/partials/MainLink.ts";
-import FormInput from "./components/partials/FormInput.ts";
-import FileInput from "./components/partials/FileInput.ts"
-import AuthForm from "./components/blocks/AuthForm.ts";
 import ChatItem from "./components/blocks/ChatItem.ts";
 import CredentialsForm from "./components/blocks/CredentialsForm.ts";
-import { LoginPage, NotFoundPage, BadServerPage, RegisterPage } from "./pages"
 
-Handlebars.registerPartial("Button", Button)
-Handlebars.registerPartial("MainLink", MainLink)
-Handlebars.registerPartial("FormInput", FormInput)
-Handlebars.registerPartial("FileInput", FileInput)
-Handlebars.registerPartial("AuthForm", AuthForm)
 Handlebars.registerPartial("ChatItem", ChatItem)
 Handlebars.registerPartial("CredentialsForm", CredentialsForm)
 
@@ -56,12 +45,12 @@ export default class App implements IApp {
             TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            const loginPage = new LoginPage();
+            const loginPage = new Pages.LoginPage();
             if (this.appElement) {
                 this.appElement.replaceWith(loginPage.getContent())
             }
         } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            const registerPage = new RegisterPage();
+            const registerPage = new Pages.RegisterPage();
             if (this.appElement) {
                 this.appElement.replaceWith(registerPage.getContent())
             }
@@ -71,17 +60,17 @@ export default class App implements IApp {
             TemplateRenderer.renderTemplate(template, this.appElement, templateData);
             this.attachEventListeners();
         } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
-            template = Handlebars.compile(Pages.ProfilePage);
-            templateData = MOCK.PROFILE_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(template, this.appElement, templateData);
-            this.attachEventListeners();
+            const profilePage = new Pages.ProfilePage();
+            if (this.appElement) {
+                this.appElement.replaceWith(profilePage.getContent())
+            }
         } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
-            const badServerPage = new BadServerPage();
+            const badServerPage = new Pages.BadServerPage();
             if (this.appElement) {
                 this.appElement.replaceWith(badServerPage.getContent())
             }
         } else {
-            const notFoundPage = new NotFoundPage();
+            const notFoundPage = new Pages.NotFoundPage();
             if (this.appElement) {
                 this.appElement.replaceWith(notFoundPage.getContent())
             }
