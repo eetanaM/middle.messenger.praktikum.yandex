@@ -34,7 +34,7 @@ type MainContentDataTemplate = {
         chatName: string | number,
         lastMessage: string | number,
         timeStamp: string | number,
-        disabled: string | null,
+        disabled: boolean,
         unreadMessagesCount: string | number,
         chatItemId: string
     }>

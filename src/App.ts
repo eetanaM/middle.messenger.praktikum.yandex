@@ -1,6 +1,8 @@
 import Handlebars from "handlebars";
 import { TemplateRenderer } from "./utils/TemplateRenderer.ts"
 
+import CredentialsForm from "./components/blocks/CredentialsForm.ts";
+
 import * as Pages from "./pages/index.ts";
 
 import * as MOCK from "./mocks/mockData.ts"
@@ -8,10 +10,17 @@ import * as ENV from "./utils/constants/consts.ts"
 
 import type { IApp, IAppState, IModalTemplateData } from "./utils/types/App.ts";
 
-import ChatItem from "./components/blocks/ChatItem.ts";
-import CredentialsForm from "./components/blocks/CredentialsForm.ts";
+// Хелпер для создания заглушек для элементов массива
+// В шаблоне вызывается как {{{ blockList "Имя массива"}}}
+Handlebars.registerHelper('blockList', function(listName, context) {
+    const items = context.data.root[listName];
+    if (!Array.isArray(items)) return '';
+    
+    return items.map((item) => {
+        return `<div data-id="list-${listName}-${item._id}"></div>`;
+    }).join('');
+});
 
-Handlebars.registerPartial("ChatItem", ChatItem)
 Handlebars.registerPartial("CredentialsForm", CredentialsForm)
 
 export default class App implements IApp {
@@ -20,7 +29,7 @@ export default class App implements IApp {
 
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
+            currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
             accessToken: null,

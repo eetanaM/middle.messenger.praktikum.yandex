@@ -2,7 +2,6 @@ import Block from "../../utils/Block";
 import type { IBlockProps } from "../../utils/types/Block";
 export default class MainLink extends Block {
     constructor(props: IBlockProps) {
-        console.log("Rendering Main Link")
         super({
             ...props,
             events: {

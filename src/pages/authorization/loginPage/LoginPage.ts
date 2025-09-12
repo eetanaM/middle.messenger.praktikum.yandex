@@ -9,18 +9,11 @@ import logoUrl from "../../../../images/logo/logo.png";
 
 export default class LoginPage extends Block {
     constructor() {
-        console.log("Rendering Login page")
         super({
             events: {},
             AuthForm: new AuthForm({
                 logoUrl: logoUrl,
-                inputs: MOCK.inputs.map((data) => {
-                    return new FormInput({
-                        type: data.type,
-                        name: data.name,
-                        placeholder: data.placeholder
-                    })
-                }),
+                inputs: [],
                 SubmitButton: new Button(MOCK.button),
                 NoAccLink: new MainLink(MOCK.link),
                 PreviewLink: new MainLink(MOCK.preview),

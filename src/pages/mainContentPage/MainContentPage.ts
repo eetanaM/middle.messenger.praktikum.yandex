@@ -1,11 +1,24 @@
 import Block from "../../utils/Block"
 
-import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from "../../mocks/mockData"
 import { FormInput, MainLink } from "../../components/partials"
-import { ChatDetails } from "../../components/blocks"
+import { ChatDetails, ChatItem } from "../../components/blocks"
+
+import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from "../../mocks/mockData"
 
 export default class MainContentPage extends Block {
+    
     constructor() {
+        const chatItemsComponents = MOCK.chatItems.map((chatItem) => {
+            return new ChatItem({
+                    chatItemId: chatItem.chatItemId,
+                    avatarSrc: chatItem.avatarSrc,
+                    chatName: chatItem.chatName,
+                    lastMessage: chatItem.lastMessage,
+                    timeStamp: chatItem.timeStamp,
+                    disabled: chatItem.disabled,
+                    unreadMessagesCount: chatItem.unreadMessagesCount
+                })
+        })
         super({
             events: {},
             profileImgSrc: MOCK.profileImgSrc,
@@ -14,7 +27,7 @@ export default class MainContentPage extends Block {
                 name: "search",
                 placeholder: "Поиск"
             }),
-            ChatItems: [],
+            ChatItems: chatItemsComponents,
             MainLink: new MainLink({
                 href: MOCK.preview.href,
                 id: MOCK.preview.id,
@@ -39,7 +52,7 @@ export default class MainContentPage extends Block {
                             <form class="menu__menu-search">
                                 {{{ FormInput }}}
                             </form>
-                            {{{ ChatItems }}}
+                            {{{ blockList "ChatItems" }}}
                             {{{ MainLink }}}
                         </nav>
                         <section class="chat">
@@ -56,3 +69,4 @@ export default class MainContentPage extends Block {
                 </div>`
     }
 }
+

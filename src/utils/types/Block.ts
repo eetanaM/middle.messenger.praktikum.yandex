@@ -12,7 +12,7 @@ interface IBlock {
     setProps(newProps?: unknown): void,
     getContent(): HTMLElement,
     show(): void,
-    hide(): void
+    hide(): void,
 }
 interface IBlockEvents {
     [key: string]: string
@@ -25,7 +25,9 @@ interface IBlockProps {
     | TAttributes
     | string
     | number
+    | boolean
     | TEventHandlersList
+    | { _stub: string }[]
 }
 
 export type {

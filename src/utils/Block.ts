@@ -1,10 +1,11 @@
-import { type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList} from "./types/Block";
-import type { Callback } from "./types/EventBus";
-
-import { v4 as uuidv4 } from "uuid";
 import EventBus from "./EventBus";
 import Handlebars from "handlebars";
 import { TemplateRenderer } from "./TemplateRenderer";
+import { v4 as uuidv4 } from "uuid";
+
+import { type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList} from "./types/Block";
+import type { Callback } from "./types/EventBus";
+
 class Block implements IBlock {
     private static EVENTS: IBlockEvents = {
         FLOW_INIT: "init",
@@ -26,11 +27,12 @@ class Block implements IBlock {
         const { props, children, lists } = this._getChildrenPropsAndProps(propsWithChildren);
         
 
-        this.props = this._makePropsProxy({...props});
+        this.props = this._makePropsProxy({...props}) as IBlockProps;
         this.children = children;
         this.lists = this._makePropsProxy({...lists}) as Record<string, any[]>; // разобраться с any[]
         
         this._id = uid;
+
         this.eventBus = () => eventBus;
 
         this._registerEvents();
@@ -52,17 +54,17 @@ class Block implements IBlock {
         { 
             props: IBlockProps, 
             children: Record<string, Block>, 
-            lists: Record<string, any[]>
+            lists: Record<string, Block[]>
         } {
             const props: IBlockProps = {};
             const children: Record<string, Block> = {};
-            const lists: Record<string, any[]> = {}; // разобраться с any[]
+            const lists: Record<string, Block[]> = {};
 
             Object.entries(propsWithChildren).forEach(([key, value]) => {
                 if (value instanceof Block) {
                     children[key] = value;
-                } else if (Array.isArray(value)) {
-                    lists[key] = value;
+                } else if (Array.isArray(value) && value.every(item => item instanceof Block)) {
+                    lists[key] = value as Block[];
                 } else {
                     props[key] = value;
                 }
@@ -161,20 +163,19 @@ class Block implements IBlock {
     }
 
     private _render() {
-        console.log('Rendered', this); 
         const propsAndStubs = { ...this.props };
+        
         Object.entries(this.children).forEach(([key, child]) => {
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
         });
 
-        Object.entries(this.lists).forEach(([key]) => {
-            const tmpId = uuidv4(); // пересмотреть определение идентификатора для списков
-            propsAndStubs[key] = `<div data-id="__l_${tmpId}"></div>`;
+        Object.entries(this.lists).forEach(([listName, listItems]) => {
+            propsAndStubs[listName] = listItems
         });
+
         const fragment = this._createDocumentElement("template");
         const template = Handlebars.compile(this.render())
         fragment.content.appendChild(TemplateRenderer.renderTemplate(template, undefined, propsAndStubs))
-        console.log(fragment.content.firstElementChild?.innerHTML)
 
         Object.values(this.children).forEach(child => {
             const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
@@ -183,20 +184,13 @@ class Block implements IBlock {
             }
         });
 
-        Object.entries(this.lists).forEach((child) => {
-            const tmpId = uuidv4(); // пересмотреть определение идентификатора для списков
-            const listCont = this._createDocumentElement('template');
-            child.forEach(item => {
-                if (item instanceof Block) {
-                    listCont.content.append(item.getContent());
-                } else {
-                    listCont.content.append(`${item}`);
+        Object.entries(this.lists).forEach(([listName, listItems]) => {
+            listItems.forEach((item) => {
+                const stub = fragment.content.querySelector(`[data-id="list-${listName}-${item._id}"]`);
+                if (stub && item instanceof Block) {
+                    stub.replaceWith(item.getContent());
                 }
             });
-            const stub = fragment.content.querySelector(`[data-id="${tmpId}"]`);
-            if (stub) {
-                stub.replaceWith(listCont.content);
-            }
         });
 
         const newElement = fragment.content.firstElementChild as HTMLElement;
