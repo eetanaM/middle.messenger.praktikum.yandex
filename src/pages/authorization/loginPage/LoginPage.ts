@@ -9,11 +9,18 @@ import logoUrl from "../../../../images/logo/logo.png";
 
 export default class LoginPage extends Block {
     constructor() {
+        const inputs = MOCK.inputs.map((input) => {
+            return new FormInput({
+                type: input.type,
+                name: input.name,
+                placeholder: input.placeholder
+            })
+        })
         super({
             events: {},
             AuthForm: new AuthForm({
                 logoUrl: logoUrl,
-                inputs: [],
+                inputs: inputs,
                 SubmitButton: new Button(MOCK.button),
                 NoAccLink: new MainLink(MOCK.link),
                 PreviewLink: new MainLink(MOCK.preview),
@@ -34,3 +41,4 @@ export default class LoginPage extends Block {
             </div>`
     }
 }
+

@@ -29,7 +29,7 @@ export default class App implements IApp {
 
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
+            currentPage: ENV.PAGES.REGISTER_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
             accessToken: null,

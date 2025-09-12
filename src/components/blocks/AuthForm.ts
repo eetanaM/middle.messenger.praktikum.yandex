@@ -8,10 +8,10 @@ export default class AuthForm extends Block {
         })
     }
 
-    override render() { // вернуть {{{ inputs }}}
+    override render() {
         return `<form class="authorization__auth-form">
                     <img src={{ logoUrl }} class="app__main-logo" alt="Логотип">
-                    {{{ inputs }}}
+                    {{{ blockList "inputs" }}}
                     {{{ SubmitButton }}}
                     {{{ NoAccLink }}}
                     {{{ AlreadyHasAccLink }}}

@@ -40,3 +40,4 @@ export default class NotFoundPage extends Block {
                 </div>`
     }
 }
+
