@@ -1,16 +1,7 @@
 import Block from "../../utils/Block";
 import type { IBlockProps } from "../../utils/types/Block";
 
-export default `<input 
-type="{{type}}" 
-name="{{name}}" 
-{{#if placeholder}} placeholder="{{placeholder}}" {{/if}}
-class="app__main-input"/>
-<p id="{{name}}" class="app__invalid-input hidden">
-    Невалидный input
-</p>`
-
-export class FormInput extends Block {
+export default class FormInput extends Block {
     constructor(props: IBlockProps) {
         super({
             ...props,

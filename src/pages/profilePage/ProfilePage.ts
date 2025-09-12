@@ -1,9 +1,10 @@
-import Block from "../../utils/Block"
+import Block from "../../utils/Block";
 
-import ProfileCredentials from "../../components/blocks/ProfileCredentials"
+import ProfileCredentials from "../../components/blocks/ProfileCredentials";
 
-import { PROFILE_TEMPLATE_DATA as MOCK } from "../../mocks/mockData"
-import navButtonSrc from "../../../images/nav-button.png"
+import { PROFILE_TEMPLATE_DATA as MOCK } from "../../mocks/mockData";
+
+import navButtonSrc from "../../../images/nav-button.png";
 
 export default class ProfilePage extends Block {
     constructor() {
@@ -17,7 +18,7 @@ export default class ProfilePage extends Block {
                 userFirstName: MOCK.profileName,
                 userLastName: MOCK.userLastName,
                 displayName: MOCK.displayName,
-                phoneNumber: MOCK.phoneNumber
+                phoneNumber: MOCK.phoneNumber,
             }),
             navButtonSrc,
             

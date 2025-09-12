@@ -1,12 +1,11 @@
-import Block from "../../../utils/Block"
+import Block from "../../../utils/Block";
 
-import { AuthForm } from "../../../components/blocks/AuthForm"
-import { FormInput } from "../../../components/partials/FormInput"
-import { Button } from "../../../components/partials/Button"
-import { MainLink } from "../../../components/partials/MainLink"
+import { AuthForm } from "../../../components/blocks";
+import { Button, FormInput, MainLink } from "../../../components/partials";
 
-import { LOGIN_TEMPLATE_DATA as MOCK } from "../../../mocks/mockData"
-import logoUrl from "../../../../images/logo/logo.png"
+import { LOGIN_TEMPLATE_DATA as MOCK } from "../../../mocks/mockData";
+
+import logoUrl from "../../../../images/logo/logo.png";
 
 export default class LoginPage extends Block {
     constructor() {
