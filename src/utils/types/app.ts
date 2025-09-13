@@ -1,6 +1,5 @@
 interface IAppState {
     currentPage: string | null,
-    currentChatItemId: string | null,
     accessToken: string | null,
     refreshToken: string | null,
 }

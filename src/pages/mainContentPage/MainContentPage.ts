@@ -10,6 +10,18 @@ import type { IBlockProps } from "../../utils/types/Block"
 export default class MainContentPage extends Block {
     
     constructor(props: IBlockProps) {
+        let currentChatItemId: number | null = null;
+        const FormInputComponent = new FormInput({
+            type: "text",
+            name: "message",
+            placeholder: "Введите сообщение"
+        })
+
+        const ChatDetailsComponent = new ChatDetails({
+            icons: CHAT_MOCK.icons,
+            FormInput: FormInputComponent
+        })
+
         const chatItemsComponents = MOCK.chatItems.map((chatItem) => {
             return new ChatItem({
                     chatItemId: chatItem.chatItemId,
@@ -18,9 +30,30 @@ export default class MainContentPage extends Block {
                     lastMessage: chatItem.lastMessage,
                     timeStamp: chatItem.timeStamp,
                     disabled: chatItem.disabled,
-                    unreadMessagesCount: chatItem.unreadMessagesCount
+                    unreadMessagesCount: chatItem.unreadMessagesCount,
+                    events: {
+                        click: ((e: Event) => {
+                            e.stopPropagation();
+                            e.stopImmediatePropagation();
+
+                            const chatItemEl = e.currentTarget as HTMLElement;
+                            currentChatItemId = Number(chatItemEl.id)
+                            const baseClass = "chat-item"
+                            const allChatItems = document.querySelectorAll(".chat-item")
+
+                            allChatItems.forEach((el) => {
+                                el.setAttribute("class", baseClass)
+                            })
+                            chatItemEl.setAttribute("class", `${baseClass} active`)
+
+                            ChatDetailsComponent.setProps({
+                                currentChatItemId: currentChatItemId,
+                            })
+                        })
+                    }
                 })
         })
+
         super({
             ...props,
             events: {},
@@ -41,9 +74,7 @@ export default class MainContentPage extends Block {
                     })
                 }
             }),
-            ChatDetails: new ChatDetails({
-                icons: CHAT_MOCK.icons
-            })
+            ChatDetails: ChatDetailsComponent
         })
     }
 
@@ -62,9 +93,7 @@ export default class MainContentPage extends Block {
                         {{{ blockList "ChatItems" }}}
                         {{{ PreviewLink }}}
                     </nav>
-                    <section class="chat">
-                        {{{ ChatDetails }}}
-                    </section>
+                    {{{ ChatDetails }}}
                 </main>`
     }
 }

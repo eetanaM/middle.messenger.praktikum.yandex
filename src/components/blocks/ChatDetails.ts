@@ -11,46 +11,50 @@ export default class ChatDetails extends Block {
 
     override render() {
         if (!this.props.currentChatItemId) {
-            return `<p>Выберите чат, чтобы отправить сообщение</p>`
+            return `<section class="chat">
+                        <p>Выберите чат, чтобы отправить сообщение</p>
+                    </section>`
         } else {
-            return `<header class="chat__header">
-                        <h1>Chat Name {{ currentChatItemId }}</h1>
-                        <button class="header__menu-button">
-                            <img src={{ icons.menuButton }} alt="Menu button">
-                        </button>
-                    </header>
-                    <div class="chat__messages-container">
-                        <div class="messages-container__day-messages">
-                            <h3 class="day-messages__date-stamp">
-                                19 июня
-                            </h3>
-                            <p class="day-messages__message opponent">
-                                Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
-                                
-                                Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
-                                <span class="app-timestamp">11:56</span>
-                            </p>
-                            <p class="day-messages__message opponent media">
-                                <img src={{ icons.mockImg }} alt="Attached image">
-                                <span class="app-timestamp">11:56</span>
-                            </p>
-                            <p class="day-messages__message user">
-                                Круто!
-                                <span class="app-timestamp">12:00</span>
-                            </p>
+            return `<section class="chat">
+                        <header class="chat__header">
+                            <h1>Chat Name {{ currentChatItemId }}</h1>
+                            <button class="header__menu-button">
+                                <img src={{ icons.menuButton }} alt="Menu button">
+                            </button>
+                        </header>
+                        <div class="chat__messages-container">
+                            <div class="messages-container__day-messages">
+                                <h3 class="day-messages__date-stamp">
+                                    19 июня
+                                </h3>
+                                <p class="day-messages__message opponent">
+                                    Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.
+                                    
+                                    Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
+                                    <span class="app-timestamp">11:56</span>
+                                </p>
+                                <p class="day-messages__message opponent media">
+                                    <img src={{ icons.mockImg }} alt="Attached image">
+                                    <span class="app-timestamp">11:56</span>
+                                </p>
+                                <p class="day-messages__message user">
+                                    Круто!
+                                    <span class="app-timestamp">12:00</span>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <footer class="chat__footer">
-                        <form action="" class="footer__send-message-form">
-                            <button type="button" class="send-message-form__attach-file-button">
-                                <img src={{ icons.paperClip }} alt="Clip">
-                            </button>
-                            {{> FormInput type=form.type name=form.name placeholder=form.placeholder}}
-                            <button type="submit" class="send-message-form__send-button">
-                                <img src={{ icons.sendButton }}  alt="Arrow">
-                            </button>
-                        </form>
-                    </footer>`
+                        <footer class="chat__footer">
+                            <form action="" class="footer__send-message-form">
+                                <button type="button" class="send-message-form__attach-file-button">
+                                    <img src={{ icons.paperClip }} alt="Clip">
+                                </button>
+                                {{{ FormInput }}}
+                                <button type="submit" class="send-message-form__send-button">
+                                    <img src={{ icons.sendButton }}  alt="Arrow">
+                                </button>
+                            </form>
+                        </footer>
+                    </section>`
         }
     }
 }
