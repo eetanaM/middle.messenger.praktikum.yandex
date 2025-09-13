@@ -5,7 +5,7 @@ import CredentialsForm from "./components/blocks/CredentialsForm.ts";
 
 import * as Pages from "./pages/index.ts";
 
-import * as MOCK from "./mocks/mockData.ts"
+import * as MOCK from "./utils/api/mocks/mockData.ts"
 import * as ENV from "./utils/constants/consts.ts"
 
 import type { IApp, IAppState, IModalTemplateData } from "./utils/types/App.ts";
@@ -30,7 +30,7 @@ export default class App implements IApp {
 
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
+            currentPage: ENV.PAGES.REGISTER_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             currentChatItemId: null,
             accessToken: null,

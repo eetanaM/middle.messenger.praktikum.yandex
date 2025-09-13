@@ -1,18 +1,18 @@
-import logo from "../../images/logo/logo.png"
-import avatar from "../../images/profile/avatar.png"
-import profileDefault from "../../images/profile/profileDefault.png"
-import navButtonSrc from "../../images/nav-button.png"
-import notFoundLogoSrc from "../../images/logo/logo404.png"
-import menuButton from "../../images/chat/menu1.png"
-import mockImg from "../../images/chat/mockimage.png"
-import paperClip from "../../images/chat/paperclip.png"
-import sendButton from "../../images/chat/send.png"
+import logo from "../../../../images/logo/logo.png"
+import avatar from "../../../../images/profile/avatar.png"
+import profileDefault from "../../../../images/profile/profileDefault.png"
+import navButtonSrc from "../../../../images/nav-button.png"
+import notFoundLogoSrc from "../../../../images/logo/logo404.png"
+import menuButton from "../../../../images/chat/menu1.png"
+import mockImg from "../../../../images/chat/mockimage.png"
+import paperClip from "../../../../images/chat/paperclip.png"
+import sendButton from "../../../../images/chat/send.png"
 
 
-import * as ENV from "../utils/constants/consts"
-import { TemplateRenderer } from "../utils/TemplateRenderer"
+import * as ENV from "../../constants/consts"
+import { TemplateRenderer } from "../../TemplateRenderer"
 
-import type { AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate } from "../utils/types/api/mockData"
+import type { AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate } from "../../types/api/mockData"
 
 export const PREVIEW_TEMPLATE_DATA: PreviewDataTemplate = {  
     links: [
@@ -27,8 +27,24 @@ export const PREVIEW_TEMPLATE_DATA: PreviewDataTemplate = {
 export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
     logoUrl: logo,
     inputs: [
-        { type: "text", name: "login", placeholder: "Email/Login"},
-        { type: "password", name: "password", placeholder: "Пароль"},
+        {
+            inputData: {
+                type: "text", name: "login", placeholder: "Email/Login",
+            },
+            invalidInputData: {
+                name: "login",
+                textContent: "Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой"
+            }
+        },
+        {
+            inputData: {
+                type: "password", name: "password", placeholder: "Пароль",
+            },
+            invalidInputData: {
+                name: "login",
+                textContent: "Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра"
+            }
+        },
     ],
     button: {
         id: 'login-button',
@@ -49,12 +65,60 @@ export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
 export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
     logoUrl: logo,
     inputs: [
-        { type: "email", name: "email", placeholder: "Email"},
-        { type: "login", name: "login", placeholder: "Логин"},
-        { type: "text", name: "first_name", placeholder: "Имя"},
-        { type: "text", name: "second_name", placeholder: "Фамилия"},
-        { type: "tel", name: "phone", placeholder: "Телефон"},
-        { type: "password", name: "password", placeholder: "Пароль"},
+        {
+            inputData: {
+                type: "email", name: "email", placeholder: "Email"
+            },
+            invalidInputData: {
+                name: "email",
+                textContent: "Неверный формат ввода. Допустимый формат ввода: example@mail.com"
+            }
+        },
+        {
+            inputData: {
+                type: "login", name: "login", placeholder: "Логин"
+            },
+            invalidInputData: {
+                name: "login",
+                textContent: "Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой"
+            }
+        },
+        {
+            inputData: {
+                type: "text", name: "first_name", placeholder: "Имя"
+            },
+            invalidInputData: {
+                name: "first_name",
+                textContent: "Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная"
+            }
+        },
+        {
+            inputData: {
+                type: "text", name: "second_name", placeholder: "Фамилия"
+            },
+            invalidInputData: {
+                name: "second_name",
+                textContent: "Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная"
+            }
+        },
+        {
+            inputData: {
+                type: "tel", name: "phone", placeholder: "Телефон"
+            },
+            invalidInputData: {
+                name: "phone",
+                textContent: "Неверный формат ввода. Поле должно содержать от 10 до 15 цифр. Допустимый формат ввода: 123456789 / +123456789"
+            }
+        },
+        {
+            inputData: {
+                type: "password", name: "password", placeholder: "Пароль"
+            },
+            invalidInputData: {
+                name: "password",
+                textContent: "Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра."
+            }
+        },
     ],
     button: {
         id: 'register-button',
@@ -80,9 +144,9 @@ export const MAIN_CONTENT_TEMPLATE_DATA: MainContentDataTemplate = {
         textContent: TemplateRenderer.escapeHtml("Вернуться к превью")
     },
     searchInput: {
-        type: "text",
-        name: "search",
-        placeholder: "Поиск"
+        inputData: {
+            type: "text", name: "search", placeholder: "Поиск"
+        },
     },
     chatItems: [
         {
@@ -144,9 +208,9 @@ export const MAIN_CONTENT_TEMPLATE_DATA: MainContentDataTemplate = {
 
 export const CHAT_DETAILS_TEMPLATE_DATA: ChatDetailsDataTemplate = {
     form: {
-        type: "text", 
-        name: "message", 
-        placeholder: "Введите сообщение...",
+         inputData: {
+            type: "text", name: "message", placeholder: "Введите сообщение..."
+        },
     },
     icons: {
         menuButton,

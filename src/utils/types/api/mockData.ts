@@ -5,10 +5,16 @@ type LinkData = {
 }
 
 type FormData = {
-    type: string,
-    name: string,
-    placeholder: string,
+    inputData: {
+        type: string,
+        name: string,
+        placeholder: string,
+    },
 }
+
+type FormDataWithInvalidInputLabel = FormData & { invalidInputData: { name: string, textContent: string } }
+
+
 
 type PreviewDataTemplate = {
     links: Array<{
@@ -19,7 +25,7 @@ type PreviewDataTemplate = {
 
 type AuthDataTemplate = {
     logoUrl: string,
-    inputs: Array<FormData>,
+    inputs: Array<FormDataWithInvalidInputLabel>,
     button: {
         id: string,
         textContent: string | number

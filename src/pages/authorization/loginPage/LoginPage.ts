@@ -1,9 +1,9 @@
 import Block from "../../../utils/Block";
 
 import { AuthForm } from "../../../components/blocks";
-import { Button, FormInput, MainLink } from "../../../components/partials";
+import { Button, FormInputWithValidation, MainLink } from "../../../components/partials";
 
-import { LOGIN_TEMPLATE_DATA as MOCK } from "../../../mocks/mockData";
+import { LOGIN_TEMPLATE_DATA as MOCK } from "../../../utils/api/mocks/mockData";
 import * as ENV from "../../../utils/constants/consts"
 
 import type { IBlockProps } from "../../../utils/types/Block";
@@ -11,10 +11,16 @@ import type { IBlockProps } from "../../../utils/types/Block";
 export default class LoginPage extends Block {
     constructor(props: IBlockProps) {
         const inputs = MOCK.inputs.map((input) => {
-            return new FormInput({
-                type: input.type,
-                name: input.name,
-                placeholder: input.placeholder
+            return new FormInputWithValidation({
+                input: {
+                    type: input.inputData.type,
+                    name: input.inputData.name,
+                    placeholder: input.inputData.placeholder
+                },
+                invalid: {
+                    name: input.invalidInputData.name,
+                    textContent: input.invalidInputData.textContent
+                }                
             })
         })
         

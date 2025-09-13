@@ -3,7 +3,7 @@ import Block from "../../utils/Block";
 import ProfileCredentials from "../../components/blocks/ProfileCredentials";
 import { RoundButton } from "../../components/partials";
 
-import { PROFILE_TEMPLATE_DATA as MOCK } from "../../mocks/mockData";
+import { PROFILE_TEMPLATE_DATA as MOCK } from "../../utils/api/mocks/mockData";
 
 import type { IBlockProps } from "../../utils/types/Block";
 

@@ -2,7 +2,7 @@ import Block from "../../utils/Block";
 
 import { MainLink } from "../../components/partials"
 
-import { BAD_SERVER_TEMPLATE_DATA as MOCK } from "../../mocks/mockData";
+import { BAD_SERVER_TEMPLATE_DATA as MOCK } from "../../utils/api/mocks/mockData";
 import * as ENV from "../../utils/constants/consts"
 
 import type { IBlockProps } from "../../utils/types/Block";
