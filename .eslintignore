@@ -3,3 +3,4 @@ dist
 build
 stylelint.config.mjs
 server.cjs
+vite.config.ts
