@@ -1,3 +1,5 @@
+import type { IBlock } from "./Block";
+
 interface IAppState {
     currentPage: string | null,
     accessToken: string | null,
@@ -26,9 +28,10 @@ interface IModalTemplateData {
 abstract class IApp {
     state: IAppState;
     appElement: HTMLElement | null;
+    modalRoot: HTMLElement | null;
 
     render:() => void;
-    toggleModal: (modalTemplateData: IModalTemplateData) => void;
+    toggleModal: (block: IBlock) => void;
     attachEventListeners: () => void;
     changePage: (page: string) => void;
 }

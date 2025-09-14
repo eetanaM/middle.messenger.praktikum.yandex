@@ -44,15 +44,7 @@ export default class ChatDetails extends Block {
                             </div>
                         </div>
                         <footer class="chat__footer">
-                            <form action="" class="footer__send-message-form">
-                                <button type="button" class="send-message-form__attach-file-button">
-                                    <img src={{ icons.paperClip }} alt="Clip">
-                                </button>
-                                {{{ FormInput }}}
-                                <button type="submit" class="send-message-form__send-button">
-                                    <img src={{ icons.sendButton }}  alt="Arrow">
-                                </button>
-                            </form>
+                            {{{ SendMessageForm }}}
                         </footer>
                     </section>`
         }

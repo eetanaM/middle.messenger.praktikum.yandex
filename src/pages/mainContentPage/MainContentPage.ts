@@ -1,7 +1,7 @@
 import Block from "../../utils/Block"
 
 import { FormInput, MainLink } from "../../components/partials"
-import { ChatDetails, ChatItem } from "../../components/blocks"
+import { ChatDetails, ChatItem, SendMessageForm } from "../../components/blocks"
 
 import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from "../../utils/api/mocks/mockData"
 import * as ENV from "../../utils/constants/consts"
@@ -11,15 +11,18 @@ export default class MainContentPage extends Block {
     
     constructor(props: IBlockProps) {
         let currentChatItemId: number | null = null;
-        const FormInputComponent = new FormInput({
-            type: "text",
-            name: "message",
-            placeholder: "Введите сообщение"
+        const SendMessageFormComponent = new SendMessageForm({
+            icons: CHAT_MOCK.icons,
+            FormInput: new FormInput({
+                type: "text",
+                name: "message",
+                placeholder: "Введите сообщение"
+            })
         })
 
         const ChatDetailsComponent = new ChatDetails({
             icons: CHAT_MOCK.icons,
-            FormInput: FormInputComponent
+            SendMessageForm: SendMessageFormComponent
         })
 
         const chatItemsComponents = MOCK.chatItems.map((chatItem) => {

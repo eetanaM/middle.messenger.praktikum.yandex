@@ -1,14 +1,13 @@
 import Handlebars from "handlebars";
 import { TemplateRenderer } from "./utils/TemplateRenderer.ts"
 
-import CredentialsForm from "./components/blocks/CredentialsForm.ts";
 
 import * as Pages from "./pages/index.ts";
 
 import * as MOCK from "./utils/api/mocks/mockData.ts"
 import * as ENV from "./utils/constants/consts.ts"
 
-import type { IApp, IAppState, IModalTemplateData } from "./utils/types/App.ts";
+import type { IApp, IAppState } from "./utils/types/App.ts";
 import type { IBlock } from "./utils/types/Block.ts";
 
 // Хелпер для создания заглушек для элементов массива
@@ -21,27 +20,31 @@ Handlebars.registerHelper('blockList', function(listName, context) {
         return `<div data-id="list-${listName}-${item._id}"></div>`;
     }).join('');
 });
-
-Handlebars.registerPartial("CredentialsForm", CredentialsForm)
-
 export default class App implements IApp {
     state: IAppState;
     appElement: HTMLElement;
+    modalRoot: HTMLElement;
 
     constructor() {
         this.state = {
-            currentPage: ENV.PAGES.MAIN_CONTENT_PAGE,
+            currentPage: ENV.PAGES.PROFILE_PAGE,
             // currentChatItemId - временно для псевдонавигации по чатам
             accessToken: null,
             refreshToken: null,
         }
         const appEl = document.getElementById("app");
+        const modalRoot = document.getElementById("modal")
 
         if (!appEl) {
             throw new Error("There is no app element in DOM")
         }
 
+        if (!modalRoot) {
+            throw new Error("There is no modal-root element in DOM")
+        }
+
         this.appElement = appEl;
+        this.modalRoot = modalRoot;
     }
 
     protected _replaceContent(page: IBlock) {
@@ -92,28 +95,23 @@ export default class App implements IApp {
         this._replaceContent(page)
     }
 
-    toggleModal(modalTemplateData: Event | IModalTemplateData) {
-        const modalContentEl = document.querySelector(".modal__content") as HTMLElement;
-        const modalRoot = document.getElementById("modal");
-
-        if (!modalRoot) {
-            throw new Error("There is no modal root element in DOM")
+    toggleModal(block: IBlock) {
+        const modalContentEl = this.modalRoot.querySelector(".modal__content");
+        const modalOverlay = this.modalRoot.querySelector(".modal__overlay");
+        const overlayClickHandler = () => {
+            return this.toggleModal(block);
         }
-
-        if (modalContentEl.childElementCount !== 0) {
-            modalContentEl.innerHTML = "";
-            modalRoot.removeAttribute("class");
-        } else {
-            let modalTemplate = Handlebars.compile(CredentialsForm);
-            const modalOverlay = document.querySelector(".modal__overlay");
-    
-            TemplateRenderer.renderTemplate(modalTemplate, modalTemplateData, modalContentEl);
         
-            modalRoot.setAttribute("class", "opened")
-            if (!modalOverlay) {
-                throw new Error ("There is no modal__overlay element in DOM")
+        if (modalContentEl && modalOverlay) {
+            if (modalContentEl.childElementCount !== 0) {
+                modalContentEl.innerHTML = "";
+                this.modalRoot.removeAttribute("class");
+                modalOverlay.replaceWith(modalOverlay.cloneNode(true));
+            } else {
+                modalContentEl.appendChild(block.getContent())
+                this.modalRoot.setAttribute("class", "opened")
+                modalOverlay.addEventListener("click", overlayClickHandler)
             }
-            modalOverlay.addEventListener("click", this.toggleModal)
         }
     }
 
@@ -139,10 +137,7 @@ export default class App implements IApp {
     }
 
     changePage(page: string) {
-        console.log(page)
-        console.log(this)
         this.state.currentPage = page;
-        console.log(this.state.currentPage)
         this.render();
     }
 }

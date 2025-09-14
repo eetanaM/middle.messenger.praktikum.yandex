@@ -72,6 +72,16 @@ type ErrorPageDataTemplate = {
     preview: LinkData
 }
 
+type ChangeCredentialsFormDataTemplate = {
+    fileInputs: {
+        name: string,
+        id: string,
+        src: string
+    }[],
+    inputs: Array<FormDataWithInvalidInputLabel>,
+    passwordInputs: Array<FormDataWithInvalidInputLabel>,
+}
+
 export type {
     PreviewDataTemplate,
     AuthDataTemplate,
@@ -79,5 +89,6 @@ export type {
     ChatDetailsDataTemplate,
     ProfileDataTemplate,
     ErrorPageDataTemplate,
+    ChangeCredentialsFormDataTemplate
 }
 

@@ -12,7 +12,7 @@ import sendButton from "../../../../images/chat/send.png"
 import * as ENV from "../../constants/consts"
 import { TemplateRenderer } from "../../TemplateRenderer"
 
-import type { AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate } from "../../types/api/mockData"
+import type { AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate } from "../../types/api/mockData"
 
 export const PREVIEW_TEMPLATE_DATA: PreviewDataTemplate = {  
     links: [
@@ -41,7 +41,7 @@ export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
                 type: "password", name: "password", placeholder: "Пароль",
             },
             invalidInputData: {
-                name: "login",
+                name: "password",
                 textContent: "Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра"
             }
         },
@@ -249,3 +249,85 @@ export const BAD_SERVER_TEMPLATE_DATA: ErrorPageDataTemplate = {
     }
 }
 
+export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTemplate = {
+    fileInputs: [
+        { name: "avatar", id: "avatar", src: profileDefault },
+    ],
+    inputs: [
+        {
+            inputData: {
+                type: "email", name: "email", placeholder: "Email",
+            },
+            invalidInputData: {
+                name: "email",
+                textContent: "Неверный формат ввода. Допустимый формат ввода: example@mail.com"
+            }
+        },
+        {
+            inputData: {
+                type: "login", name: "login", placeholder: "Логин"
+            },
+            invalidInputData: {
+                name: "login",
+                textContent: "Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой"
+            }
+        },
+        {
+            inputData: {
+                type: "text", name: "first_name", placeholder: "Имя"
+            },
+            invalidInputData: {
+                name: "first_name",
+                textContent: "Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная"
+            }
+        },
+        {
+            inputData: {
+                type: "text", name: "second_name", placeholder: "Фамилия"
+            },
+            invalidInputData: {
+                name: "second_name",
+                textContent: "Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная"
+            }
+        },
+        {
+            inputData: {
+                type: "text", name: "display_name", placeholder: "Имя в чате"
+            },
+            invalidInputData: {
+                name: "display_name",
+                textContent: ""
+            }
+        },
+        {
+            inputData: {
+                type: "tel", name: "phone", placeholder: "Телефон"
+            },
+            invalidInputData: {
+                name: "phone",
+                textContent: ""
+            }
+        },
+    ],
+    passwordInputs: [
+        {
+            inputData: {
+                type: "password", name: "oldPassword", placeholder: "Старый пароль",
+            },
+            invalidInputData: {
+                name: "oldPassword",
+                textContent: "Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра."
+            }
+        },
+        {
+            inputData: {
+                type: "password", name: "newPassword", placeholder: "Новый пароль",
+            },
+            invalidInputData: {
+                name: "newPassword",
+                textContent: "Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра."
+            }
+        },
+    ],
+        
+}
