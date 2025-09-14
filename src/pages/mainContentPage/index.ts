@@ -1,1 +1,1 @@
-export { default as MainContentPage } from './MainContentPage.ts';
+export { default as MainContentPage } from './MainContentPage';

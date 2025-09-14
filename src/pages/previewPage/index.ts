@@ -1,1 +1,1 @@
-export { default as PreviewPage } from './PreviewPage.ts';
+export { default as PreviewPage } from './PreviewPage';
