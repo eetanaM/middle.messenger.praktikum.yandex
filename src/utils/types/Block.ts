@@ -8,6 +8,8 @@ type TEventHandlersList = {
 type TAttributes = {
   [key: string]: string
 };
+
+type TBlockPropValue = Block | Block[] | TAttributes | string | number | boolean | TEventHandler | TEventHandlersList | IApp;
 interface IBlock {
   dispatchComponentDidMount(): void,
   setProps(newProps?: unknown): void,
@@ -20,19 +22,12 @@ interface IBlockEvents {
 }
 
 interface IBlockProps {
-  [key: string]:
-  | Block
-  | Block[]
-  | TAttributes
-  | string
-  | number
-  | boolean
-  | TEventHandlersList
-  | IApp
+  [key: string]: TBlockPropValue
 }
 
 export type {
   TAttributes,
+  TBlockPropValue,
   TEventHandlersList,
   IBlock,
   IBlockProps,

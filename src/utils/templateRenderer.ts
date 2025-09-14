@@ -19,8 +19,7 @@ export class TemplateRenderer implements ITemplateRenderer {
     });
 
     if (container) {
-      container.innerHTML = '';
-      container.appendChild(fragment);
+      container.replaceChildren(fragment);
       return container;
     }
     return fragment;

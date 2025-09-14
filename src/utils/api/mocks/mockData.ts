@@ -12,6 +12,7 @@ import * as ENV from '../../constants/consts';
 import { TemplateRenderer } from '../../TemplateRenderer';
 
 import type {
+  // eslint-disable-next-line max-len
   AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate,
 } from '../../types/api/mockData';
 
@@ -34,6 +35,7 @@ export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
       },
       invalidInputData: {
         name: 'login',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой',
       },
     },
@@ -43,6 +45,7 @@ export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
       },
       invalidInputData: {
         name: 'password',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
       },
     },
@@ -81,6 +84,7 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
       },
       invalidInputData: {
         name: 'login',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой',
       },
     },
@@ -90,6 +94,7 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
       },
       invalidInputData: {
         name: 'first_name',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
       },
     },
@@ -99,6 +104,7 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
       },
       invalidInputData: {
         name: 'second_name',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
       },
     },
@@ -108,6 +114,7 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
       },
       invalidInputData: {
         name: 'phone',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать от 10 до 15 цифр. Допустимый формат ввода: 123456789 / +123456789',
       },
     },
@@ -117,6 +124,7 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
       },
       invalidInputData: {
         name: 'password',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.',
       },
     },
@@ -270,6 +278,7 @@ export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTem
       },
       invalidInputData: {
         name: 'login',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой',
       },
     },
@@ -279,6 +288,7 @@ export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTem
       },
       invalidInputData: {
         name: 'first_name',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
       },
     },
@@ -288,6 +298,7 @@ export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTem
       },
       invalidInputData: {
         name: 'second_name',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
       },
     },
@@ -317,6 +328,7 @@ export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTem
       },
       invalidInputData: {
         name: 'oldPassword',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.',
       },
     },
@@ -326,6 +338,7 @@ export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTem
       },
       invalidInputData: {
         name: 'newPassword',
+        // eslint-disable-next-line max-len
         textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.',
       },
     },

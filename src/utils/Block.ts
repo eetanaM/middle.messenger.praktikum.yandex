@@ -4,7 +4,7 @@ import EventBus from './EventBus';
 import { TemplateRenderer } from './TemplateRenderer';
 
 import {
-  type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList,
+  type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList, type TBlockPropValue,
 } from './types/Block';
 import type { Callback } from './types/EventBus';
 import type { IApp } from './types/App';
@@ -38,7 +38,7 @@ class Block implements IBlock {
 
     this.props = this._makePropsProxy({ ...props }) as IBlockProps;
     this.children = children;
-    this.lists = this._makePropsProxy({ ...lists }) as Record<string, Block[]>; // разобраться с any[]
+    this.lists = this._makePropsProxy({ ...lists }) as Record<string, Block[]>;
 
     this._id = uid;
     this._appElement = this.props.appEl as IApp;
@@ -164,13 +164,13 @@ class Block implements IBlock {
     const self = this;
 
     return new Proxy(props, {
-      get(target: any, prop: string) {
+      get(target: IBlockProps, prop: string) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: any, prop: string, value: any) {
+      set(target: IBlockProps, prop: string, value: TBlockPropValue) {
         const oldTarget = { ...target };
-        target[prop] = value;
+        Reflect.set(target, prop, value);
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },

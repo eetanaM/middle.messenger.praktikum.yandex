@@ -14,9 +14,9 @@ export default class PreviewPage extends Block {
           e.preventDefault();
           e.stopPropagation();
           const liEl = e.currentTarget as HTMLElement;
-          const link = liEl.querySelector('a');
-          if (link) {
-            const { pagesrc } = link.dataset;
+          const anchorEl = liEl.querySelector('a');
+          if (anchorEl) {
+            const { pagesrc } = anchorEl.dataset;
             if (pagesrc) {
               this._appElement.changePage(pagesrc);
             } else {

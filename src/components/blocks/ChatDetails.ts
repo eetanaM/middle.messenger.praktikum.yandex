@@ -15,6 +15,7 @@ export default class ChatDetails extends Block {
                         <p>Выберите чат, чтобы отправить сообщение</p>
                     </section>`;
     }
+    /* eslint-disable max-len */
     return `<section class="chat">
                         <header class="chat__header">
                             <h1>Chat Name {{ currentChatItemId }}</h1>
@@ -48,4 +49,5 @@ export default class ChatDetails extends Block {
                         </footer>
                     </section>`;
   }
+/* eslint-enable max-len */
 }

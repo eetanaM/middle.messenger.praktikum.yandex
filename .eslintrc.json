@@ -4,9 +4,15 @@
         "airbnb-typescript/base"
     ],
     "parserOptions": {
-        "project": "./tsconfig.json"
+        "project": "./tsconfig.json",
+        "tsconfigRootDir": "./"
     },
     "rules": {
-        "no-underscore-dangle":"off"
+        "no-underscore-dangle":"off",
+        "no-console":"off",
+        "class-methods-use-this":"off",
+        "import/prefer-default-export": "off",
+        "max-len": [2, 130],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
     }
 }
