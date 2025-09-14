@@ -1,120 +1,117 @@
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
 
-import * as Pages from "./pages/index.ts";
+import * as Pages from './pages';
 
-import * as ENV from "./utils/constants/consts.ts"
+import * as ENV from './utils/constants/consts';
 
-import type { IApp, IAppState } from "./utils/types/App.ts";
-import type { IBlock } from "./utils/types/Block.ts";
+import type { IApp, IAppState } from './utils/types/App';
+import type { IBlock } from './utils/types/Block';
 
 // Хелпер для создания заглушек для элементов массива
 // В шаблоне вызывается как {{{ blockList "Имя массива"}}}
-Handlebars.registerHelper('blockList', function(listName, context) {
-    const items = context.data.root[listName];
-    if (!Array.isArray(items)) return '';
-    
-    return items.map((item) => {
-        return `<div data-id="list-${listName}-${item._id}"></div>`;
-    }).join('');
+Handlebars.registerHelper('blockList', (listName, context) => {
+  const items = context.data.root[listName];
+  if (!Array.isArray(items)) return '';
+
+  return items.map((item) => `<div data-id="list-${listName}-${item._id}"></div>`).join('');
 });
 export default class App implements IApp {
-    state: IAppState;
-    appElement: HTMLElement;
-    modalRoot: HTMLElement;
+  state: IAppState;
 
-    constructor() {
-        this.state = {
-            currentPage: ENV.PAGES.PREVIEW_PAGE,
-            // currentChatItemId - временно для псевдонавигации по чатам
-            accessToken: null,
-            refreshToken: null,
-        }
-        const appEl = document.getElementById("app");
-        const modalRoot = document.getElementById("modal")
+  appElement: HTMLElement;
 
-        if (!appEl) {
-            throw new Error("There is no app element in DOM")
-        }
+  modalRoot: HTMLElement;
 
-        if (!modalRoot) {
-            throw new Error("There is no modal-root element in DOM")
-        }
+  constructor() {
+    this.state = {
+      currentPage: ENV.PAGES.PREVIEW_PAGE,
+      // currentChatItemId - временно для псевдонавигации по чатам
+      accessToken: null,
+      refreshToken: null,
+    };
+    const appEl = document.getElementById('app');
+    const modalRoot = document.getElementById('modal');
 
-        this.appElement = appEl;
-        this.modalRoot = modalRoot;
+    if (!appEl) {
+      throw new Error('There is no app element in DOM');
     }
 
-    protected _replaceContent(page: IBlock) {
-        if (this.appElement.firstElementChild) {
-                this.appElement.firstElementChild.replaceWith(page.getContent())
-            } else {
-                this.appElement.appendChild(page.getContent())
-        }
+    if (!modalRoot) {
+      throw new Error('There is no modal-root element in DOM');
     }
 
-    render() {
-        let page;
+    this.appElement = appEl;
+    this.modalRoot = modalRoot;
+  }
 
-        if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            page = new Pages.PreviewPage({
-                appEl: this.app
-            });
-        } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
-            page = new Pages.LoginPage({
-                appEl: this.app
-            });
-        } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
-            page = new Pages.RegisterPage({
-                appEl: this.app
-            });
-        } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
-            page = new Pages.MainContentPage({
-                appEl: this.app
-            })
-        } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
-            page = new Pages.ProfilePage({
-                appEl: this.app
-            });
-        } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
-            page = new Pages.BadServerPage({
-                appEl: this.app
-            });
-        } else {
-            page = new Pages.NotFoundPage({
-                appEl: this.app
-            });
-        }
+  protected _replaceContent(page: IBlock) {
+    if (this.appElement.firstElementChild) {
+      this.appElement.firstElementChild.replaceWith(page.getContent());
+    } else {
+      this.appElement.appendChild(page.getContent());
+    }
+  }
 
-        this._replaceContent(page)
+  render() {
+    let page;
+
+    if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
+      page = new Pages.PreviewPage({
+        appEl: this.app,
+      });
+    } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
+      page = new Pages.LoginPage({
+        appEl: this.app,
+      });
+    } else if (this.state.currentPage === ENV.PAGES.REGISTER_PAGE) {
+      page = new Pages.RegisterPage({
+        appEl: this.app,
+      });
+    } else if (this.state.currentPage === ENV.PAGES.MAIN_CONTENT_PAGE) {
+      page = new Pages.MainContentPage({
+        appEl: this.app,
+      });
+    } else if (this.state.currentPage === ENV.PAGES.PROFILE_PAGE) {
+      page = new Pages.ProfilePage({
+        appEl: this.app,
+      });
+    } else if (this.state.currentPage === ENV.PAGES.BAD_SERVER_PAGE) {
+      page = new Pages.BadServerPage({
+        appEl: this.app,
+      });
+    } else {
+      page = new Pages.NotFoundPage({
+        appEl: this.app,
+      });
     }
 
-    toggleModal(block: IBlock) {
-        const modalContentEl = this.modalRoot.querySelector(".modal__content");
-        const modalOverlay = this.modalRoot.querySelector(".modal__overlay");
-        const overlayClickHandler = () => {
-            return this.toggleModal(block);
-        }
-        
-        if (modalContentEl && modalOverlay) {
-            if (modalContentEl.childElementCount !== 0) {
-                modalContentEl.innerHTML = "";
-                this.modalRoot.removeAttribute("class");
-                modalOverlay.replaceWith(modalOverlay.cloneNode(true));
-            } else {
-                modalContentEl.appendChild(block.getContent())
-                this.modalRoot.setAttribute("class", "opened")
-                modalOverlay.addEventListener("click", overlayClickHandler)
-            }
-        }
-    }
+    this._replaceContent(page);
+  }
 
-    get app() {
-        return this
-    }
+  toggleModal(block: IBlock) {
+    const modalContentEl = this.modalRoot.querySelector('.modal__content');
+    const modalOverlay = this.modalRoot.querySelector('.modal__overlay');
+    const overlayClickHandler = () => this.toggleModal(block);
 
-    changePage(page: string) {
-        this.state.currentPage = page;
-        this.render();
+    if (modalContentEl && modalOverlay) {
+      if (modalContentEl.childElementCount !== 0) {
+        modalContentEl.innerHTML = '';
+        this.modalRoot.removeAttribute('class');
+        modalOverlay.replaceWith(modalOverlay.cloneNode(true));
+      } else {
+        modalContentEl.appendChild(block.getContent());
+        this.modalRoot.setAttribute('class', 'opened');
+        modalOverlay.addEventListener('click', overlayClickHandler);
+      }
     }
+  }
+
+  get app() {
+    return this;
+  }
+
+  changePage(page: string) {
+    this.state.currentPage = page;
+    this.render();
+  }
 }
-

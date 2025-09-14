@@ -1,1 +1,1 @@
-export { default as RegisterPage } from "./RegisterPage.ts"
+export { default as RegisterPage } from './RegisterPage.ts';

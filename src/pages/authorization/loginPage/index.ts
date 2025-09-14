@@ -1,2 +1,1 @@
-export { default as LoginPage } from "./LoginPage.ts";
-
+export { default as LoginPage } from './LoginPage.ts';

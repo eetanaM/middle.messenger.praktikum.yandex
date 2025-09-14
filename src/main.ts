@@ -1,8 +1,7 @@
-import "./styles/main.less"
-import App from "./App.js"
+import './styles/main.less';
+import App from './App.js';
 
-document.addEventListener("DOMContentLoaded", () => {
-    const app = new App();
-    app.render();
-})
-
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new App();
+  app.render();
+});

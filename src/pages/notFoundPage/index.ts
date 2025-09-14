@@ -1,2 +1,1 @@
-export { default as NotFoundPage } from "./NotFoundPage.ts";
-
+export { default as NotFoundPage } from './NotFoundPage.ts';

@@ -1,128 +1,124 @@
-import Block from "../../utils/Block";
+import Block from '../../utils/Block';
 
-import ProfileCredentials from "../../components/blocks/ProfileCredentials";
-import { Button, FileInput, FormInputWithValidation, ProfileMenuButton, RoundButton } from "../../components/partials";
-import { CredentialsForm } from "../../components/blocks";
+import ProfileCredentials from '../../components/blocks/ProfileCredentials';
+import {
+  Button, FileInput, FormInputWithValidation, ProfileMenuButton, RoundButton,
+} from '../../components/partials';
+import { CredentialsForm } from '../../components/blocks';
 
-import { PROFILE_TEMPLATE_DATA as MOCK, CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA as CRED_MOCK } from "../../utils/api/mocks/mockData";
+import { PROFILE_TEMPLATE_DATA as MOCK, CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA as CRED_MOCK } from '../../utils/api/mocks/mockData';
 
-import type { IBlockProps } from "../../utils/types/Block";
+import type { IBlockProps } from '../../utils/types/Block';
 
 export default class ProfilePage extends Block {
-    constructor(props: IBlockProps) {
-        const FileInputs = CRED_MOCK.fileInputs.map((input) => {
-            return new FileInput({
-                name: input.name,
-                id: input.id,
-                src: input.src,
-            })
-        })
+  constructor(props: IBlockProps) {
+    const FileInputs = CRED_MOCK.fileInputs.map((input) => new FileInput({
+      name: input.name,
+      id: input.id,
+      src: input.src,
+    }));
 
-        const CredentialsTextInputs = CRED_MOCK.inputs.map((input) => {
-            return new FormInputWithValidation({
-                input: {
-                    type: input.inputData.type,
-                    name: input.inputData.name,
-                    placeholder: input.inputData.placeholder
-                },
-                invalid: {
-                    name: input.invalidInputData.name,
-                    textContent: input.invalidInputData.textContent
-                }     
-            })
-        })
+    const CredentialsTextInputs = CRED_MOCK.inputs.map((input) => new FormInputWithValidation({
+      input: {
+        type: input.inputData.type,
+        name: input.inputData.name,
+        placeholder: input.inputData.placeholder,
+      },
+      invalid: {
+        name: input.invalidInputData.name,
+        textContent: input.invalidInputData.textContent,
+      },
+    }));
 
-        const ChangePasswordTextInputs = CRED_MOCK.passwordInputs.map((input) => {
-            return new FormInputWithValidation({
-                input: {
-                    type: input.inputData.type,
-                    name: input.inputData.name,
-                    placeholder: input.inputData.placeholder
-                },
-                invalid: {
-                    name: input.invalidInputData.name,
-                    textContent: input.invalidInputData.textContent
-                }     
-            })
-        })
+    const ChangePasswordTextInputs = CRED_MOCK.passwordInputs.map((input) => new FormInputWithValidation({
+      input: {
+        type: input.inputData.type,
+        name: input.inputData.name,
+        placeholder: input.inputData.placeholder,
+      },
+      invalid: {
+        name: input.invalidInputData.name,
+        textContent: input.invalidInputData.textContent,
+      },
+    }));
 
-        const ChangeCredentialsForm = new CredentialsForm({
-            appEl: props.appEl,
-            fileInputs: FileInputs,
-            inputs: CredentialsTextInputs,
-            SubmitButton: new Button({
-                id: "confirm",
-                type: "submit",
-                textContent: "Подтвердить",
-                appEl: props.appEl,
-            }),
-            ResetButton: new Button({
-                id: "reset",
-                type: "reset",
-                textContent: "Отменить",
-                appEl: props.appEl,
-            }),
-        })
+    const ChangeCredentialsForm = new CredentialsForm({
+      appEl: props.appEl,
+      fileInputs: FileInputs,
+      inputs: CredentialsTextInputs,
+      SubmitButton: new Button({
+        id: 'confirm',
+        type: 'submit',
+        textContent: 'Подтвердить',
+        appEl: props.appEl,
+      }),
+      ResetButton: new Button({
+        id: 'reset',
+        type: 'reset',
+        textContent: 'Отменить',
+        appEl: props.appEl,
+      }),
+    });
 
-        const ChangePasswordForm = new CredentialsForm({
-            appEl: props.appEl,
-            inputs: ChangePasswordTextInputs,
-            SubmitButton: new Button({
-                id: "confirm",
-                type: "submit",
-                textContent: "Подтвердить",
-                appEl: props.appEl,
-            }),
-            ResetButton: new Button({
-                id: "reset",
-                type: "reset",
-                textContent: "Отменить",
-                appEl: props.appEl,
-            }),
-        })
+    const ChangePasswordForm = new CredentialsForm({
+      appEl: props.appEl,
+      inputs: ChangePasswordTextInputs,
+      SubmitButton: new Button({
+        id: 'confirm',
+        type: 'submit',
+        textContent: 'Подтвердить',
+        appEl: props.appEl,
+      }),
+      ResetButton: new Button({
+        id: 'reset',
+        type: 'reset',
+        textContent: 'Отменить',
+        appEl: props.appEl,
+      }),
+    });
 
-        super({
-            ...props,
-            events: {},
-            profileImg: MOCK.profileImg,
-            profileName: MOCK.profileName,
-            ProfileCredentials: new ProfileCredentials({
-                ...MOCK,
-                userFirstName: MOCK.profileName,
-            }),
-            BackButton: new RoundButton({
-                appEl: props.appEl,
-            }),
-            ChangeDataButton: new ProfileMenuButton({
-                id: "change-credentials",
-                textContent: "Изменить данные",
-                events: {
-                    click: ((e: Event) => {
-                        e.stopPropagation();
-                        this._appElement.toggleModal(ChangeCredentialsForm)
-                    })
-                }
-            }),
-            ChangePasswordButton: new ProfileMenuButton({
-                id: "change-password",
-                textContent: "Изменить пароль",
-                events: {
-                    click: ((e: Event) => {
-                        e.stopPropagation();
-                        this._appElement.toggleModal(ChangePasswordForm)
-                    })
-                }
-            }),
-            LogOutButton: new ProfileMenuButton({
-                id: "logout",
-                textContent: "Выйти",
-                class: "red"
-            })
-        })
-    }
+    super({
+      ...props,
+      events: {},
+      profileImg: MOCK.profileImg,
+      profileName: MOCK.profileName,
+      ProfileCredentials: new ProfileCredentials({
+        ...MOCK,
+        userFirstName: MOCK.profileName,
+      }),
+      BackButton: new RoundButton({
+        appEl: props.appEl,
+      }),
+      ChangeDataButton: new ProfileMenuButton({
+        id: 'change-credentials',
+        textContent: 'Изменить данные',
+        events: {
+          click: ((e: Event) => {
+            e.stopPropagation();
+            this._appElement.toggleModal(ChangeCredentialsForm);
+          }),
+        },
+      }),
+      ChangePasswordButton: new ProfileMenuButton({
+        id: 'change-password',
+        textContent: 'Изменить пароль',
+        events: {
+          click: ((e: Event) => {
+            e.stopPropagation();
+            this._appElement.toggleModal(ChangePasswordForm);
+          }),
+        },
+      }),
+      LogOutButton: new ProfileMenuButton({
+        id: 'logout',
+        textContent: 'Выйти',
+        class: 'red',
+      }),
+    });
+  }
 
-    override render() {
-        return `<main class="profile">
+  override render() {
+    return `<main class="profile">
                     <div class="profile__header">
                         <img class="header__avatar" src={{ profileImg }} alt="Profile image">
                         <h1 class="header__profile-name">{{ profileName }}</h1>
@@ -134,7 +130,6 @@ export default class ProfilePage extends Block {
                         {{{ LogOutButton }}}
                     </nav>
                     {{{ BackButton }}}
-                </main>`
-    }
+                </main>`;
+  }
 }
-

@@ -1,16 +1,16 @@
-import Block from "../../utils/Block"
-import type { IBlockProps } from "../../utils/types/Block"
+import Block from '../../utils/Block';
+import type { IBlockProps } from '../../utils/types/Block';
 
 export default class ProfileCredentials extends Block {
-    constructor(props: IBlockProps) {
-        super({
-            ...props,
-            events: {}
-        })
-    }
+  constructor(props: IBlockProps) {
+    super({
+      ...props,
+      events: {},
+    });
+  }
 
-    override render() {
-        return `<div class="profile__credentials">
+  override render() {
+    return `<div class="profile__credentials">
                     <ul>
                         <li class="credentials__credentials-item">
                             <span class="credentials-item__label">Почта</span>
@@ -37,7 +37,6 @@ export default class ProfileCredentials extends Block {
                             <span class="credentials-item__value">{{ phoneNumber }}</span>
                         </li>
                     </ul>
-                </div>`
-    }
+                </div>`;
+  }
 }
-

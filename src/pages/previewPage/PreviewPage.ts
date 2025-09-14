@@ -1,45 +1,42 @@
-import { PreviewLink } from "../../components/partials";
-import { PREVIEW_TEMPLATE_DATA as MOCK} from "../../utils/api/mocks/mockData";
-import Block from "../../utils/Block";
+import { PreviewLink } from '../../components/partials';
+import { PREVIEW_TEMPLATE_DATA as MOCK } from '../../utils/api/mocks/mockData';
+import Block from '../../utils/Block';
 
-
-import type { IBlockProps } from "../../utils/types/Block";
+import type { IBlockProps } from '../../utils/types/Block';
 
 export default class PreviewPage extends Block {
-    constructor(props: IBlockProps) {
-        const links = MOCK.links.map((link) => {
-            return new PreviewLink({
-                pageSrc: link.pageSrc,
-                textContent: link.textContent,
-                events: {
-                    click: ((e: Event) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const liEl = e.currentTarget as HTMLElement;
-                        const link = liEl.querySelector("a");
-                        if (link) {
-                            const pagesrc = link.dataset.pagesrc
-                            if (pagesrc) {
-                                this._appElement.changePage(pagesrc)
-                            } else {
-                                throw new Error("No pagesrc data attribute found")
-                            }
-                        } else {
-                            throw new Error("No anchor element in the list element")
-                        }
-                    })
-                }
-            })
-        })
+  constructor(props: IBlockProps) {
+    const links = MOCK.links.map((link) => new PreviewLink({
+      pageSrc: link.pageSrc,
+      textContent: link.textContent,
+      events: {
+        click: ((e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const liEl = e.currentTarget as HTMLElement;
+          const link = liEl.querySelector('a');
+          if (link) {
+            const { pagesrc } = link.dataset;
+            if (pagesrc) {
+              this._appElement.changePage(pagesrc);
+            } else {
+              throw new Error('No pagesrc data attribute found');
+            }
+          } else {
+            throw new Error('No anchor element in the list element');
+          }
+        }),
+      },
+    }));
 
-        super({
-            ...props,
-            links: links
-        })
-    }
+    super({
+      ...props,
+      links,
+    });
+  }
 
-    override render() {
-        return `<main>
+  override render() {
+    return `<main>
                     <nav>
                         <ul class="preview-page__links">
                             {{{ blockList "links"}}}
@@ -49,7 +46,6 @@ export default class PreviewPage extends Block {
                         <div class="modal__overlay"></div>
                         <div class="modal__content"></div> 
                     </div>
-                </main>`
-    }
+                </main>`;
+  }
 }
-

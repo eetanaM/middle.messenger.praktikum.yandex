@@ -1,22 +1,17 @@
-
-import Block from "../../utils/Block";
-import type { IBlockProps } from "../../utils/types/Block";
+import Block from '../../utils/Block';
+import type { IBlockProps } from '../../utils/types/Block';
 
 export default class InvalidInput extends Block {
-    constructor(props: IBlockProps) {
-        super({
-            ...props,
-            events: {}
-        })
-    }
+  constructor(props: IBlockProps) {
+    super({
+      ...props,
+      events: {},
+    });
+  }
 
-    override render() {
-        return `<p id="{{ name }}" class="app__invalid-input hidden">
+  override render() {
+    return `<p id="{{ name }}" class="app__invalid-input hidden">
                     {{ textContent }}
-                </p>`
-    }
+                </p>`;
+  }
 }
-
-
-
-                    

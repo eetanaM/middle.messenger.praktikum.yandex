@@ -1,2 +1,1 @@
-export { default as BadServerPage } from "./BadServerPage.ts";
-
+export { default as BadServerPage } from './BadServerPage.ts';

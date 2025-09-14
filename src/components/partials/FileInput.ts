@@ -1,16 +1,16 @@
-import Block from "../../utils/Block";
-import type { IBlockProps } from "../../utils/types/Block";
+import Block from '../../utils/Block';
+import type { IBlockProps } from '../../utils/types/Block';
 
 export default class FileInput extends Block {
-    constructor(props: IBlockProps) {
-        super({
-            ...props,
-            events: {}
-        })
-    }
+  constructor(props: IBlockProps) {
+    super({
+      ...props,
+      events: {},
+    });
+  }
 
-    override render() {
-        return `<div class="app__file-input-with-label">
+  override render() {
+    return `<div class="app__file-input-with-label">
                     <input 
                         type="file" 
                         name="{{ name }}" 
@@ -20,7 +20,6 @@ export default class FileInput extends Block {
                     <label for="{{ id }}" class="app__file-input-button">
                         <img class="app__file-input-image" src="{{ src }}" alt="Profile image" />
                     </label>
-                </div>`
-    }
+                </div>`;
+  }
 }
-

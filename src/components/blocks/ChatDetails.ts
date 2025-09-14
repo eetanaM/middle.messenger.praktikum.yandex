@@ -1,21 +1,21 @@
-import Block from "../../utils/Block"
-import type { IBlockProps } from "../../utils/types/Block"
+import Block from '../../utils/Block';
+import type { IBlockProps } from '../../utils/types/Block';
 
 export default class ChatDetails extends Block {
-    constructor(props: IBlockProps) {
-        super({
-            ...props,
-            events: {},
-        })
-    }
+  constructor(props: IBlockProps) {
+    super({
+      ...props,
+      events: {},
+    });
+  }
 
-    override render() {
-        if (!this.props.currentChatItemId) {
-            return `<section class="chat">
+  override render() {
+    if (!this.props.currentChatItemId) {
+      return `<section class="chat">
                         <p>Выберите чат, чтобы отправить сообщение</p>
-                    </section>`
-        } else {
-            return `<section class="chat">
+                    </section>`;
+    }
+    return `<section class="chat">
                         <header class="chat__header">
                             <h1>Chat Name {{ currentChatItemId }}</h1>
                             <button class="header__menu-button">
@@ -46,7 +46,6 @@ export default class ChatDetails extends Block {
                         <footer class="chat__footer">
                             {{{ SendMessageForm }}}
                         </footer>
-                    </section>`
-        }
-    }
+                    </section>`;
+  }
 }

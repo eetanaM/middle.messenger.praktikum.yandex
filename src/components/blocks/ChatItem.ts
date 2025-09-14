@@ -1,15 +1,15 @@
-import Block from "../../utils/Block"
-import type { IBlockProps } from "../../utils/types/Block"
+import Block from '../../utils/Block';
+import type { IBlockProps } from '../../utils/types/Block';
 
 export default class ChatItem extends Block {
-    constructor(props: IBlockProps) {
-        super({
-            ...props,
-        })
-    }
+  constructor(props: IBlockProps) {
+    super({
+      ...props,
+    });
+  }
 
-    override render() {
-        return `<div id={{ chatItemId }} class="chat-item" tabindex="1">
+  override render() {
+    return `<div id={{ chatItemId }} class="chat-item" tabindex="1">
                     <div class="chat-item__avatar">
                         <img src={{ avatarSrc }} alt="Profile photo">
                     </div>
@@ -25,7 +25,6 @@ export default class ChatItem extends Block {
                             <p>{{ unreadMessagesCount }}</p>
                         </div>
                     </div>
-                </div>`
-    }
+                </div>`;
+  }
 }
-
