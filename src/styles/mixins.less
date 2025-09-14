@@ -1,4 +1,4 @@
-@import "./variables.less";
+@import url("./variables.less");
 
 .titlePageLayout() {
     min-height: fit-content;
@@ -8,7 +8,6 @@
     box-shadow: @block-shadow;
     background-color: @light-layout-bgc;
     padding: 10px 30px;
-
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -23,7 +22,6 @@
     min-height: 50px;
     padding: 10px 45px;
     margin-top: 20px;
-    
     font: inherit;
     color: white;
     font-weight: 300;
@@ -33,6 +31,7 @@
         cursor: pointer;
         color: @link-hover-font-color;
     }
+
     &:focus {
         outline: 1px solid black;
     }
@@ -62,7 +61,6 @@
     border: none;
     padding: 5px 15px;
     margin-top: 10px;
-
     font-family: inherit;
     font-size: 13px;
 
@@ -107,7 +105,8 @@
     }
 
     &__500, &__404 {
-        color: #999999;
+        color: #999;
+
         & > h2 {
             font-size: 128px;
             font-weight: 600;

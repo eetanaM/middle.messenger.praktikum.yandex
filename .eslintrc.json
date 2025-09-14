@@ -13,6 +13,7 @@
         "class-methods-use-this":"off",
         "import/prefer-default-export": "off",
         "max-len": [2, 130],
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "@typescript-eslint/quotes": "off"
     }
 }

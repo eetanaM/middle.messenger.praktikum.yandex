@@ -1,5 +1,5 @@
-@import "../../../styles/variables.less";
-@import "../../../styles/mixins.less";
+@import url("../../../styles/variables.less");
+@import url("../../../styles/mixins.less");
 
 .main-content {
     height: 100%;
@@ -78,21 +78,22 @@
                 height: fit-content;
                 min-width: 125px;
                 max-width: 600px;
-                padding: 15px 15px;
+                padding: 15px;
                 background-color: @main-layout-bgc;
                 margin-bottom: 35px;
                 font-size: 12px;
                 text-wrap: balance;
                 text-align: start;
             }
+
             .opponent {
                 align-self: flex-start;
-                border-radius: 0 25px 5px 25px;
+                border-radius: 0 25px 5px;
             }
 
             .user {
                 align-self: flex-end;
-                border-radius: 5px 25px 0 25px;
+                border-radius: 5px 25px 0;
             }
             
             .media {
@@ -149,14 +150,13 @@
 .menu {
     height: 100%;
     width: 350px;
-    border-right: 1px solid rgba(0, 0, 0, 0.25);
+    border-right: 1px solid rgb(0 0 0 / 25%);
     display: flex;
     flex-direction: column;
     justify-content: start;
     
     &__menu-header {
         .mainContentMenuBlock;
-
         .menu-header__avatar {
             width: 60px;
             height: 60px;
@@ -266,12 +266,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             font-size: 14px;
             font-weight: 600;
-            color: #FFFFFF;
+            color: #FFF;
 
-            &[class*=disabled]{
+            &[class*="disabled"]{
                 visibility: hidden;
             }
         }
@@ -282,7 +281,7 @@
         background-color: @chat-item-hover-bgc;
     }
 
-    &[class*=active] {
+    &[class*="active"] {
         background-color: @components-bgc;
 
         & .main-content__menu_chat-item_messages-count_counter  {
