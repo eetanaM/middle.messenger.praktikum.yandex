@@ -1,4 +1,4 @@
-type Callback = (...args: any[]) => void;
+type Callback = (...args: unknown[]) => void;
 
 interface IEventBus {
   readonly listeners: {

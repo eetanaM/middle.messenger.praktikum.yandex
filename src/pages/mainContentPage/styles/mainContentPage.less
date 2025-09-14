@@ -186,14 +186,15 @@
         height: 40px;
         min-height: 40px;
         padding: 4px 8px;
-
-        & .chat__footer .footer__send-message-form .app__main-input {
+/* stylelint-disable no-descending-specificity */
+        & .app__main-input {
             margin: 0;
             width: 100%;
             height: 100%;
             border-radius: 10px;
             font-size: 18px;
         }
+/* stylelint-enable no-descending-specificity */
     }
 
     & > .app__main-link {
@@ -215,11 +216,13 @@
         border: 1px solid @components-bgc;
         margin-right: 20px;
 
-        & .chat__header .header__menu-button > img {
+/* stylelint-disable no-descending-specificity */
+        & img {
             height: 100%;
             width: 100%;
             object-fit: cover;
         }
+/* stylelint-enable no-descending-specificity */
     }
 
     &__chat-info {

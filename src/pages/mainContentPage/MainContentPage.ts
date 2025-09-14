@@ -59,7 +59,7 @@ export default class MainContentPage extends Block {
       events: {},
       profileImgSrc: MOCK.profileImgSrc,
       SearchInput: new FormInput({
-        ...MOCK.preview,
+        ...MOCK.searchInput.inputData,
       }),
       ChatItems: chatItemsComponents,
       PreviewLink: new MainLink({

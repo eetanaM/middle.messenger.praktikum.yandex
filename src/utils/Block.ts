@@ -23,7 +23,7 @@ class Block implements IBlock {
 
   protected children: Record<string, Block>;
 
-  protected lists: Record<string, Block[]>; // разобраться с any[]
+  protected lists: Record<string, Block[]>;
 
   protected eventBus: () => EventBus;
 
