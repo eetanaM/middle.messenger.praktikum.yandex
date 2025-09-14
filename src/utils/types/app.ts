@@ -32,7 +32,6 @@ abstract class IApp {
 
     render:() => void;
     toggleModal: (block: IBlock) => void;
-    attachEventListeners: () => void;
     changePage: (page: string) => void;
 }
 

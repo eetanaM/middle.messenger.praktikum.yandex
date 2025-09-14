@@ -1,10 +1,7 @@
 import Handlebars from "handlebars";
-import { TemplateRenderer } from "./utils/TemplateRenderer.ts"
-
 
 import * as Pages from "./pages/index.ts";
 
-import * as MOCK from "./utils/api/mocks/mockData.ts"
 import * as ENV from "./utils/constants/consts.ts"
 
 import type { IApp, IAppState } from "./utils/types/App.ts";
@@ -56,16 +53,12 @@ export default class App implements IApp {
     }
 
     render() {
-        let template: HandlebarsTemplateDelegate<any>;
-        let templateData;
         let page;
 
         if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            template = Handlebars.compile(Pages.PreviewPage);
-            templateData = MOCK.PREVIEW_TEMPLATE_DATA;
-            TemplateRenderer.renderTemplate(template, templateData, this.appElement);
-            this.attachEventListeners();
-            return
+            page = new Pages.PreviewPage({
+                appEl: this.app
+            });
         } else if (this.state.currentPage === ENV.PAGES.LOGIN_PAGE) {
             page = new Pages.LoginPage({
                 appEl: this.app
@@ -112,23 +105,6 @@ export default class App implements IApp {
                 this.modalRoot.setAttribute("class", "opened")
                 modalOverlay.addEventListener("click", overlayClickHandler)
             }
-        }
-    }
-
-    attachEventListeners() {
-        const links = document.querySelectorAll(".preview-page__links li a") as NodeListOf<HTMLElement>
-
-        if (this.state.currentPage === ENV.PAGES.PREVIEW_PAGE) {
-            // Attaching event listeners on links for changing pages and rerender
-            links.forEach((node) => {
-                if (node.dataset.pagesrc) {
-                    const pageSrc = node.dataset.pagesrc
-                    node.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        this.changePage(pageSrc)
-                    })
-                }
-            })
         }
     }
 
