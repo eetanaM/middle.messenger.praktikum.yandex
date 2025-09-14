@@ -91,6 +91,22 @@ class Block implements IBlock {
         })
     }
 
+    protected _removeEvents(): void {
+        const events = this.props.events as TEventHandlersList || {};
+
+        Object.keys(events).forEach((eventName) => {
+            const handler = events[eventName];
+
+            if (this._element && (typeof handler === 'function' || Array.isArray(handler))) {
+                if (Array.isArray(handler)) {
+                    handler.forEach(h => this._element!.removeEventListener(eventName, h));
+                } else {
+                    this._element.removeEventListener(eventName, handler);
+                }
+            }
+        })
+    }
+
     protected addAttributes(): void {
         const { attr= {} } = this.props;
 
@@ -102,7 +118,6 @@ class Block implements IBlock {
     }
 
     protected init(): void {
-        // this._createResources();
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
@@ -125,6 +140,7 @@ class Block implements IBlock {
             return
         }
 
+        this._removeEvents();
         this._render()
     }
 
