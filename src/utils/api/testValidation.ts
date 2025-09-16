@@ -9,14 +9,16 @@ function testValidation(inputType: string, inputText: string) {
       break;
     case 'email': regexp = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9]+$/gi;
       break;
-    case 'password': regexp = /^(?=.*[A-Z])(?=.*\d).{8,40}$/gi;
+    case 'password': regexp = /^(?=.*[A-Z])(?=.*\d).{8,40}$/g;
+      break;
+    case 'oldPassword': regexp = /^(?=.*[A-Z])(?=.*\d).{8,40}$/g;
+      break;
+    case 'newPassword': regexp = /^(?=.*[A-Z])(?=.*\d).{8,40}$/g;
       break;
     case 'phone': regexp = /^(\+\d{10,15}|\d{10,15})$/gi;
       break;
     default: regexp = /^(?!\s*$).+/gi;
   }
-  console.log(regexp);
-
   return regexp.test(inputText);
 }
 
