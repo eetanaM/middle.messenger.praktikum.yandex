@@ -26,7 +26,8 @@ type AuthDataTemplate = {
   inputs: Array<FormDataWithInvalidInputLabel>,
   button: {
     id: string,
-    textContent: string | number
+    textContent: string | number,
+    type: string,
   },
   link: LinkData,
   preview: LinkData,

@@ -53,6 +53,7 @@ export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
   button: {
     id: 'login-button',
     textContent: TemplateRenderer.escapeHtml('Войти'),
+    type: "submit",
   },
   link: {
     href: '#',
@@ -132,6 +133,7 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
   button: {
     id: 'register-button',
     textContent: TemplateRenderer.escapeHtml('Зарегистрироваться'),
+    type: "submit",
   },
   link: {
     href: '#',
