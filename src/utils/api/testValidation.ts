@@ -1,9 +1,9 @@
 function testValidation(inputType: string, inputText: string) {
   let regexp: RegExp;
   switch (inputType) {
-    case 'first_name': regexp = /^[A-ZА-ЯЁ][a-zа-яё]*-?[a-zа-яё]*$/gi;
+    case 'first_name': regexp = /^[A-ZА-ЯЁ][a-zа-яё]*-?[a-zа-яё]*$/g;
       break;
-    case 'second_name': regexp = /^[A-ZА-ЯЁ][a-zа-яё]*-?[a-zа-яё]*$/gi;
+    case 'second_name': regexp = /^[A-ZА-ЯЁ][a-zа-яё]*-?[a-zа-яё]*$/g;
       break;
     case 'login': regexp = /^(?![0-9]+$)[a-zA-Z0-9_-]{3,20}$/gi;
       break;
@@ -15,6 +15,7 @@ function testValidation(inputType: string, inputText: string) {
       break;
     default: regexp = /^(?!\s*$).+/gi;
   }
+  console.log(regexp);
 
   return regexp.test(inputText);
 }
