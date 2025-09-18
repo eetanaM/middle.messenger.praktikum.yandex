@@ -5,25 +5,21 @@ const METHODS = {
   DELETE: "DELETE",
 } as const;
 
-type HttpMethod = keyof typeof METHODS;
-type HttpData = Record<string, string> | FormData | URLSearchParams;
-type HttpHeaders = Record<string, string>;
+type TRequestMethod = keyof typeof METHODS;
+type TRequestData = Record<string, string> | FormData | URLSearchParams;
+type TRequestHeaders = Record<string, string>;
 
-interface HttpOptions {
-  data?: HttpData;
-  headers?: HttpHeaders;
+interface TRequestOptions {
+  data?: TRequestData;
+  headers?: TRequestHeaders;
   timeout?: number;
 }
 
-interface FullHttpOptions extends HttpOptions {
-  method: HttpMethod;
+interface IFullHttpOptions extends TRequestOptions {
+  method: TRequestMethod;
 }
 
-interface HttpResponse extends XMLHttpRequest {
-  // ожидаем любой ответ
-  responseJSON?: any;
-  responseXML: Document | null;
-}
+type THTTPMethod = <R = unknown>(url: string, options?: TRequestOptions) => Promise<R>;
 
 function queryStringify(data: Record<string, string>): string {
   if (typeof data !== 'object' || data === null) {
@@ -44,22 +40,25 @@ function isPlainObject(data: unknown): data is Record<string, string> {
 }
 
 export default class HTTPTransport {
-  /* eslint-disable max-len */
-  get = (url: string, options: HttpOptions = {}): Promise<HttpResponse> => this.request(url, { ...options, method: 'GET' }, options.timeout);
+  private createMethod(method: TRequestMethod): THTTPMethod {
+    return (url, options = {}) => this.request(url, { ...options, method });
+  }
 
-  post = (url: string, options: HttpOptions = {}): Promise<HttpResponse> => this.request(url, { ...options, method: 'POST' }, options.timeout);
+  protected readonly get = this.createMethod(METHODS.GET);
 
-  put = (url: string, options: HttpOptions = {}): Promise<HttpResponse> => this.request(url, { ...options, method: 'PUT' }, options.timeout);
+  protected readonly put = this.createMethod(METHODS.PUT);
 
-  delete = (url: string, options: HttpOptions = {}): Promise<HttpResponse> => this.request(url, { ...options, method: 'DELETE' }, options.timeout);
-  /* eslint-enable max-len */
+  protected readonly post = this.createMethod(METHODS.POST);
 
-  private request = (
+  protected readonly delete = this.createMethod(METHODS.DELETE);
+
+  private request<R>(
     url: string,
-    options: FullHttpOptions,
-    timeout = 5000,
-  ): Promise<HttpResponse> => {
-    const { headers = {}, method, data } = options;
+    options: IFullHttpOptions,
+  ): Promise<R> {
+    const {
+      headers = {}, method, data, timeout,
+    } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
@@ -77,14 +76,16 @@ export default class HTTPTransport {
       });
 
       xhr.onload = () => {
-        resolve(xhr as HttpResponse);
+        resolve(xhr as R);
       };
 
       xhr.onabort = () => reject(new Error('Request aborted'));
       xhr.onerror = () => reject(new Error('Network error'));
       xhr.ontimeout = () => reject(new Error('Request timeout'));
 
-      xhr.timeout = timeout;
+      if (timeout) {
+        xhr.timeout = timeout;
+      }
 
       if (isGet || !data) {
         xhr.send();
@@ -97,5 +98,5 @@ export default class HTTPTransport {
         xhr.send(data as XMLHttpRequestBodyInit);
       }
     });
-  };
+  }
 }
