@@ -9,7 +9,7 @@ import {
 import type { Callback } from './types/EventBus';
 import type { IApp } from './types/App';
 
-class Block implements IBlock {
+abstract class Block implements IBlock {
   private static EVENTS: IBlockEvents = {
     FLOW_INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
