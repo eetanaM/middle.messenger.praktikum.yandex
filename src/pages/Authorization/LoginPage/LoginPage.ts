@@ -6,7 +6,7 @@ import { Button, FormInputWithValidation, MainLink } from '../../../components/p
 import { LOGIN_TEMPLATE_DATA as MOCK } from '../../../utils/api/mocks/mockData';
 import * as ENV from '../../../utils/constants/consts';
 
-import type { IBlockProps } from '../../../utils/types/Block';
+import type { IBlockProps } from '../../../utils/types/utils/Block';
 
 export default class LoginPage extends Block {
   constructor(props: IBlockProps) {

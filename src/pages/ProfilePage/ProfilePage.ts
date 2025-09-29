@@ -9,7 +9,7 @@ import { CredentialsForm } from '../../components/blocks';
 // eslint-disable-next-line max-len
 import { PROFILE_TEMPLATE_DATA as MOCK, CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA as CRED_MOCK } from '../../utils/api/mocks/mockData';
 
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../utils/types/utils/Block';
 
 export default class ProfilePage extends Block {
   constructor(props: IBlockProps) {

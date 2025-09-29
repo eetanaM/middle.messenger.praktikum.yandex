@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import type { IBlockProps, TAttributes } from '../../utils/types/Block';
+import type { IBlockProps, TAttributes } from '../../utils/types/utils/Block';
 import FormInput from './FormInput';
 import InvalidInput from './InvalidInput';
 

@@ -1,6 +1,6 @@
 import testValidation from '../../utils/api/testValidation';
 import Block from '../../utils/Block';
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../utils/types/utils/Block';
 
 export default class SendMessageForm extends Block {
   constructor(props: IBlockProps) {

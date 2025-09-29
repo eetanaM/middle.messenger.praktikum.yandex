@@ -14,7 +14,7 @@ import { TemplateRenderer } from '../../TemplateRenderer';
 import type {
   // eslint-disable-next-line max-len
   AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate,
-} from '../../types/api/mockData';
+} from '../../types/utils/api/mockData';
 
 export const PREVIEW_TEMPLATE_DATA: PreviewDataTemplate = {
   links: [

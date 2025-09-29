@@ -1,4 +1,4 @@
-import type { IBlock } from './Block';
+import type { IBlock } from './utils/Block';
 
 interface IAppState {
   currentPage: string | null,

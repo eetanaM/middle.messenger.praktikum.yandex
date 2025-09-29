@@ -5,7 +5,7 @@ import { ChatDetails, ChatItem, SendMessageForm } from '../../components/blocks'
 
 import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../utils/api/mocks/mockData';
 import * as ENV from '../../utils/constants/consts';
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../utils/types/utils/Block';
 
 export default class MainContentPage extends Block {
   constructor(props: IBlockProps) {

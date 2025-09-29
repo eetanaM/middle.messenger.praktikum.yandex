@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../utils/types/utils/Block';
 
 export default class FileInput extends Block {
   constructor(props: IBlockProps) {

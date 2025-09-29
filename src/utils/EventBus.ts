@@ -1,4 +1,4 @@
-import type { Callback, IEventBus } from './types/EventBus';
+import type { Callback, IEventBus } from './types/utils/EventBus';
 
 class EventBus implements IEventBus {
   private _listeners: {

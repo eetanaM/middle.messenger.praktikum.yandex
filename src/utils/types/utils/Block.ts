@@ -1,5 +1,5 @@
-import type Block from '../Block';
-import type { IApp } from './App';
+import type Block from '../../Block';
+import type { IApp } from '../App';
 
 type TEventHandler = (event: Event) => void;
 type TEventHandlersList = {

@@ -5,7 +5,7 @@ import { MainLink } from '../../components/partials';
 import { NOT_FOUND_TEMPLATE_DATA as MOCK } from '../../utils/api/mocks/mockData';
 import * as ENV from '../../utils/constants/consts';
 
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../utils/types/utils/Block';
 
 export default class NotFoundPage extends Block {
   constructor(props: IBlockProps) {
