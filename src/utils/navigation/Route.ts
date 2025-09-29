@@ -1,16 +1,17 @@
 import type Block from "../block/Block";
 import type { IBlockProps } from "../types/utils/block/Block";
+import type { TPageBlock } from "../types/utils/navigation/Route";
 
 export default class Route {
   protected _pathname: string;
 
-  protected _blockClass: new (props: IBlockProps) => Block;
+  protected _blockClass: TPageBlock;
 
   protected _block: null | Block;
 
   protected _props: IBlockProps;
 
-  constructor(pathname: string, view: new (props: IBlockProps) => Block, props: IBlockProps) {
+  constructor(pathname: string, view: TPageBlock, props: IBlockProps) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;

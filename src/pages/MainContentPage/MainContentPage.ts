@@ -97,3 +97,5 @@ export default class MainContentPage extends Block {
                 </main>`;
   }
 }
+
+export type TMainContentPage = typeof MainContentPage;

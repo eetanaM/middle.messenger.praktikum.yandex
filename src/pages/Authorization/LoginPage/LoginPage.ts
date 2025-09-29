@@ -60,3 +60,5 @@ export default class LoginPage extends Block {
                 </main>`;
   }
 }
+
+export type TLoginPage = typeof LoginPage;

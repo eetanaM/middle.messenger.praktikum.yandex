@@ -49,3 +49,5 @@ export default class PreviewPage extends Block {
                 </main>`;
   }
 }
+
+export type TPreviewPage = typeof PreviewPage;

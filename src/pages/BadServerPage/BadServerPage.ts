@@ -42,3 +42,5 @@ export default class BadServerPage extends Block {
                 </main>`;
   }
 }
+
+export type TBadServerPage = typeof BadServerPage;

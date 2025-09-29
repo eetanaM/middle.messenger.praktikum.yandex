@@ -1,5 +1,4 @@
-import type Block from "../block/Block";
-import type { IBlockProps } from "../types/utils/block/Block";
+import type { TPageBlock } from "../types/utils/navigation/Route";
 import Route from "./Route";
 
 export default class Router {
@@ -26,7 +25,7 @@ export default class Router {
     Router.__instance = this;
   }
 
-  use(pathname: string, block: new (props: IBlockProps) => Block) {
+  use(pathname: string, block: TPageBlock) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
 
     this.routes.push(route);

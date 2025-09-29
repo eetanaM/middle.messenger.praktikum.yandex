@@ -134,3 +134,5 @@ export default class ProfilePage extends Block {
                 </main>`;
   }
 }
+
+export type TProfilePage = typeof ProfilePage;

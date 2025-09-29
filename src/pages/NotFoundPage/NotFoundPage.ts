@@ -42,3 +42,5 @@ export default class NotFoundPage extends Block {
                 </main>`;
   }
 }
+
+export type TNotFoundPage = typeof NotFoundPage;

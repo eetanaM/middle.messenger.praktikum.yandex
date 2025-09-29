@@ -60,3 +60,5 @@ export default class RegisterPage extends Block {
                 </main>`;
   }
 }
+
+export type TRegisterPage = typeof RegisterPage;
