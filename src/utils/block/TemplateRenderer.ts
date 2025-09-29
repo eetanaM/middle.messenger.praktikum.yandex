@@ -1,6 +1,6 @@
-import type { ITemplateRenderer } from './types/utils/TemplateRenderer';
+import type { ITemplateRenderer } from '../types/utils/block/TemplateRenderer';
 
-export class TemplateRenderer implements ITemplateRenderer {
+export default class TemplateRenderer implements ITemplateRenderer {
   static renderTemplate(template:HandlebarsTemplateDelegate<unknown>, data?:unknown, container?: HTMLElement) {
     const htmlString = template(data);
     const parser = new DOMParser();

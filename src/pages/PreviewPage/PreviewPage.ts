@@ -1,8 +1,8 @@
 import { PreviewLink } from '../../components/partials';
 import { PREVIEW_TEMPLATE_DATA as MOCK } from '../../utils/api/mocks/mockData';
-import Block from '../../utils/Block';
+import { Block } from '../../utils/block';
 
-import type { IBlockProps } from '../../utils/types/utils/Block';
+import type { IBlockProps } from '../../utils/types/utils/block/Block';
 
 export default class PreviewPage extends Block {
   constructor(props: IBlockProps) {

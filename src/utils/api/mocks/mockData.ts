@@ -9,7 +9,7 @@ import paperClip from '../../../../images/chat/paperclip.png';
 import sendButton from '../../../../images/chat/send.png';
 
 import * as ENV from '../../constants/consts';
-import { TemplateRenderer } from '../../TemplateRenderer';
+import { TemplateRenderer } from '../../block';
 
 import type {
   // eslint-disable-next-line max-len

@@ -1,11 +1,11 @@
-import Block from '../../utils/Block';
+import { Block } from '../../utils/block';
 
 import { MainLink } from '../../components/partials';
 
 import { BAD_SERVER_TEMPLATE_DATA as MOCK } from '../../utils/api/mocks/mockData';
 import * as ENV from '../../utils/constants/consts';
 
-import type { IBlockProps } from '../../utils/types/utils/Block';
+import type { IBlockProps } from '../../utils/types/utils/block/Block';
 
 export default class BadServerPage extends Block {
   constructor(props: IBlockProps) {

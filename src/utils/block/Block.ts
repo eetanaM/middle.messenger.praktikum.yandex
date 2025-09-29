@@ -1,13 +1,13 @@
 import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
 import EventBus from './EventBus';
-import { TemplateRenderer } from './TemplateRenderer';
+import TemplateRenderer from './TemplateRenderer';
 
 import {
   type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList, type TBlockPropValue,
-} from './types/utils/Block';
-import type { Callback } from './types/utils/EventBus';
-import type { IApp } from './types/App';
+} from '../types/utils/block/Block';
+import type { Callback } from '../types/utils/block/EventBus';
+import type { IApp } from '../types/App';
 
 abstract class Block implements IBlock {
   private static EVENTS: IBlockEvents = {

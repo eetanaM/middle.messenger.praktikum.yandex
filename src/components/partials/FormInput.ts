@@ -1,5 +1,5 @@
-import Block from '../../utils/Block';
-import type { IBlockProps } from '../../utils/types/utils/Block';
+import { Block } from '../../utils/block';
+import type { IBlockProps } from '../../utils/types/utils/block/Block';
 import testValidation from '../../utils/api/testValidation';
 
 export default class FormInput extends Block {
