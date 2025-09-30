@@ -1,7 +1,8 @@
 import type { TPageBlock } from "../../types/services/navigation/Route";
 import Route from "./Route";
+import { rootBlockQuery } from "../../utils/constants/consts";
 
-export default class Router {
+class Router {
   static __instance: Router;
 
   public routes: Array<any>;
@@ -65,3 +66,5 @@ export default class Router {
     return this.routes.find((route) => route.match(pathname));
   }
 }
+
+export default new Router(rootBlockQuery);

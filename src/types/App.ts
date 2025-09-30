@@ -1,4 +1,11 @@
 import type { IBlock } from './services/block/Block';
+import { Router } from '../services/navigation';
+
+declare global {
+  interface Window {
+    router: typeof Router;
+  }
+}
 
 interface IAppState {
   currentPage: string | null,
@@ -26,17 +33,11 @@ interface IModalTemplateData {
 }
 
 abstract class IApp {
-  state: IAppState;
+  modalRoot: HTMLElement;
 
-  appElement: HTMLElement | null;
-
-  modalRoot: HTMLElement | null;
-
-  render:() => void;
+  initRouter: () => void;
 
   toggleModal: (block: IBlock) => void;
-
-  changePage: (page: string) => void;
 }
 
 export type {

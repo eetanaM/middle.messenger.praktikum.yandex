@@ -8,24 +8,13 @@ import mockImg from '../../../../images/chat/mockimage.png';
 import paperClip from '../../../../images/chat/paperclip.png';
 import sendButton from '../../../../images/chat/send.png';
 
-import * as ENV from '../../../utils/constants/consts';
 import { TemplateRenderer } from '../../block';
 
 import type {
   // eslint-disable-next-line max-len
-  AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, PreviewDataTemplate, ProfileDataTemplate,
+  AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, ProfileDataTemplate,
 } from '../../../types/services/api/mockData';
 
-export const PREVIEW_TEMPLATE_DATA: PreviewDataTemplate = {
-  links: [
-    { pageSrc: ENV.PAGES.LOGIN_PAGE, textContent: TemplateRenderer.escapeHtml('Вход') },
-    { pageSrc: ENV.PAGES.REGISTER_PAGE, textContent: TemplateRenderer.escapeHtml('Регистрация') },
-    { pageSrc: ENV.PAGES.MAIN_CONTENT_PAGE, textContent: TemplateRenderer.escapeHtml('Чаты') },
-    { pageSrc: ENV.PAGES.PROFILE_PAGE, textContent: TemplateRenderer.escapeHtml('Профиль') },
-    { pageSrc: ENV.PAGES.NOT_FOUND_PAGE, textContent: TemplateRenderer.escapeHtml('404') },
-    { pageSrc: ENV.PAGES.BAD_SERVER_PAGE, textContent: TemplateRenderer.escapeHtml('50*') },
-  ],
-};
 export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
   logoUrl: logo,
   inputs: [

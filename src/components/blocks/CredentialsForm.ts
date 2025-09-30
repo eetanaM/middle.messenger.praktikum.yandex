@@ -35,12 +35,12 @@ export default class CredentialsForm extends Block {
             });
 
             console.log(formData);
-            this._appElement.toggleModal(this);
+            // this._appElement.toggleModal(this); TODO пофиксить модалку
           }
         }),
         reset: ((e: Event) => {
           e.preventDefault();
-          this._appElement.toggleModal(this);
+          // this._appElement.toggleModal(this); TODO пофиксить модалку
         }),
       },
     });

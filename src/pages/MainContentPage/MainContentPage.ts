@@ -4,11 +4,10 @@ import { FormInput, MainLink } from '../../components/partials';
 import { ChatDetails, ChatItem, SendMessageForm } from '../../components/blocks';
 
 import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
-import * as ENV from '../../utils/constants/consts';
 import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class MainContentPage extends Block {
-  constructor(props: IBlockProps) {
+  constructor(props?: IBlockProps) {
     let currentChatItemId: number | null = null;
     const SendMessageFormComponent = new SendMessageForm({
       icons: CHAT_MOCK.icons,
@@ -66,11 +65,10 @@ export default class MainContentPage extends Block {
         href: MOCK.preview.href,
         id: MOCK.preview.id,
         textContent: MOCK.preview.textContent,
-        appEl: props.appEl,
         events: {
           click: ((e: Event) => {
             e.preventDefault();
-            this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE);
+            // this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE); пофиксить переход
           }),
         },
       }),

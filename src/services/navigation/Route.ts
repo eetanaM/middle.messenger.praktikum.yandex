@@ -1,6 +1,5 @@
 import type Block from "../block/Block";
-import type { IBlockProps } from "../../types/services/block/Block";
-import type { TPageBlock } from "../../types/services/navigation/Route";
+import type { IRouteQuery, TPageBlock } from "../../types/services/navigation/Route";
 
 export default class Route {
   protected _pathname: string;
@@ -9,13 +8,22 @@ export default class Route {
 
   protected _block: null | Block;
 
-  protected _props: IBlockProps;
+  protected _props: IRouteQuery;
 
-  constructor(pathname: string, view: TPageBlock, props: IBlockProps) {
+  constructor(pathname: string, view: TPageBlock, props: IRouteQuery) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
+  }
+
+  private _appedToRoot(rootQuery: string, block: Block) {
+    const rootEl = document.querySelector(rootQuery);
+
+    if (rootEl) {
+      rootEl.innerHTML = '';
+      rootEl.appendChild(block.getContent());
+    }
   }
 
   navigate(pathname: string) {
@@ -37,7 +45,9 @@ export default class Route {
 
   render() {
     if (!this._block) {
-      this._block = new this._blockClass(this._props);
+      this._block = new this._blockClass();
     }
+
+    this._appedToRoot(this._props.rootQuery, this._block);
   }
 }

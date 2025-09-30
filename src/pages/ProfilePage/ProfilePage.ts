@@ -2,18 +2,19 @@ import { Block } from '../../services/block';
 
 import ProfileCredentials from '../../components/blocks/ProfileCredentials';
 import {
-  Button, FileInput, FormInputWithValidation, ProfileMenuButton, RoundButton,
+  ProfileMenuButton, RoundButton,
 } from '../../components/partials';
-import { CredentialsForm } from '../../components/blocks';
+// import { CredentialsForm } from '../../components/blocks';
 
 // eslint-disable-next-line max-len
-import { PROFILE_TEMPLATE_DATA as MOCK, CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA as CRED_MOCK } from '../../services/api/mocks/mockData';
+import { PROFILE_TEMPLATE_DATA as MOCK } from '../../services/api/mocks/mockData';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class ProfilePage extends Block {
-  constructor(props: IBlockProps) {
-    const FileInputs = CRED_MOCK.fileInputs.map((input) => new FileInput({
+  constructor(props?: IBlockProps) {
+    // Пофиксить модалки
+    /* const FileInputs = CRED_MOCK.fileInputs.map((input) => new FileInput({
       name: input.name,
       id: input.id,
       src: input.src,
@@ -44,39 +45,33 @@ export default class ProfilePage extends Block {
     }));
 
     const ChangeCredentialsForm = new CredentialsForm({
-      appEl: props.appEl,
       fileInputs: FileInputs,
       inputs: CredentialsTextInputs,
       SubmitButton: new Button({
         id: 'confirm',
         type: 'submit',
         textContent: 'Подтвердить',
-        appEl: props.appEl,
       }),
       ResetButton: new Button({
         id: 'reset',
         type: 'reset',
         textContent: 'Отменить',
-        appEl: props.appEl,
       }),
     });
 
     const ChangePasswordForm = new CredentialsForm({
-      appEl: props.appEl,
       inputs: ChangePasswordTextInputs,
       SubmitButton: new Button({
         id: 'confirm',
         type: 'submit',
         textContent: 'Подтвердить',
-        appEl: props.appEl,
       }),
       ResetButton: new Button({
         id: 'reset',
         type: 'reset',
         textContent: 'Отменить',
-        appEl: props.appEl,
       }),
-    });
+    }); */
 
     super({
       ...props,
@@ -88,7 +83,6 @@ export default class ProfilePage extends Block {
         userFirstName: MOCK.profileName,
       }),
       BackButton: new RoundButton({
-        appEl: props.appEl,
       }),
       ChangeDataButton: new ProfileMenuButton({
         id: 'change-credentials',
@@ -96,7 +90,7 @@ export default class ProfilePage extends Block {
         events: {
           click: ((e: Event) => {
             e.stopPropagation();
-            this._appElement.toggleModal(ChangeCredentialsForm);
+            // this._appElement.toggleModal(ChangeCredentialsForm); пофиксить переход
           }),
         },
       }),
@@ -106,7 +100,7 @@ export default class ProfilePage extends Block {
         events: {
           click: ((e: Event) => {
             e.stopPropagation();
-            this._appElement.toggleModal(ChangePasswordForm);
+            // this._appElement.toggleModal(ChangePasswordForm); пофиксить переход
           }),
         },
       }),

@@ -3,23 +3,21 @@ import { Block } from '../../services/block';
 import { MainLink } from '../../components/partials';
 
 import { NOT_FOUND_TEMPLATE_DATA as MOCK } from '../../services/api/mocks/mockData';
-import * as ENV from '../../utils/constants/consts';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class NotFoundPage extends Block {
-  constructor(props: IBlockProps) {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
       notFoundLogoSrc: MOCK.notFoundLogoSrc,
       events: {},
       PreviewLink: new MainLink({
         ...MOCK.preview,
-        appEl: props.appEl,
         events: {
           click: ((e: Event) => {
             e.preventDefault();
-            this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE);
+            // this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE); пофиксить переход
           }),
         },
       }),

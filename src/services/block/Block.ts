@@ -7,7 +7,6 @@ import {
   type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList, type TBlockPropValue,
 } from '../../types/services/block/Block';
 import type { Callback } from '../../types/services/block/EventBus';
-import type { IApp } from '../../types/App';
 
 abstract class Block implements IBlock {
   private static EVENTS: IBlockEvents = {
@@ -29,8 +28,6 @@ abstract class Block implements IBlock {
 
   protected _id: string;
 
-  protected _appElement: IApp;
-
   constructor(propsWithChildren: IBlockProps = {}) {
     const uid = uuidv4();
     const eventBus = new EventBus();
@@ -41,8 +38,6 @@ abstract class Block implements IBlock {
     this.lists = this._makePropsProxy({ ...lists }) as Record<string, Block[]>;
 
     this._id = uid;
-    this._appElement = this.props.appEl as IApp;
-
     this.eventBus = () => eventBus;
 
     this._registerEvents();
