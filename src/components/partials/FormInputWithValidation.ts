@@ -4,9 +4,9 @@ import FormInput from './FormInput';
 import InvalidInput from './InvalidInput';
 
 export default class FormInputWithValidation extends Block {
-  constructor(props: IBlockProps) {
-    const inputData = props.input as TAttributes;
-    const invalidData = props.invalid as TAttributes;
+  constructor(props?: IBlockProps) {
+    const inputData = props?.input as TAttributes;
+    const invalidData = props?.invalid as TAttributes;
 
     super({
       FormInput: new FormInput({

@@ -1,6 +1,6 @@
 import { Block } from '../../services/block';
 
-import { FormInput, MainLink } from '../../components/partials';
+import { FormInput } from '../../components/partials';
 import { ChatDetails, ChatItem, SendMessageForm } from '../../components/blocks';
 
 import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
@@ -61,17 +61,6 @@ export default class MainContentPage extends Block {
         ...MOCK.searchInput.inputData,
       }),
       ChatItems: chatItemsComponents,
-      PreviewLink: new MainLink({
-        href: MOCK.preview.href,
-        id: MOCK.preview.id,
-        textContent: MOCK.preview.textContent,
-        events: {
-          click: ((e: Event) => {
-            e.preventDefault();
-            // this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE); пофиксить переход
-          }),
-        },
-      }),
       ChatDetails: ChatDetailsComponent,
     });
   }

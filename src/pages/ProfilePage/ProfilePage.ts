@@ -83,6 +83,12 @@ export default class ProfilePage extends Block {
         userFirstName: MOCK.profileName,
       }),
       BackButton: new RoundButton({
+        events: {
+          click: ((e: Event) => {
+            e.preventDefault();
+            window.router.back();
+          }),
+        },
       }),
       ChangeDataButton: new ProfileMenuButton({
         id: 'change-credentials',

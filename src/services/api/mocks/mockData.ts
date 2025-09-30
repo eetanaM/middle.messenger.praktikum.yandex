@@ -233,19 +233,19 @@ export const PROFILE_TEMPLATE_DATA: ProfileDataTemplate = {
 
 export const NOT_FOUND_TEMPLATE_DATA: ErrorPageDataTemplate = {
   notFoundLogoSrc,
-  preview: {
+  back: {
     href: '/',
     id: 'preview',
-    textContent: TemplateRenderer.escapeHtml('Вернуться к превью'),
+    textContent: TemplateRenderer.escapeHtml('Вернуться назад'),
   },
 };
 
 export const BAD_SERVER_TEMPLATE_DATA: ErrorPageDataTemplate = {
   notFoundLogoSrc,
-  preview: {
+  back: {
     href: '/',
-    id: 'preview',
-    textContent: TemplateRenderer.escapeHtml('Вернуться к превью'),
+    id: 'back',
+    textContent: TemplateRenderer.escapeHtml('Вернуться назад'),
   },
 };
 

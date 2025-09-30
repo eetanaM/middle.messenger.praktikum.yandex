@@ -5,7 +5,6 @@ export default class InvalidInput extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
-      events: {},
     });
   }
 

@@ -4,6 +4,7 @@ import { AuthForm } from '../../../components/blocks';
 import { Button, FormInputWithValidation, MainLink } from '../../../components/partials';
 
 import { LOGIN_TEMPLATE_DATA as MOCK } from '../../../services/api/mocks/mockData';
+import { ERoutes } from '../../../utils/constants/consts';
 
 import type { IBlockProps } from '../../../types/services/block/Block';
 
@@ -33,16 +34,7 @@ export default class LoginPage extends Block {
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              // this._appElement.changePage(ENV.PAGES.REGISTER_PAGE); пофиксить переход
-            },
-          },
-        }),
-        PreviewLink: new MainLink({
-          ...MOCK.preview,
-          events: {
-            click: (e: Event) => {
-              e.preventDefault();
-              // this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE); пофиксить переход
+              window.router.go(ERoutes.REGISTER);
             },
           },
         }),

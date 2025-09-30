@@ -3,7 +3,7 @@ import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class FormInput extends Block {
-  constructor(props: IBlockProps) {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
       events: {

@@ -68,7 +68,7 @@ type ProfileDataTemplate = {
 
 type ErrorPageDataTemplate = {
   notFoundLogoSrc: string,
-  preview: LinkData
+  back: LinkData
 };
 
 type ChangeCredentialsFormDataTemplate = {

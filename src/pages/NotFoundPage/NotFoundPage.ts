@@ -12,12 +12,12 @@ export default class NotFoundPage extends Block {
       ...props,
       notFoundLogoSrc: MOCK.notFoundLogoSrc,
       events: {},
-      PreviewLink: new MainLink({
-        ...MOCK.preview,
+      BackLink: new MainLink({
+        ...MOCK.back,
         events: {
           click: ((e: Event) => {
             e.preventDefault();
-            // this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE); пофиксить переход
+            window.router.back();
           }),
         },
       }),
@@ -35,7 +35,7 @@ export default class NotFoundPage extends Block {
                         <p>Page not found</p>
                     </div>
                     <nav>
-                        {{{ PreviewLink }}}
+                        {{{ BackLink }}}
                     </nav>
                 </main>`;
   }
