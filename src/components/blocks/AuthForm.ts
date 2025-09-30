@@ -2,7 +2,7 @@ import testValidation from '../../utils/helpers/testValidation';
 import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class AuthForm extends Block {
+class AuthForm extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
@@ -48,7 +48,8 @@ export default class AuthForm extends Block {
                     {{{ SubmitButton }}}
                     {{{ NoAccLink }}}
                     {{{ AlreadyHasAccLink }}}
-                    {{{ PreviewLink }}}
                 </form>`;
   }
 }
+
+export default AuthForm;

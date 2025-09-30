@@ -2,7 +2,7 @@ import { Block } from "../../services/block";
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class Button extends Block {
+class Button extends Block {
   constructor(props?: IBlockProps) {
     super({
       ...props,
@@ -19,3 +19,5 @@ export default class Button extends Block {
                 </button>`;
   }
 }
+
+export default Button;

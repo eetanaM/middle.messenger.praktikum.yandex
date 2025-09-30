@@ -11,7 +11,7 @@ import { PROFILE_TEMPLATE_DATA as MOCK } from '../../services/api/mocks/mockData
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class ProfilePage extends Block {
+class ProfilePage extends Block {
   constructor(props?: IBlockProps) {
     // Пофиксить модалки
     /* const FileInputs = CRED_MOCK.fileInputs.map((input) => new FileInput({
@@ -134,5 +134,7 @@ export default class ProfilePage extends Block {
                 </main>`;
   }
 }
+
+export default ProfilePage;
 
 export type TProfilePage = typeof ProfilePage;

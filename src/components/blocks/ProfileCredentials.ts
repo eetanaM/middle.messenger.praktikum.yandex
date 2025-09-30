@@ -1,7 +1,7 @@
 import { Block } from "../../services/block";
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class ProfileCredentials extends Block {
+class ProfileCredentials extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
@@ -40,3 +40,5 @@ export default class ProfileCredentials extends Block {
                 </div>`;
   }
 }
+
+export default ProfileCredentials;

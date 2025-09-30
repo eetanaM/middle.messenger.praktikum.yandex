@@ -3,7 +3,7 @@ import { set } from "../../utils/helpers";
 import { EventBus } from "../block";
 
 export enum StoreEvents {
-  Updated = "updated",
+  STORE_UPD = "store:updated",
 }
 
 class Store extends EventBus {
@@ -15,7 +15,7 @@ class Store extends EventBus {
 
   public set(path: string, value: unknown) {
     set(this.state, path, value);
-    this.emit(StoreEvents.Updated);
+    this.emit(StoreEvents.STORE_UPD);
   }
 }
 

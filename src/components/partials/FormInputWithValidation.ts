@@ -3,7 +3,7 @@ import type { IBlockProps, TAttributes } from '../../types/services/block/Block'
 import FormInput from './FormInput';
 import InvalidInput from './InvalidInput';
 
-export default class FormInputWithValidation extends Block {
+class FormInputWithValidation extends Block {
   constructor(props?: IBlockProps) {
     const inputData = props?.input as TAttributes;
     const invalidData = props?.invalid as TAttributes;
@@ -25,3 +25,5 @@ export default class FormInputWithValidation extends Block {
                 </div>`;
   }
 }
+
+export default FormInputWithValidation;

@@ -2,7 +2,7 @@ import testValidation from '../../utils/helpers/testValidation';
 import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class SendMessageForm extends Block {
+class SendMessageForm extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
@@ -51,3 +51,5 @@ export default class SendMessageForm extends Block {
                 </form>`;
   }
 }
+
+export default SendMessageForm;

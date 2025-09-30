@@ -2,6 +2,7 @@ import Handlebars from 'handlebars';
 import { v4 as uuidv4 } from 'uuid';
 import EventBus from './EventBus';
 import TemplateRenderer from './TemplateRenderer';
+import merge from '../../utils/helpers/merge';
 
 import {
   type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList, type TBlockPropValue,
@@ -180,7 +181,7 @@ abstract class Block implements IBlock {
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    merge(this.props, nextProps);
   };
 
   private _render() {

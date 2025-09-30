@@ -1,7 +1,7 @@
 import { Block } from "../../services/block";
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class InvalidInput extends Block {
+class InvalidInput extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
@@ -14,3 +14,5 @@ export default class InvalidInput extends Block {
                 </p>`;
   }
 }
+
+export default InvalidInput;

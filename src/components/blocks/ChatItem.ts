@@ -1,7 +1,7 @@
 import { Block } from "../../services/block";
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class ChatItem extends Block {
+class ChatItem extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
@@ -28,3 +28,5 @@ export default class ChatItem extends Block {
                 </div>`;
   }
 }
+
+export default ChatItem;

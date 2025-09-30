@@ -4,7 +4,7 @@ import navBtnSrc from '../../../images/nav-button.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class RoundButton extends Block {
+class RoundButton extends Block {
   constructor(props?: IBlockProps) {
     super({
       ...props,
@@ -18,3 +18,5 @@ export default class RoundButton extends Block {
                 </button>`;
   }
 }
+
+export default RoundButton;

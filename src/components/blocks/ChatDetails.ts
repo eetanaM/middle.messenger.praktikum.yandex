@@ -1,7 +1,7 @@
 import { Block } from "../../services/block";
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class ChatDetails extends Block {
+class ChatDetails extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
@@ -51,3 +51,5 @@ export default class ChatDetails extends Block {
   }
 /* eslint-enable max-len */
 }
+
+export default ChatDetails;

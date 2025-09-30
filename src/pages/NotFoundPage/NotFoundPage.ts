@@ -6,7 +6,7 @@ import { NOT_FOUND_TEMPLATE_DATA as MOCK } from '../../services/api/mocks/mockDa
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class NotFoundPage extends Block {
+class NotFoundPage extends Block {
   constructor(props?: IBlockProps) {
     super({
       ...props,
@@ -40,5 +40,7 @@ export default class NotFoundPage extends Block {
                 </main>`;
   }
 }
+
+export default NotFoundPage;
 
 export type TNotFoundPage = typeof NotFoundPage;

@@ -8,7 +8,7 @@ import { ERoutes } from '../../../utils/constants/consts';
 
 import type { IBlockProps } from '../../../types/services/block/Block';
 
-export default class RegisterPage extends Block {
+class RegisterPage extends Block {
   constructor(props?: IBlockProps) {
     const inputs = MOCK.inputs.map((input) => new FormInputWithValidation({
       input: {
@@ -49,5 +49,7 @@ export default class RegisterPage extends Block {
                 </main>`;
   }
 }
+
+export default RegisterPage;
 
 export type TRegisterPage = typeof RegisterPage;

@@ -6,7 +6,7 @@ import { BAD_SERVER_TEMPLATE_DATA as MOCK } from '../../services/api/mocks/mockD
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class BadServerPage extends Block {
+class BadServerPage extends Block {
   constructor(props?: IBlockProps) {
     super({
       ...props,
@@ -40,5 +40,7 @@ export default class BadServerPage extends Block {
                 </main>`;
   }
 }
+
+export default BadServerPage;
 
 export type TBadServerPage = typeof BadServerPage;

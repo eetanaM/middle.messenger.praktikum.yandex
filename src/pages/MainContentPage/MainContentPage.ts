@@ -6,7 +6,7 @@ import { ChatDetails, ChatItem, SendMessageForm } from '../../components/blocks'
 import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class MainContentPage extends Block {
+class MainContentPage extends Block {
   constructor(props?: IBlockProps) {
     let currentChatItemId: number | null = null;
     const SendMessageFormComponent = new SendMessageForm({
@@ -84,5 +84,7 @@ export default class MainContentPage extends Block {
                 </main>`;
   }
 }
+
+export default MainContentPage;
 
 export type TMainContentPage = typeof MainContentPage;

@@ -2,7 +2,7 @@ import testValidation from '../../utils/helpers/testValidation';
 import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class FormInput extends Block {
+class FormInput extends Block {
   constructor(props?: IBlockProps) {
     super({
       ...props,
@@ -36,3 +36,5 @@ export default class FormInput extends Block {
           />`;
   }
 }
+
+export default FormInput;

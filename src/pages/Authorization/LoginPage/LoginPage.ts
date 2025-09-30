@@ -8,7 +8,7 @@ import { ERoutes } from '../../../utils/constants/consts';
 
 import type { IBlockProps } from '../../../types/services/block/Block';
 
-export default class LoginPage extends Block {
+class LoginPage extends Block {
   constructor(props?: IBlockProps) {
     const inputs = MOCK.inputs.map((input) => new FormInputWithValidation({
       input: {
@@ -45,9 +45,11 @@ export default class LoginPage extends Block {
 
   override render() {
     return `<main class="authorization">
-                    {{{ AuthForm }}}
-                </main>`;
+                {{{ AuthForm }}}
+            </main>`;
   }
 }
+
+export default LoginPage;
 
 export type TLoginPage = typeof LoginPage;
