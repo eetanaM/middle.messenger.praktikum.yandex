@@ -4,8 +4,8 @@ import * as Pages from './pages';
 
 import * as ENV from './utils/constants/consts';
 
-import type { IApp, IAppState } from './utils/types/App';
-import type { IBlock } from './utils/types/utils/block/Block';
+import type { IApp, IAppState } from './types/App';
+import type { IBlock } from './types/services/block/Block';
 
 // Хелпер для создания заглушек для элементов массива
 // В шаблоне вызывается как {{{ blockList "Имя массива"}}}

@@ -1,11 +1,11 @@
-import { Block } from '../../utils/block';
+import { Block } from '../../services/block';
 
 import { MainLink } from '../../components/partials';
 
-import { NOT_FOUND_TEMPLATE_DATA as MOCK } from '../../utils/api/mocks/mockData';
+import { NOT_FOUND_TEMPLATE_DATA as MOCK } from '../../services/api/mocks/mockData';
 import * as ENV from '../../utils/constants/consts';
 
-import type { IBlockProps } from '../../utils/types/utils/block/Block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class NotFoundPage extends Block {
   constructor(props: IBlockProps) {

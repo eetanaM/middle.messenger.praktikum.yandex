@@ -1,10 +1,10 @@
-import { Block } from '../../utils/block';
+import { Block } from '../../services/block';
 
 import * as ENV from '../../utils/constants/consts';
 
 import navBtnSrc from '../../../images/nav-button.png';
 
-import type { IBlockProps } from '../../utils/types/utils/block/Block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class RoundButton extends Block {
   constructor(props: IBlockProps) {

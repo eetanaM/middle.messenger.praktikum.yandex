@@ -1,4 +1,4 @@
-import type Block from "../../../Block";
+import type { Block } from "../../../services/block";
 
 interface IRouter {
   routes: Array<any>

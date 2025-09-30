@@ -1,12 +1,12 @@
-import Block from '../../../utils/block/Block';
+import { Block } from '../../../services/block';
 
 import { AuthForm } from '../../../components/blocks';
 import { Button, FormInputWithValidation, MainLink } from '../../../components/partials';
 
-import { LOGIN_TEMPLATE_DATA as MOCK } from '../../../utils/api/mocks/mockData';
+import { LOGIN_TEMPLATE_DATA as MOCK } from '../../../services/api/mocks/mockData';
 import * as ENV from '../../../utils/constants/consts';
 
-import type { IBlockProps } from '../../../utils/types/utils/block/Block';
+import type { IBlockProps } from '../../../types/services/block/Block';
 
 export default class LoginPage extends Block {
   constructor(props: IBlockProps) {

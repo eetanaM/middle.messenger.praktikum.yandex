@@ -1,4 +1,4 @@
-import type { TPageBlock } from "../types/utils/navigation/Route";
+import type { TPageBlock } from "../../types/services/navigation/Route";
 import Route from "./Route";
 
 export default class Router {

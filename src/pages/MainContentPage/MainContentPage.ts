@@ -1,11 +1,11 @@
-import { Block } from '../../utils/block';
+import { Block } from '../../services/block';
 
 import { FormInput, MainLink } from '../../components/partials';
 import { ChatDetails, ChatItem, SendMessageForm } from '../../components/blocks';
 
-import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../utils/api/mocks/mockData';
+import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
 import * as ENV from '../../utils/constants/consts';
-import type { IBlockProps } from '../../utils/types/utils/block/Block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class MainContentPage extends Block {
   constructor(props: IBlockProps) {

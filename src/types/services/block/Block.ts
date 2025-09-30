@@ -1,4 +1,4 @@
-import type { Block } from '../../../block';
+import type { Block } from "../../../services/block";
 import type { IApp } from '../../App';
 
 type TEventHandler = (event: Event) => void;

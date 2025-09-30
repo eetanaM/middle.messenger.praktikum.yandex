@@ -1,6 +1,6 @@
 import type Block from "../block/Block";
-import type { IBlockProps } from "../types/utils/block/Block";
-import type { TPageBlock } from "../types/utils/navigation/Route";
+import type { IBlockProps } from "../../types/services/block/Block";
+import type { TPageBlock } from "../../types/services/navigation/Route";
 
 export default class Route {
   protected _pathname: string;

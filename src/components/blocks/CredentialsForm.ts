@@ -1,6 +1,6 @@
-import testValidation from '../../utils/api/testValidation';
-import { Block } from '../../utils/block';
-import type { IBlockProps } from '../../utils/types/utils/block/Block';
+import testValidation from '../../utils/helpers/testValidation';
+import { Block } from '../../services/block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class CredentialsForm extends Block {
   constructor(props: IBlockProps) {

@@ -5,9 +5,9 @@ import TemplateRenderer from './TemplateRenderer';
 
 import {
   type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList, type TBlockPropValue,
-} from '../types/utils/block/Block';
-import type { Callback } from '../types/utils/block/EventBus';
-import type { IApp } from '../types/App';
+} from '../../types/services/block/Block';
+import type { Callback } from '../../types/services/block/EventBus';
+import type { IApp } from '../../types/App';
 
 abstract class Block implements IBlock {
   private static EVENTS: IBlockEvents = {

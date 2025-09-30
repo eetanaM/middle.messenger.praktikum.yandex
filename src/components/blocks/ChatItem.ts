@@ -1,5 +1,5 @@
-import { Block } from '../../utils/block';
-import type { IBlockProps } from '../../utils/types/utils/block/Block';
+import { Block } from "../../services/block";
+import type { IBlockProps } from '../../types/services/block/Block';
 
 export default class ChatItem extends Block {
   constructor(props: IBlockProps) {
