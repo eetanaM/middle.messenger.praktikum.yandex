@@ -1,9 +1,10 @@
-import type { IBlock } from './services/block/Block';
 import { Router } from '../services/navigation';
+import type { Store } from '../services/store';
 
 declare global {
   interface Window {
     router: typeof Router;
+    store: typeof Store;
   }
 }
 
@@ -37,7 +38,7 @@ abstract class IApp {
 
   initRouter: () => void;
 
-  toggleModal: (block: IBlock) => void;
+  initStore: () => void;
 }
 
 export type {
