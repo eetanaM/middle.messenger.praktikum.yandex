@@ -8,7 +8,7 @@ const METHODS = {
 } as const;
 
 type TRequestMethod = keyof typeof METHODS;
-type TRequestData = Record<string, string> | FormData | URLSearchParams;
+type TRequestData = Record<string, any> | FormData;
 type TRequestHeaders = Record<string, string>;
 
 interface TRequestOptions {

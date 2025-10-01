@@ -1,4 +1,4 @@
-import type { ISignInData, ISignUpData } from "../../types/services/api/AuthApi";
+import type { ISignInReqData, ISignUpReqData } from "../../types/services/api/AuthApi";
 import { BaseApi } from "./BaseApi";
 import HTTPTransport from "./HTTPTransport";
 
@@ -11,11 +11,11 @@ const authOptions = {
 };
 
 class AuthApi extends BaseApi {
-  public signUp(data: ISignUpData) {
+  public signUp(data: ISignUpReqData) {
     return authApiInstance.post('/signup', { ...authOptions, data });
   }
 
-  public signIn(data: ISignInData) {
+  public signIn(data: ISignInReqData) {
     return authApiInstance.post('/signin', { ...authOptions, data });
   }
 

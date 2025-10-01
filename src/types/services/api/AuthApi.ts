@@ -1,4 +1,4 @@
-interface ISignUpData extends FormData {
+interface ISignUpReqData extends FormData {
   first_name: string,
   second_name: string,
   login: string,
@@ -7,12 +7,12 @@ interface ISignUpData extends FormData {
   phone: string,
 }
 
-interface ISignInData extends FormData {
+interface ISignInReqData extends FormData {
   login: string,
   password: string,
 }
 
 export type {
-  ISignUpData,
-  ISignInData,
+  ISignUpReqData,
+  ISignInReqData,
 };
