@@ -1,3 +1,5 @@
+import { BASE_URL } from "../../utils/constants/consts";
+
 const METHODS = {
   GET: "GET",
   POST: "POST",
@@ -40,17 +42,23 @@ function isPlainObject(data: unknown): data is Record<string, string> {
 }
 
 export default class HTTPTransport {
-  private createMethod(method: TRequestMethod): THTTPMethod {
-    return (url, options = {}) => this.request(url, { ...options, method });
+  private _requestUrl: string;
+
+  constructor(url: string) {
+    this._requestUrl = `${BASE_URL}${url}`;
   }
 
-  protected readonly get = this.createMethod(METHODS.GET);
+  private createMethod(method: TRequestMethod): THTTPMethod {
+    return (url, options = {}) => this.request(`${this._requestUrl}${url}`, { ...options, method });
+  }
 
-  protected readonly put = this.createMethod(METHODS.PUT);
+  public readonly get = this.createMethod(METHODS.GET);
 
-  protected readonly post = this.createMethod(METHODS.POST);
+  public readonly put = this.createMethod(METHODS.PUT);
 
-  protected readonly delete = this.createMethod(METHODS.DELETE);
+  public readonly post = this.createMethod(METHODS.POST);
+
+  public readonly delete = this.createMethod(METHODS.DELETE);
 
   private request<R>(
     url: string,

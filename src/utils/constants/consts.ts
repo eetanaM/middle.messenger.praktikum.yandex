@@ -7,4 +7,4 @@ export enum ERoutes {
   NOT_FOUND = '/*',
 }
 export const rootBlockQuery = '#app';
-export const baseUrl = 'ya-praktikum.tech/api/v2';
+export const BASE_URL = 'ya-praktikum.tech/api/v2';
