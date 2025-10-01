@@ -49,11 +49,6 @@ export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
     id: 'no-acc',
     textContent: TemplateRenderer.escapeHtml('Нет аккаунта?'),
   },
-  preview: {
-    href: '#',
-    id: 'preview',
-    textContent: TemplateRenderer.escapeHtml('Вернуться к превью'),
-  },
 };
 
 export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
@@ -129,20 +124,10 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
     id: 'no-acc',
     textContent: TemplateRenderer.escapeHtml('Уже есть аккаунт?'),
   },
-  preview: {
-    href: '#',
-    id: 'preview',
-    textContent: TemplateRenderer.escapeHtml('Вернуться к превью'),
-  },
 };
 
 export const MAIN_CONTENT_TEMPLATE_DATA: MainContentDataTemplate = {
   profileImgSrc: avatar,
-  preview: {
-    href: '#',
-    id: 'preview',
-    textContent: TemplateRenderer.escapeHtml('Вернуться к превью'),
-  },
   searchInput: {
     inputData: {
       type: 'text', name: 'search', placeholder: 'Поиск',

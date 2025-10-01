@@ -30,12 +30,10 @@ type AuthDataTemplate = {
     type: string,
   },
   link: LinkData,
-  preview: LinkData,
 };
 
 type MainContentDataTemplate = {
   profileImgSrc: string,
-  preview: LinkData,
   searchInput: FormData,
   chatItems: Array<{
     avatarSrc: string,
