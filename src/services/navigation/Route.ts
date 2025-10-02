@@ -17,7 +17,7 @@ export default class Route {
     this._props = props;
   }
 
-  private _appedToRoot(rootQuery: string, block: Block) {
+  private _appendToRoot(rootQuery: string, block: Block) {
     const rootEl = document.querySelector(rootQuery);
 
     if (rootEl) {
@@ -48,6 +48,6 @@ export default class Route {
       this._block = new this._blockClass();
     }
 
-    this._appedToRoot(this._props.rootQuery, this._block);
+    this._appendToRoot(this._props.rootQuery, this._block);
   }
 }

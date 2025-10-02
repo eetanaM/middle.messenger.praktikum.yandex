@@ -6,7 +6,8 @@ type Indexed<T = any> = {
 
 interface IState {
   app: null | App,
-  isAuthenticated: boolean
+  isAuthenticated: boolean,
+  isLoading: boolean,
 }
 
 export type {

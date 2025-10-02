@@ -14,7 +14,6 @@ import { PROFILE_TEMPLATE_DATA as MOCK, CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA as
 
 import type { IBlockProps } from '../../types/services/block/Block';
 import { CredentialsForm } from '../../components/blocks';
-import { connect } from '../../services/store';
 import toggleModal from '../../utils/toggleModal';
 
 class ProfilePage extends Block {
@@ -142,6 +141,6 @@ class ProfilePage extends Block {
   }
 }
 
-export default connect(ProfilePage) as typeof ProfilePage;
+export default ProfilePage;
 
 export type TProfilePage = typeof ProfilePage;

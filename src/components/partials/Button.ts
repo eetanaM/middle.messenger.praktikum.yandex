@@ -14,6 +14,9 @@ class Button extends Block {
                     id="{{ id }}" 
                     class="app__main-button"
                     type="{{ type }}"
+                    {{#if isLoading }}
+                    style="background-color: grey;"
+                    {{/if}}
                 >
                     {{ textContent }}
                 </button>`;

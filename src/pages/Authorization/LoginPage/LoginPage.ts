@@ -1,4 +1,6 @@
-import { Block } from '../../../services/block';
+import { Block, TemplateRenderer } from '../../../services/block';
+import AuthController from '../../../controllers/AuthController';
+import { connect } from '../../../services/store';
 
 import { AuthForm } from '../../../components/blocks';
 import { Button, FormInputWithValidation, MainLink } from '../../../components/partials';
@@ -22,19 +24,28 @@ class LoginPage extends Block {
       },
     }));
 
+    const ConnectedButton = connect((state) => ({
+      isLoading: state.isLoading,
+    }))(Button);
+
     super({
       ...props,
       events: {},
       AuthForm: new AuthForm({
         logoUrl: MOCK.logoUrl,
         inputs,
-        SubmitButton: new Button(MOCK.button),
+        SubmitButton: new ConnectedButton({
+          id: 'login-button',
+          textContent: TemplateRenderer.escapeHtml('Войти'),
+          type: "submit",
+          isLoading: AuthController.store.getState()?.isLoading,
+        }),
         NoAccLink: new MainLink({
           ...MOCK.link,
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              window.router.go(ERoutes.REGISTER);
+              AuthController.router.go(ERoutes.REGISTER);
             },
           },
         }),

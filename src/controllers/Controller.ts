@@ -1,0 +1,11 @@
+import { Router } from "../services/navigation";
+import { Store } from "../services/store";
+import type { IController } from "../types/controllers/Controller";
+
+class Controller implements IController {
+  public router: typeof Router = Router;
+
+  public store: typeof Store = Store;
+}
+
+export default Controller;

@@ -7,6 +7,7 @@ import { REGISTER_TEMPLATE_DATA as MOCK } from '../../../services/api/mocks/mock
 import { ERoutes } from '../../../utils/constants/consts';
 
 import type { IBlockProps } from '../../../types/services/block/Block';
+import AuthController from '../../../controllers/AuthController';
 
 class RegisterPage extends Block {
   constructor(props?: IBlockProps) {
@@ -34,7 +35,7 @@ class RegisterPage extends Block {
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              window.router.go(ERoutes.LOGIN);
+              AuthController.router.go(ERoutes.LOGIN);
             },
           },
         }),
