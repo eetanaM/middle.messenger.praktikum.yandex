@@ -1,13 +1,15 @@
-import type App from "../../../App";
-
 type Indexed<T = any> = {
   [key in string]: T;
 };
 
 interface IState {
-  app: null | App,
   isAuthenticated: boolean,
-  isLoading: boolean,
+  auth: {
+    isLoading: boolean,
+    user: {
+      id: string,
+    } | null,
+  }
 }
 
 export type {

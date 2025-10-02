@@ -1,6 +1,6 @@
 import { Block, TemplateRenderer } from '../../../services/block';
 import AuthController from '../../../controllers/AuthController';
-import { connect } from '../../../services/store';
+import connect from '../../../services/store/connect';
 
 import { AuthForm } from '../../../components/blocks';
 import { Button, FormInputWithValidation, MainLink } from '../../../components/partials';
@@ -25,7 +25,7 @@ class LoginPage extends Block {
     }));
 
     const ConnectedButton = connect((state) => ({
-      isLoading: state.isLoading,
+      isLoading: state.auth.isLoading,
     }))(Button);
 
     super({
@@ -38,7 +38,7 @@ class LoginPage extends Block {
           id: 'login-button',
           textContent: TemplateRenderer.escapeHtml('Войти'),
           type: "submit",
-          isLoading: AuthController.store.getState()?.isLoading,
+          isLoading: AuthController.store.getState()?.auth?.isLoading,
         }),
         NoAccLink: new MainLink({
           ...MOCK.link,

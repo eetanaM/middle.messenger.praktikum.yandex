@@ -1,5 +1,5 @@
 import { Router } from "../../services/navigation";
-import { Store } from "../../services/store";
+import Store from "../../services/store/Store";
 
 interface IController {
   store: typeof Store,

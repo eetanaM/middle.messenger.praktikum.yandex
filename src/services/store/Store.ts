@@ -40,7 +40,9 @@ class Store extends EventBus {
 }
 
 export default new Store({
-  app: null,
   isAuthenticated: false,
-  isLoading: false,
+  auth: {
+    isLoading: false,
+    user: null,
+  },
 });
