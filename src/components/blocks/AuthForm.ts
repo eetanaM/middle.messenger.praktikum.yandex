@@ -1,7 +1,7 @@
 import testValidation from '../../utils/helpers/testValidation';
 import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
-import AuthController from '../../controllers/AuthController';
+// import AuthController from '../../controllers/AuthController';
 
 class AuthForm extends Block {
   constructor(props: IBlockProps) {
@@ -36,7 +36,7 @@ class AuthForm extends Block {
             });
 
             console.log(formData);
-            AuthController.registerUser();
+            // AuthController.registerUser();
           }
         }),
       },

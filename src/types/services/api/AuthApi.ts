@@ -12,7 +12,18 @@ interface ISignInReqData extends FormData {
   password: string,
 }
 
+interface ISignUpOkResponse extends Response {
+  id: string,
+}
+
+interface ISignUpBadResponse extends Response {
+  id: string,
+}
+
+type ISignUpResponse = ISignUpOkResponse | ISignUpBadResponse;
+
 export type {
   ISignUpReqData,
   ISignInReqData,
+  ISignUpResponse,
 };

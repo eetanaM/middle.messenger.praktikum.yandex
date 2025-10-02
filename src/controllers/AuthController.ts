@@ -1,13 +1,17 @@
+import AuthApi from "../services/api/AuthApi";
+import type { ISignUpReqData } from "../types/services/api/AuthApi";
 import Controller from "./Controller";
 
 class AuthController extends Controller {
-  public registerUser = async () => {
+  public registerUser = async (data: ISignUpReqData) => {
     this.store.set("auth.isLoading", true);
-    console.log("Starting registration");
-    setTimeout(() => {
-      this.store.set("auth.isLoading", false);
-      console.log("Registration finished");
-    }, 2000);
+    try {
+      const response = await AuthApi.signUp(data);
+      console.log(response);
+      // TODO реализовать логику поведения при регистрации
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 

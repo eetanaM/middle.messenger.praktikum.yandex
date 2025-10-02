@@ -21,7 +21,7 @@ interface IFullHttpOptions extends TRequestOptions {
   method: TRequestMethod;
 }
 
-type THTTPMethod = <R = unknown>(url: string, options?: TRequestOptions) => Promise<R>;
+type THTTPMethod<R = any> = (url: string, options?: TRequestOptions) => Promise<R>;
 
 function queryStringify(data: Record<string, string>): string {
   if (typeof data !== 'object' || data === null) {
@@ -48,19 +48,19 @@ export default class HTTPTransport {
     this._requestUrl = `${BASE_URL}${url}`;
   }
 
-  private createMethod(method: TRequestMethod): THTTPMethod {
-    return (url, options = {}) => this.request(`${this._requestUrl}${url}`, { ...options, method });
+  private createMethod<R = any>(method: TRequestMethod): THTTPMethod<R> {
+    return (url, options = {}) => this.request<R>(`${this._requestUrl}${url}`, { ...options, method });
   }
 
-  public readonly get = this.createMethod(METHODS.GET);
+  public readonly get = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.GET)(url, options);
 
-  public readonly put = this.createMethod(METHODS.PUT);
+  public readonly put = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.PUT)(url, options);
 
-  public readonly post = this.createMethod(METHODS.POST);
+  public readonly post = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.POST)(url, options);
 
-  public readonly delete = this.createMethod(METHODS.DELETE);
+  public readonly delete = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.DELETE)(url, options);
 
-  private request<R>(
+  private request<R = any>(
     url: string,
     options: IFullHttpOptions,
   ): Promise<R> {

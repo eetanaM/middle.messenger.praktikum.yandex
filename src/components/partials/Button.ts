@@ -16,6 +16,7 @@ class Button extends Block {
                     type="{{ type }}"
                     {{#if isLoading }}
                     style="background-color: grey;"
+                    disabled
                     {{/if}}
                 >
                     {{ textContent }}
