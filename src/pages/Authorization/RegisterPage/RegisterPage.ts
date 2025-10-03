@@ -8,6 +8,8 @@ import { ERoutes } from '../../../utils/constants/consts';
 
 import type { IBlockProps } from '../../../types/services/block/Block';
 import AuthController from '../../../controllers/AuthController';
+import testValidation from '../../../utils/helpers/testValidation';
+import type { ISignUpReqData } from '../../../types/services/api/AuthApi';
 
 class RegisterPage extends Block {
   constructor(props?: IBlockProps) {
@@ -39,7 +41,38 @@ class RegisterPage extends Block {
             },
           },
         }),
-        events: {},
+        events: {
+          submit: ((e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
+  
+            let isValidationPassed = true;
+            const form = e.target as HTMLFormElement;
+            const formInputs = form.querySelectorAll('input');
+  
+            formInputs.forEach((node) => {
+              const inputName = node.name;
+              const inputValue = node.value;
+              const invalidInputLabel = document.getElementById(inputName);
+  
+              if (testValidation(inputName, inputValue)) {
+                invalidInputLabel?.setAttribute('class', 'app__invalid-input hidden');
+              } else {
+                invalidInputLabel?.setAttribute('class', 'app__invalid-input');
+                isValidationPassed = false;
+              }
+            });
+  
+            if (isValidationPassed) {
+              const formData: FormData = new FormData();
+              formInputs.forEach((node) => {
+                formData.append(node.name, node.value);
+              });
+  
+              AuthController.registerUser(formData as ISignUpReqData);
+            }
+          }),
+        },
       }),
     });
   }
