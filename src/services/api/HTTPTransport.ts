@@ -8,7 +8,7 @@ const METHODS = {
 } as const;
 
 type TRequestMethod = keyof typeof METHODS;
-type TRequestData = Record<string, any> | FormData;
+type TRequestData = Record<string, unknown> | FormData;
 type TRequestHeaders = Record<string, string>;
 
 interface TRequestOptions {
@@ -48,19 +48,19 @@ export default class HTTPTransport {
     this._requestUrl = `${BASE_URL}${url}`;
   }
 
-  private createMethod<R = any>(method: TRequestMethod): THTTPMethod<R> {
+  private createMethod<R = unknown>(method: TRequestMethod): THTTPMethod<R> {
     return (url, options = {}) => this.request<R>(`${this._requestUrl}${url}`, { ...options, method });
   }
 
-  public readonly get = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.GET)(url, options);
+  public readonly get = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.GET)(url, options);
 
-  public readonly put = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.PUT)(url, options);
+  public readonly put = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.PUT)(url, options);
 
-  public readonly post = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.POST)(url, options);
+  public readonly post = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.POST)(url, options);
 
-  public readonly delete = <R = any>(url: string, options = {}) => this.createMethod<R>(METHODS.DELETE)(url, options);
+  public readonly delete = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.DELETE)(url, options);
 
-  private request<R = any>(
+  private request<R = unknown>(
     url: string,
     options: IFullHttpOptions,
   ): Promise<R> {
@@ -103,7 +103,7 @@ export default class HTTPTransport {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
       } else {
-        xhr.send(data as XMLHttpRequestBodyInit);
+        xhr.send(data as unknown as XMLHttpRequestBodyInit);
       }
     });
   }
