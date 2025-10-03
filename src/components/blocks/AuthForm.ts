@@ -5,7 +5,7 @@ import type { IBlockProps } from '../../types/services/block/Block';
 class AuthForm extends Block {
   constructor(props: IBlockProps) {
     super({
-      ...props, 
+      ...props,
     });
   }
 

@@ -13,8 +13,8 @@ const authOptions = {
 class AuthApi extends BaseApi {
   public signUp(data: ISignUpReqData) {
     return authApiInstance
-                        .post<ISignUpResponse>('/signup', { ...authOptions, data })
-                        .then(this._checkResponse<ISignUpResponse>);
+      .post<ISignUpResponse>('/signup', { ...authOptions, data })
+      .then(this._checkResponse<ISignUpResponse>);
   }
 
   public signIn(data: ISignInReqData) {

@@ -9,7 +9,6 @@ import { ERoutes } from '../../../utils/constants/consts';
 import type { IBlockProps } from '../../../types/services/block/Block';
 import AuthController from '../../../controllers/AuthController';
 import testValidation from '../../../utils/helpers/testValidation';
-import type { ISignUpReqData } from '../../../types/services/api/AuthApi';
 
 class RegisterPage extends Block {
   constructor(props?: IBlockProps) {
@@ -45,16 +44,17 @@ class RegisterPage extends Block {
           submit: ((e: Event) => {
             e.preventDefault();
             e.stopPropagation();
-  
+
             let isValidationPassed = true;
             const form = e.target as HTMLFormElement;
             const formInputs = form.querySelectorAll('input');
-  
+            const signInData: Record<string, string | false> = {};
+
             formInputs.forEach((node) => {
               const inputName = node.name;
               const inputValue = node.value;
               const invalidInputLabel = document.getElementById(inputName);
-  
+
               if (testValidation(inputName, inputValue)) {
                 invalidInputLabel?.setAttribute('class', 'app__invalid-input hidden');
               } else {
@@ -62,14 +62,20 @@ class RegisterPage extends Block {
                 isValidationPassed = false;
               }
             });
-  
+
             if (isValidationPassed) {
-              const formData: FormData = new FormData();
               formInputs.forEach((node) => {
-                formData.append(node.name, node.value);
+                signInData[node.name] = node.value;
               });
-  
-              AuthController.registerUser(formData as ISignUpReqData);
+
+              AuthController.registerUser({
+                first_name: signInData.first_name as string,
+                second_name: signInData.second_name as string,
+                login: signInData.login as string,
+                phone: signInData.phone as string,
+                email: signInData.email as string,
+                password: signInData.password as string,
+              });
             }
           }),
         },

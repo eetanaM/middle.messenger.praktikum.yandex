@@ -55,16 +55,16 @@ class LoginPage extends Block {
           submit: ((e: Event) => {
             e.preventDefault();
             e.stopPropagation();
-  
+
             let isValidationPassed = true;
             const form = e.target as HTMLFormElement;
             const formInputs = form.querySelectorAll('input');
-  
+
             formInputs.forEach((node) => {
               const inputName = node.name;
               const inputValue = node.value;
               const invalidInputLabel = document.getElementById(inputName);
-  
+
               if (testValidation(inputName, inputValue)) {
                 invalidInputLabel?.setAttribute('class', 'app__invalid-input hidden');
               } else {
@@ -72,7 +72,7 @@ class LoginPage extends Block {
                 isValidationPassed = false;
               }
             });
-  
+
             if (isValidationPassed) {
               const formData: ISignUpReqData = new FormData();
               formInputs.forEach((node) => {

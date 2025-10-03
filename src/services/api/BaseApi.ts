@@ -3,8 +3,9 @@ export class BaseApi {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка ${res.status}`)
-  }
+    return Promise.reject(new Error(`Ошибка: ${res.status} - ${res.statusText}`));
+  };
+
   public create() { throw new Error('Not implemented'); }
 
   public request() { throw new Error('Not implemented'); }
