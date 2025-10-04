@@ -1,4 +1,5 @@
 import type { Block } from "../../../services/block";
+import type { TChatDetails } from "../store/Store";
 
 type TEventHandler = (event: Event) => void;
 type TEventHandlersList = {
@@ -8,7 +9,16 @@ type TAttributes = {
   [key: string]: string
 };
 
-type TBlockPropValue = Block | Block[] | TAttributes | string | number | boolean | TEventHandler | TEventHandlersList;
+type TBlockPropValue =
+| Block
+| Block[]
+| TAttributes
+| string
+| number
+| boolean
+| TEventHandler
+| TEventHandlersList
+| Array<TChatDetails>;
 interface IBlock {
   dispatchComponentDidMount(): void,
   setProps(newProps?: unknown): void,

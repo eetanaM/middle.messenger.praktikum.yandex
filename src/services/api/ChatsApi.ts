@@ -17,7 +17,7 @@ const chatsOptions = {
 };
 
 class ChatsApi extends BaseApi {
-  public getAllChats(data: IGetChatsReqData) {
+  public getAllChats(data?: IGetChatsReqData) {
     return chatsApiInstance.get('/', { ...chatsOptions, data });
   }
 

@@ -8,14 +8,14 @@ import defaultAvatarImg from '../../../images/profile/avatar.png';
 import type { IBlockProps } from '../../types/services/block/Block';
 
 class MenuHeader extends Block {
-  constructor(props: IBlockProps) {
+  constructor(props?: IBlockProps) {
     const AvatarComponent = connect((state) => ({
       profileImgSrc: state.auth?.user?.avatar || defaultAvatarImg,
     }))(MenuHeaderAvatar);
 
     super({
       ...props,
-      Avatar: new AvatarComponent({}),
+      Avatar: new AvatarComponent(),
     });
   }
 

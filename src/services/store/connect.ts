@@ -8,7 +8,7 @@ function connect(storeSelector: (state: Indexed) => Indexed) {
   // eslint-disable-next-line func-names
   return function (Component: typeof Block) {
     return class extends Component {
-      constructor(props: IBlockProps) {
+      constructor(props?: IBlockProps) {
         let state = storeSelector(Store.getState());
 
         super({ ...props, ...state });
