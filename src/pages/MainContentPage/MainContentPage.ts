@@ -1,14 +1,25 @@
 import { Block } from '../../services/block';
 
 import { FormInput } from '../../components/partials';
-import { ChatDetails, ChatItem, SendMessageForm } from '../../components/blocks';
+import {
+  ChatDetails,
+  ChatItem,
+  MenuHeader,
+  SendMessageForm,
+} from '../../components/blocks';
 
 import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
 import type { IBlockProps } from '../../types/services/block/Block';
+import connect from '../../services/store/connect';
 
 class MainContentPage extends Block {
   constructor(props?: IBlockProps) {
     let currentChatItemId: number | null = null;
+
+    const MenuHeaderComponent = connect((state) => ({
+      profileName: state.auth?.user?.display_name || state.auth?.user?.first_name,
+    }))(MenuHeader);
+
     const SendMessageFormComponent = new SendMessageForm({
       icons: CHAT_MOCK.icons,
       FormInput: new FormInput({
@@ -56,7 +67,7 @@ class MainContentPage extends Block {
     super({
       ...props,
       events: {},
-      profileImgSrc: MOCK.profileImgSrc,
+      Header: new MenuHeaderComponent({}),
       SearchInput: new FormInput({
         ...MOCK.searchInput.inputData,
       }),
@@ -68,12 +79,7 @@ class MainContentPage extends Block {
   override render() {
     return `<main class="main-content">
                     <nav class="menu">
-                        <div class="menu__menu-header">
-                            <div class="menu-header__avatar">
-                                <img src={{ profileImgSrc }} alt="Profile photo">
-                            </div>
-                            <span class="menu-header__profile-name">Profile Name</span>
-                        </div>
+                        {{{ Header }}}
                         <form class="menu__menu-search">
                             {{{ SearchInput }}}
                         </form>

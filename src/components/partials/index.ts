@@ -7,3 +7,4 @@ export { default as InvalidInput } from './InvalidInput';
 export { default as FormInputWithValidation } from './FormInputWithValidation';
 export { default as ProfileMenuButton } from './ProfileMenuButton';
 export { default as PreviewLink } from './PreviewLink';
+export { default as MenuHeaderAvatar } from './MenuHeaderAvatar';

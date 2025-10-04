@@ -1,6 +1,5 @@
 import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
-// import AuthController from '../../controllers/AuthController';
 
 class AuthForm extends Block {
   constructor(props: IBlockProps) {

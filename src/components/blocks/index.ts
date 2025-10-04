@@ -4,3 +4,4 @@ export { default as ChatItem } from './ChatItem';
 export { default as CredentialsForm } from './CredentialsForm';
 export { default as ProfileCredentials } from './ProfileCredentials';
 export { default as SendMessageForm } from './SendMessageForm';
+export { default as MenuHeader } from './MenuHeader';
