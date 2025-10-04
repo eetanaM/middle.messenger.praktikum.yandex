@@ -25,7 +25,7 @@ class RegisterPage extends Block {
       },
     }));
 
-    const ConnectedButton = connect((state) => ({
+    const SignUpButton = connect((state) => ({
       isLoading: state.auth.isLoading,
     }))(Button);
 
@@ -35,7 +35,7 @@ class RegisterPage extends Block {
       AuthForm: new AuthForm({
         logoUrl: MOCK.logoUrl,
         inputs,
-        SubmitButton: new ConnectedButton({
+        SubmitButton: new SignUpButton({
           id: 'register-button',
           textContent: 'Зарегистрироваться',
           type: "submit",

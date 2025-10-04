@@ -25,7 +25,7 @@ class LoginPage extends Block {
       },
     }));
 
-    const ConnectedButton = connect((state) => ({
+    const SignInButton = connect((state) => ({
       isLoading: state.auth.isLoading,
     }))(Button);
 
@@ -35,7 +35,7 @@ class LoginPage extends Block {
       AuthForm: new AuthForm({
         logoUrl: MOCK.logoUrl,
         inputs,
-        SubmitButton: new ConnectedButton({
+        SubmitButton: new SignInButton({
           id: 'login-button',
           textContent: TemplateRenderer.escapeHtml('Войти'),
           type: "submit",
