@@ -10,7 +10,6 @@ import { LOGIN_TEMPLATE_DATA as MOCK } from '../../../services/api/mocks/mockDat
 import { ERoutes } from '../../../utils/constants/consts';
 
 import type { IBlockProps } from '../../../types/services/block/Block';
-import type { ISignUpReqData } from '../../../types/services/api/AuthApi';
 
 class LoginPage extends Block {
   constructor(props?: IBlockProps) {
@@ -59,6 +58,7 @@ class LoginPage extends Block {
             let isValidationPassed = true;
             const form = e.target as HTMLFormElement;
             const formInputs = form.querySelectorAll('input');
+            const signUpData: Record<string, string | false> = {};
 
             formInputs.forEach((node) => {
               const inputName = node.name;
@@ -74,9 +74,13 @@ class LoginPage extends Block {
             });
 
             if (isValidationPassed) {
-              const formData: ISignUpReqData = new FormData();
               formInputs.forEach((node) => {
-                formData.append(node.name, node.value);
+                signUpData[node.name] = node.value;
+              });
+
+              AuthController.loginUser({
+                login: signUpData.login as string,
+                password: signUpData.password as string,
               });
             }
           }),

@@ -1,4 +1,5 @@
 import { Block } from '../../../services/block';
+import connect from '../../../services/store/connect';
 
 import { AuthForm } from '../../../components/blocks';
 import { Button, FormInputWithValidation, MainLink } from '../../../components/partials';
@@ -24,13 +25,22 @@ class RegisterPage extends Block {
       },
     }));
 
+    const ConnectedButton = connect((state) => ({
+      isLoading: state.auth.isLoading,
+    }))(Button);
+
     super({
       ...props,
       events: {},
       AuthForm: new AuthForm({
         logoUrl: MOCK.logoUrl,
         inputs,
-        SubmitButton: new Button(MOCK.button),
+        SubmitButton: new ConnectedButton({
+          id: 'register-button',
+          textContent: 'Зарегистрироваться',
+          type: "submit",
+          isLoading: AuthController.store.getState()?.auth?.isLoading,
+        }),
         AlreadyHasAccLink: new MainLink({
           ...MOCK.link,
           events: {
@@ -85,8 +95,8 @@ class RegisterPage extends Block {
 
   override render() {
     return `<main class="authorization">
-                    {{{ AuthForm }}}
-                </main>`;
+                {{{ AuthForm }}}
+            </main>`;
   }
 }
 

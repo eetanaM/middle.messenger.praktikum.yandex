@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { BASE_URL } from "../../utils/constants/consts";
 
 const METHODS = {
@@ -48,19 +49,19 @@ export default class HTTPTransport {
     this._requestUrl = `${BASE_URL}${url}`;
   }
 
-  private createMethod<R = unknown>(method: TRequestMethod): THTTPMethod<R> {
+  private createMethod<R = XMLHttpRequest>(method: TRequestMethod): THTTPMethod<R> {
     return (url, options = {}) => this.request<R>(`${this._requestUrl}${url}`, { ...options, method });
   }
 
-  public readonly get = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.GET)(url, options);
+  public readonly get = <R = XMLHttpRequest>(url: string, options = {}) => this.createMethod<R>(METHODS.GET)(url, options);
 
-  public readonly put = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.PUT)(url, options);
+  public readonly put = <R = XMLHttpRequest>(url: string, options = {}) => this.createMethod<R>(METHODS.PUT)(url, options);
 
-  public readonly post = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.POST)(url, options);
+  public readonly post = <R = XMLHttpRequest>(url: string, options = {}) => this.createMethod<R>(METHODS.POST)(url, options);
 
-  public readonly delete = <R = unknown>(url: string, options = {}) => this.createMethod<R>(METHODS.DELETE)(url, options);
+  public readonly delete = <R = XMLHttpRequest>(url: string, options = {}) => this.createMethod<R>(METHODS.DELETE)(url, options);
 
-  private request<R = unknown>(
+  private request<R = XMLHttpRequest>(
     url: string,
     options: IFullHttpOptions,
   ): Promise<R> {
@@ -71,6 +72,7 @@ export default class HTTPTransport {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
+      xhr.withCredentials = true;
 
       let requestUrl = url;
       if (isGet && data && isPlainObject(data)) {
@@ -84,6 +86,7 @@ export default class HTTPTransport {
       });
 
       xhr.onload = () => {
+        // TODO: Переделать resolve и типизировать ответы, возвращать типизированный ответ
         resolve(xhr as R);
       };
 

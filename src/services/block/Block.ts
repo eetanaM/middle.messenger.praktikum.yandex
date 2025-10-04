@@ -147,8 +147,8 @@ abstract class Block implements IBlock {
     this._render();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps): boolean {
-    console.log(oldProps, newProps);
     return true;
   }
 

@@ -21,16 +21,11 @@ class Store extends EventBus {
 
     if (initialState) {
       this.state = initialState;
-      console.log(this.state);
     }
   }
 
   public getState() {
     return this.state;
-  }
-
-  public getApp() {
-    return this.state.app;
   }
 
   public set(path: string, value: unknown) {

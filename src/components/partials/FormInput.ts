@@ -15,10 +15,8 @@ class FormInput extends Block {
             const invalidInputLabel = document.getElementById(inputName);
 
             if (inputValue === '' || testValidation(inputName, inputValue)) {
-              console.log('Validation passed on input: ', inputName);
               invalidInputLabel?.setAttribute('class', 'app__invalid-input hidden');
             } else {
-              console.log('Validation failed on input: ', inputName);
               invalidInputLabel?.setAttribute('class', 'app__invalid-input');
             }
           }
