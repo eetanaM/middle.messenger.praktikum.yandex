@@ -48,7 +48,7 @@ export default new Store({
     isLoading: false,
     allChats: [
       {
-        id: 1,
+        id: 1231,
         title: "Chat 1",
         avatar: avatarImg,
         unread_count: 1,
@@ -67,7 +67,7 @@ export default new Store({
         },
       },
       {
-        id: 2,
+        id: 123123,
         title: "Chat 2",
         avatar: avatarImg,
         unread_count: 0,
@@ -86,7 +86,7 @@ export default new Store({
         },
       },
       {
-        id: 3,
+        id: 1241241,
         title: "Chat 3",
         avatar: avatarImg,
         unread_count: 5,
