@@ -38,6 +38,13 @@ class AuthController extends Controller {
         await this.getUser();
         this.store.set("isAuthenticated", true);
         this.router.go(ERoutes.MESSENGER);
+      } else if (response.status === 400) {
+        const { reason } = JSON.parse(response.responseText);
+        if (reason === "User already in system") {
+          await this.getUser();
+          this.store.set("isAuthenticated", true);
+          this.router.go(ERoutes.MESSENGER);
+        }
       } else if (response.status === 401) {
         const { reason } = JSON.parse(response.responseText);
         // TODO: Алерт поменять на более адекватное уведомление
