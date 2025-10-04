@@ -1,5 +1,4 @@
 import logo from '../../../../images/logo/logo.png';
-import avatar from '../../../../images/profile/avatar.png';
 import profileDefault from '../../../../images/profile/profileDefault.png';
 import navButtonSrc from '../../../../images/nav-button.png';
 import notFoundLogoSrc from '../../../../images/logo/logo404.png';
@@ -12,7 +11,7 @@ import { TemplateRenderer } from '../../block';
 
 import type {
   // eslint-disable-next-line max-len
-  AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, MainContentDataTemplate, ProfileDataTemplate,
+  AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, ProfileDataTemplate,
 } from '../../../types/services/api/mockData';
 
 export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
@@ -124,71 +123,6 @@ export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
     id: 'no-acc',
     textContent: TemplateRenderer.escapeHtml('Уже есть аккаунт?'),
   },
-};
-
-export const MAIN_CONTENT_TEMPLATE_DATA: MainContentDataTemplate = {
-  profileImgSrc: avatar,
-  searchInput: {
-    inputData: {
-      type: 'text', name: 'search', placeholder: 'Поиск',
-    },
-  },
-  chatItems: [
-    {
-      avatarSrc: avatar,
-      chatName: TemplateRenderer.escapeHtml('Chat Name'),
-      lastMessage: TemplateRenderer.escapeHtml('Any text typed in last message column of the chat item'),
-      timeStamp: TemplateRenderer.escapeHtml('15:35'),
-      disabled: '',
-      unreadMessagesCount: TemplateRenderer.escapeHtml(1),
-      chatItemId: '1',
-    },
-    {
-      avatarSrc: avatar,
-      chatName: TemplateRenderer.escapeHtml('Chat Name'),
-      lastMessage: TemplateRenderer.escapeHtml('Last message'),
-      timeStamp: TemplateRenderer.escapeHtml('14:12'),
-      disabled: 'disabled',
-      unreadMessagesCount: TemplateRenderer.escapeHtml(0),
-      chatItemId: '2',
-    },
-    {
-      avatarSrc: avatar,
-      chatName: TemplateRenderer.escapeHtml('Chat Name'),
-      lastMessage: TemplateRenderer.escapeHtml('Last message'),
-      timeStamp: TemplateRenderer.escapeHtml('Вчера'),
-      disabled: 'disabled',
-      unreadMessagesCount: TemplateRenderer.escapeHtml(0),
-      chatItemId: '3',
-    },
-    {
-      avatarSrc: avatar,
-      chatName: TemplateRenderer.escapeHtml('Chat Name'),
-      lastMessage: TemplateRenderer.escapeHtml('Last message'),
-      timeStamp: TemplateRenderer.escapeHtml('Пн'),
-      disabled: '',
-      unreadMessagesCount: TemplateRenderer.escapeHtml(4),
-      chatItemId: '4',
-    },
-    {
-      avatarSrc: avatar,
-      chatName: TemplateRenderer.escapeHtml('Chat Name'),
-      lastMessage: TemplateRenderer.escapeHtml('Last message'),
-      timeStamp: TemplateRenderer.escapeHtml('Вс'),
-      disabled: 'disabled',
-      unreadMessagesCount: TemplateRenderer.escapeHtml(0),
-      chatItemId: '5',
-    },
-    {
-      avatarSrc: avatar,
-      chatName: TemplateRenderer.escapeHtml('Chat Name'),
-      lastMessage: TemplateRenderer.escapeHtml('Last message'),
-      timeStamp: TemplateRenderer.escapeHtml('01 авг.'),
-      disabled: 'disabled',
-      unreadMessagesCount: TemplateRenderer.escapeHtml(0),
-      chatItemId: '6',
-    },
-  ],
 };
 
 export const CHAT_DETAILS_TEMPLATE_DATA: ChatDetailsDataTemplate = {
