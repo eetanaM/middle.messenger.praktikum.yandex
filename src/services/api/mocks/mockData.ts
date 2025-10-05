@@ -1,6 +1,5 @@
 import logo from '../../../../images/logo/logo.png';
 import profileDefault from '../../../../images/profile/profileDefault.png';
-import navButtonSrc from '../../../../images/nav-button.png';
 import notFoundLogoSrc from '../../../../images/logo/logo404.png';
 import menuButton from '../../../../images/chat/menu1.png';
 import mockImg from '../../../../images/chat/mockimage.png';
@@ -11,7 +10,7 @@ import { TemplateRenderer } from '../../block';
 
 import type {
   // eslint-disable-next-line max-len
-  AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate, ProfileDataTemplate,
+  AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate,
 } from '../../../types/services/api/mockData';
 
 export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
@@ -137,17 +136,6 @@ export const CHAT_DETAILS_TEMPLATE_DATA: ChatDetailsDataTemplate = {
     sendButton,
     paperClip,
   },
-};
-
-export const PROFILE_TEMPLATE_DATA: ProfileDataTemplate = {
-  profileImg: profileDefault,
-  navButtonSrc,
-  profileName: TemplateRenderer.escapeHtml('Иван'),
-  userLastName: TemplateRenderer.escapeHtml('Иванов'),
-  displayName: TemplateRenderer.escapeHtml('Ivan1234'),
-  email: TemplateRenderer.escapeHtml('pochta@yandex.ru'),
-  login: TemplateRenderer.escapeHtml('ivanivanov'),
-  phoneNumber: TemplateRenderer.escapeHtml('+7 (909) 967 30 30'),
 };
 
 export const NOT_FOUND_TEMPLATE_DATA: ErrorPageDataTemplate = {

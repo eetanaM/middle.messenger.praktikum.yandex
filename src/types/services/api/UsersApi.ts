@@ -1,4 +1,4 @@
-interface IChangeCredentialsReqData extends FormData {
+interface IChangeCredentialsReqData {
   first_name: string,
   second_name: string,
   display_name: string,
@@ -7,16 +7,16 @@ interface IChangeCredentialsReqData extends FormData {
   phone: string,
 }
 
-interface IChangeAvatarReqData extends FormData {
+interface IChangeAvatarReqData {
   avatar: File,
 }
 
-interface IChangePasswordReqData extends FormData {
+interface IChangePasswordReqData {
   oldPassword: string,
   newPassword: string,
 }
 
-interface ISearchUserReqData extends FormData {
+interface ISearchUserReqData {
   login: string,
 }
 

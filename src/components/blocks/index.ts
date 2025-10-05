@@ -6,3 +6,4 @@ export { default as ProfileCredentials } from './ProfileCredentials';
 export { default as SendMessageForm } from './SendMessageForm';
 export { default as MenuHeader } from './MenuHeader';
 export { default as MenuChats } from './MenuChats';
+export { default as ProfileHeader } from './ProfileHeader';

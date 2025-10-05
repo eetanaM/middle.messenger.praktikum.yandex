@@ -1,53 +1,69 @@
 import { Block } from '../../services/block';
+import UsersController from '../../controllers/UsersController';
+import AuthController from '../../controllers/AuthController';
+import connect from '../../services/store/connect';
+import toggleModal from '../../utils/toggleModal';
 
-import ProfileCredentials from '../../components/blocks/ProfileCredentials';
+import { CredentialsForm, ProfileCredentials, ProfileHeader } from '../../components/blocks';
 import {
   Button,
   FileInput,
   FormInputWithValidation,
   ProfileMenuButton, RoundButton,
 } from '../../components/partials';
-// import { CredentialsForm } from '../../components/blocks';
 
 // eslint-disable-next-line max-len
-import { PROFILE_TEMPLATE_DATA as MOCK, CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA as CRED_MOCK } from '../../services/api/mocks/mockData';
+import { CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA as CRED_MOCK } from '../../services/api/mocks/mockData';
+import defaultProfileImg from '../../../images/profile/profileDefault.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
-import { CredentialsForm } from '../../components/blocks';
-import toggleModal from '../../utils/toggleModal';
+
+const FileInputs = CRED_MOCK.fileInputs.map((input) => new FileInput({
+  name: input.name,
+  id: input.id,
+  src: input.src,
+}));
+
+const CredentialsTextInputs = CRED_MOCK.inputs.map((input) => new FormInputWithValidation({
+  input: {
+    type: input.inputData.type,
+    name: input.inputData.name,
+    placeholder: input.inputData.placeholder,
+  },
+  invalid: {
+    name: input.invalidInputData.name,
+    textContent: input.invalidInputData.textContent,
+  },
+}));
+
+const ChangePasswordTextInputs = CRED_MOCK.passwordInputs.map((input) => new FormInputWithValidation({
+  input: {
+    type: input.inputData.type,
+    name: input.inputData.name,
+    placeholder: input.inputData.placeholder,
+  },
+  invalid: {
+    name: input.invalidInputData.name,
+    textContent: input.invalidInputData.textContent,
+  },
+}));
+
+const ConnectedProfileCredentials = connect((state) => ({
+  email: state.auth?.user?.email,
+  login: state.auth?.user?.login,
+  userFirstName: state.auth?.user?.first_name,
+  userLastName: state.auth?.user?.second_name,
+  displayName: state.auth?.user?.display_name,
+  phoneNumber: state.auth?.user?.phone,
+}))(ProfileCredentials);
+
+const ConnectedProfileHeader = connect((state) => ({
+  profileImg: state.auth?.user?.avatar || defaultProfileImg,
+  profileName: state.auth?.user?.first_name,
+}))(ProfileHeader);
 
 class ProfilePage extends Block {
   constructor(props?: IBlockProps) {
-    const FileInputs = CRED_MOCK.fileInputs.map((input) => new FileInput({
-      name: input.name,
-      id: input.id,
-      src: input.src,
-    }));
-
-    const CredentialsTextInputs = CRED_MOCK.inputs.map((input) => new FormInputWithValidation({
-      input: {
-        type: input.inputData.type,
-        name: input.inputData.name,
-        placeholder: input.inputData.placeholder,
-      },
-      invalid: {
-        name: input.invalidInputData.name,
-        textContent: input.invalidInputData.textContent,
-      },
-    }));
-
-    const ChangePasswordTextInputs = CRED_MOCK.passwordInputs.map((input) => new FormInputWithValidation({
-      input: {
-        type: input.inputData.type,
-        name: input.inputData.name,
-        placeholder: input.inputData.placeholder,
-      },
-      invalid: {
-        name: input.invalidInputData.name,
-        textContent: input.invalidInputData.textContent,
-      },
-    }));
-
     const ChangeCredentialsForm = new CredentialsForm({
       fileInputs: FileInputs,
       inputs: CredentialsTextInputs,
@@ -80,17 +96,13 @@ class ProfilePage extends Block {
     super({
       ...props,
       events: {},
-      profileImg: MOCK.profileImg,
-      profileName: MOCK.profileName,
-      ProfileCredentials: new ProfileCredentials({
-        ...MOCK,
-        userFirstName: MOCK.profileName,
-      }),
+      ProfileHeader: new ConnectedProfileHeader(),
+      ProfileCredentials: new ConnectedProfileCredentials(),
       BackButton: new RoundButton({
         events: {
           click: ((e: Event) => {
             e.preventDefault();
-            window.router.back();
+            UsersController.router.back();
           }),
         },
       }),
@@ -101,7 +113,6 @@ class ProfilePage extends Block {
           click: ((e: Event) => {
             e.stopPropagation();
             toggleModal(ChangeCredentialsForm);
-            // this._appElement.toggleModal(ChangeCredentialsForm); пофиксить переход
           }),
         },
       }),
@@ -112,7 +123,6 @@ class ProfilePage extends Block {
           click: ((e: Event) => {
             e.stopPropagation();
             toggleModal(ChangePasswordForm);
-            // this._appElement.toggleModal(ChangePasswordForm); пофиксить переход
           }),
         },
       }),
@@ -120,16 +130,21 @@ class ProfilePage extends Block {
         id: 'logout',
         textContent: 'Выйти',
         class: 'red',
+        events: {
+          click: ((e: Event) => {
+            e.stopPropagation();
+            e.preventDefault();
+            AuthController.logout();
+          }),
+        },
       }),
     });
+    AuthController.getUser();
   }
 
   override render() {
     return `<main class="profile">
-                    <div class="profile__header">
-                        <img class="header__avatar" src={{ profileImg }} alt="Profile image">
-                        <h1 class="header__profile-name">{{ profileName }}</h1>
-                    </div>
+                    {{{ ProfileHeader }}}
                     {{{ ProfileCredentials }}}
                     <nav class="profile__menu">
                         {{{ ChangeDataButton }}}

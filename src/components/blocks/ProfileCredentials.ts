@@ -5,7 +5,6 @@ class ProfileCredentials extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
-      events: {},
     });
   }
 
