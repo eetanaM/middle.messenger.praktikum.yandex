@@ -27,7 +27,6 @@ type TChatDetails = {
 };
 
 interface IState {
-  isAuthenticated: boolean,
   auth: {
     isLoading: boolean,
     user: TUserDetails | null,
@@ -35,6 +34,11 @@ interface IState {
   chats: {
     isLoading: boolean,
     allChats: Array<TChatDetails>,
+  },
+  currentChat: {
+    id: number | null,
+    chatDetails: null,
+    chatUsers: Array<Omit<TUserDetails, "phone" | "email"> & { role: string }>,
   },
 }
 

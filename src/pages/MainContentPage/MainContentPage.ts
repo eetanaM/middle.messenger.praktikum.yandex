@@ -1,5 +1,7 @@
 import { Block } from '../../services/block';
 import connect from '../../services/store/connect';
+import ChatsController from '../../controllers/ChatsController';
+import AuthController from '../../controllers/AuthController';
 
 import { FormInput } from '../../components/partials';
 import {
@@ -11,7 +13,6 @@ import {
 
 import { CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
 import type { IBlockProps } from '../../types/services/block/Block';
-import ChatsController from '../../controllers/ChatsController';
 
 const MenuHeaderComponent = connect((state) => ({
   profileName: state.auth.user?.display_name || state.auth.user?.first_name,
@@ -48,6 +49,7 @@ class MainContentPage extends Block {
     });
 
     ChatsController.getAllChats();
+    AuthController.getUser();
   }
 
   override render() {

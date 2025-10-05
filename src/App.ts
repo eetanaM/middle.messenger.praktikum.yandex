@@ -23,6 +23,5 @@ export default class App {
       .use(ERoutes.BAD_SERVER, Pages.BadServerPage)
       .use(ERoutes.NOT_FOUND, Pages.NotFoundPage)
       .start();
-    AuthController.getUser();
   }
 }
