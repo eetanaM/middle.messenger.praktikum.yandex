@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import EventBus from './EventBus';
 import TemplateRenderer from './TemplateRenderer';
 import merge from '../../utils/helpers/merge';
+import { isEqual } from '../../utils/helpers';
 
 import {
   type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList, type TBlockPropValue,
@@ -36,7 +37,7 @@ abstract class Block implements IBlock {
 
     this.props = this._makePropsProxy({ ...props }) as IBlockProps;
     this.children = children;
-    this.lists = this._makePropsProxy({ ...lists }) as Record<string, Block[]>;
+    this.lists = lists;
 
     this._id = uid;
     this.eventBus = () => eventBus;
@@ -77,6 +78,14 @@ abstract class Block implements IBlock {
     });
 
     return { props, children, lists };
+  }
+
+  public setList(listName: string, items: Block[]) {
+    const oldList = this.lists[listName] || [];
+    if (!isEqual(oldList, items)) {
+      this.lists[listName] = items;
+      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    }
   }
 
   private _addEvents(): void {
@@ -128,9 +137,7 @@ abstract class Block implements IBlock {
     this.componentDidMount();
   }
 
-  protected componentDidMount(): void {
-    console.log();
-  }
+  protected componentDidMount(): void {}
 
   public dispatchComponentDidMount(): void {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -149,7 +156,7 @@ abstract class Block implements IBlock {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps): boolean {
-    return true;
+    return !isEqual(oldProps, newProps);
   }
 
   private _createDocumentElement(type: string): HTMLTemplateElement {
@@ -180,7 +187,6 @@ abstract class Block implements IBlock {
     if (!nextProps) {
       return;
     }
-
     merge(this.props, nextProps);
   };
 
@@ -222,11 +228,10 @@ abstract class Block implements IBlock {
     this._element = newElement;
     this._addEvents();
     this.addAttributes();
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  protected render(): string | void {
-
-  }
+  protected render(): string | void {}
 
   public getContent(): HTMLElement {
     return this.element;
