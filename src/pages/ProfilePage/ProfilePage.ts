@@ -18,12 +18,6 @@ import defaultProfileImg from '../../../images/profile/profileDefault.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
-const FileInputs = CRED_MOCK.fileInputs.map((input) => new FileInput({
-  name: input.name,
-  id: input.id,
-  src: input.src,
-}));
-
 const CredentialsTextInputs = CRED_MOCK.inputs.map((input) => new FormInputWithValidation({
   input: {
     type: input.inputData.type,
@@ -59,13 +53,19 @@ const ConnectedProfileCredentials = connect((state) => ({
 
 const ConnectedProfileHeader = connect((state) => ({
   profileImg: state.auth?.user?.avatar || defaultProfileImg,
-  profileName: state.auth?.user?.first_name,
+  profileName: state.auth?.user?.display_name || state.auth?.user?.first_name,
 }))(ProfileHeader);
+
+const ConnectedProfileAvatarInput = connect((state) => ({
+  name: 'avatar',
+  id: 'avatar',
+  src: state.auth?.user?.avatar || defaultProfileImg,
+}))(FileInput);
 
 class ProfilePage extends Block {
   constructor(props?: IBlockProps) {
     const ChangeCredentialsForm = new CredentialsForm({
-      fileInputs: FileInputs,
+      ProfileAvatarInput: new ConnectedProfileAvatarInput(),
       inputs: CredentialsTextInputs,
       SubmitButton: new Button({
         id: 'confirm',

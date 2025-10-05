@@ -70,11 +70,6 @@ type ErrorPageDataTemplate = {
 };
 
 type ChangeCredentialsFormDataTemplate = {
-  fileInputs: {
-    name: string,
-    id: string,
-    src: string
-  }[],
   inputs: Array<FormDataWithInvalidInputLabel>,
   passwordInputs: Array<FormDataWithInvalidInputLabel>,
 };

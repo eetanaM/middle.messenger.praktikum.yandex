@@ -15,6 +15,7 @@ class FileInput extends Block {
                         name="{{ name }}" 
                         id="{{ id }}"
                         class="app__file-input"
+                        accept="image/*"
                     />
                     <label for="{{ id }}" class="app__file-input-button">
                         <img class="app__file-input-image" src="{{ src }}" alt="Profile image" />

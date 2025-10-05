@@ -1,5 +1,4 @@
 import logo from '../../../../images/logo/logo.png';
-import profileDefault from '../../../../images/profile/profileDefault.png';
 import notFoundLogoSrc from '../../../../images/logo/logo404.png';
 import menuButton from '../../../../images/chat/menu1.png';
 import mockImg from '../../../../images/chat/mockimage.png';
@@ -157,9 +156,6 @@ export const BAD_SERVER_TEMPLATE_DATA: ErrorPageDataTemplate = {
 };
 
 export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTemplate = {
-  fileInputs: [
-    { name: 'avatar', id: 'avatar', src: profileDefault },
-  ],
   inputs: [
     {
       inputData: {

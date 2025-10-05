@@ -1,6 +1,7 @@
 import testValidation from '../../utils/helpers/testValidation';
 import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
+import toggleModal from '../../utils/toggleModal';
 
 class CredentialsForm extends Block {
   constructor(props: IBlockProps) {
@@ -35,12 +36,12 @@ class CredentialsForm extends Block {
             });
 
             console.log(formData);
-            // this._appElement.toggleModal(this); TODO пофиксить модалку
+            toggleModal(this);
           }
         }),
         reset: ((e: Event) => {
           e.preventDefault();
-          // this._appElement.toggleModal(this); TODO пофиксить модалку
+          toggleModal(this);
         }),
       },
     });
@@ -48,7 +49,7 @@ class CredentialsForm extends Block {
 
   override render() {
     return `<form class="credentials__form">
-                    {{{ blockList "fileInputs" }}}
+                    {{{ ProfileAvatarInput }}}
                     {{{ blockList "inputs" }}}
                     {{{ SubmitButton }}}
                     {{{ ResetButton }}}
