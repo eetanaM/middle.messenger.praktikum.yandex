@@ -69,17 +69,12 @@ type ErrorPageDataTemplate = {
   back: LinkData
 };
 
-type ChangeCredentialsFormDataTemplate = {
-  inputs: Array<FormDataWithInvalidInputLabel>,
-  passwordInputs: Array<FormDataWithInvalidInputLabel>,
-};
-
 export type {
   PreviewDataTemplate,
+  FormDataWithInvalidInputLabel,
   AuthDataTemplate,
   MainContentDataTemplate,
   ChatDetailsDataTemplate,
   ProfileDataTemplate,
   ErrorPageDataTemplate,
-  ChangeCredentialsFormDataTemplate,
 };

@@ -8,8 +8,7 @@ import sendButton from '../../../../images/chat/send.png';
 import { TemplateRenderer } from '../../block';
 
 import type {
-  // eslint-disable-next-line max-len
-  AuthDataTemplate, ChangeCredentialsFormDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate,
+  AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate,
 } from '../../../types/services/api/mockData';
 
 export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
@@ -153,89 +152,4 @@ export const BAD_SERVER_TEMPLATE_DATA: ErrorPageDataTemplate = {
     id: 'back',
     textContent: TemplateRenderer.escapeHtml('Вернуться назад'),
   },
-};
-
-export const CHANGE_CREDENTIALS_FORM_TEMPLATE_DATA: ChangeCredentialsFormDataTemplate = {
-  inputs: [
-    {
-      inputData: {
-        type: 'email', name: 'email', placeholder: 'Email',
-      },
-      invalidInputData: {
-        name: 'email',
-        textContent: 'Неверный формат ввода. Допустимый формат ввода: example@mail.com',
-      },
-    },
-    {
-      inputData: {
-        type: 'login', name: 'login', placeholder: 'Логин',
-      },
-      invalidInputData: {
-        name: 'login',
-        // eslint-disable-next-line max-len
-        textContent: 'Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой',
-      },
-    },
-    {
-      inputData: {
-        type: 'text', name: 'first_name', placeholder: 'Имя',
-      },
-      invalidInputData: {
-        name: 'first_name',
-        // eslint-disable-next-line max-len
-        textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
-      },
-    },
-    {
-      inputData: {
-        type: 'text', name: 'second_name', placeholder: 'Фамилия',
-      },
-      invalidInputData: {
-        name: 'second_name',
-        // eslint-disable-next-line max-len
-        textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
-      },
-    },
-    {
-      inputData: {
-        type: 'text', name: 'display_name', placeholder: 'Имя в чате',
-      },
-      invalidInputData: {
-        name: 'display_name',
-        textContent: '',
-      },
-    },
-    {
-      inputData: {
-        type: 'tel', name: 'phone', placeholder: 'Телефон',
-      },
-      invalidInputData: {
-        name: 'phone',
-        textContent: '',
-      },
-    },
-  ],
-  passwordInputs: [
-    {
-      inputData: {
-        type: 'password', name: 'oldPassword', placeholder: 'Старый пароль',
-      },
-      invalidInputData: {
-        name: 'oldPassword',
-        // eslint-disable-next-line max-len
-        textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.',
-      },
-    },
-    {
-      inputData: {
-        type: 'password', name: 'newPassword', placeholder: 'Новый пароль',
-      },
-      invalidInputData: {
-        name: 'newPassword',
-        // eslint-disable-next-line max-len
-        textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.',
-      },
-    },
-  ],
-
 };
