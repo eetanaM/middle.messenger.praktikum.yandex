@@ -1,4 +1,5 @@
 import { Block } from '../../services/block';
+import { BaseController } from '../../controllers/Controller';
 
 import { MainLink } from '../../components/partials';
 
@@ -17,7 +18,7 @@ class BadServerPage extends Block {
         events: {
           click: ((e: Event) => {
             e.preventDefault();
-            window.router.back();
+            BaseController.router.back();
           }),
         },
       }),
