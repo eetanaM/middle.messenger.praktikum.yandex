@@ -11,7 +11,9 @@ class ProfileHeader extends Block {
 
   override render() {
     return `<div class="profile__header">
-                <img class="header__avatar" src={{ profileImg }} alt="Profile image">
+                <div class="header__avatar">
+                  <img src={{ profileImg }} alt="Profile photo">
+                </div>
                 <h1 class="header__profile-name">{{ profileName }}</h1>
             </div>`;
   }

@@ -7,7 +7,7 @@ interface IChangeCredentialsReqData {
   phone: string,
 }
 
-interface IChangeAvatarReqData {
+interface IChangeAvatarReqData extends FormData {
   avatar: File,
 }
 

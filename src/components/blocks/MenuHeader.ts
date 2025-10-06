@@ -4,13 +4,14 @@ import connect from '../../services/store/connect';
 import { MenuHeaderAvatar } from '../partials';
 
 import defaultAvatarImg from '../../../images/profile/avatar.png';
+import { BASE_URL } from '../../utils/constants/consts';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 
 class MenuHeader extends Block {
   constructor(props?: IBlockProps) {
     const AvatarComponent = connect((state) => ({
-      profileImgSrc: state.auth?.user?.avatar || defaultAvatarImg,
+      profileImgSrc: `${BASE_URL}/resources${state.auth?.user?.avatar}` || defaultAvatarImg,
     }))(MenuHeaderAvatar);
 
     super({

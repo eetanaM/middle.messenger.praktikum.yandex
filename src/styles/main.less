@@ -123,22 +123,40 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
+    & .app__file-input-with-label {
+        height: 150px;
+        width: 150px;
+        border-radius: 10px;
+        border: 1px solid @components-bgc;
+
+        & .app__file-input {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+        }
+
+        & img {
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            }
+
+        & .app__file-input-button:hover {
+            cursor: pointer;
+        }
+    }
+
     & .app__main-button {
         font-size: 13px;
         min-width: 100px;
         min-height: 30px;
     }
 
-    & .app__file-input {
-        opacity: 0;
-        visibility: hidden;
-        position: absolute;
-    }
+   
 
-    & .app__file-input-button:hover {
-        cursor: pointer;
-    }
+    
 }
 
 /* basic components */

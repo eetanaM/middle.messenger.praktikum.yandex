@@ -1,7 +1,11 @@
-import testValidation from '../../utils/helpers/testValidation';
 import { Block } from '../../services/block';
-import type { IBlockProps } from '../../types/services/block/Block';
+import UsersController from '../../controllers/UsersController';
+
+import testValidation from '../../utils/helpers/testValidation';
 import toggleModal from '../../utils/toggleModal';
+
+import type { IBlockProps } from '../../types/services/block/Block';
+import type { IChangeAvatarReqData, IChangeCredentialsReqData } from '../../types/services/api/UsersApi';
 
 class CredentialsForm extends Block {
   constructor(props: IBlockProps) {
@@ -15,6 +19,7 @@ class CredentialsForm extends Block {
           let isValidationPassed = true;
           const form = e.target as HTMLFormElement;
           const formInputs = form.querySelectorAll('.app__main-input') as NodeListOf<HTMLInputElement>;
+          const fileInput = form.querySelector('.app__file-input') as HTMLInputElement;
 
           formInputs.forEach((node) => {
             const inputName = node.name;
@@ -29,14 +34,41 @@ class CredentialsForm extends Block {
             }
           });
 
-          if (isValidationPassed) {
-            const formData: { [key: string]: string } = {};
-            formInputs.forEach((node) => {
-              formData[node.name] = node.value;
-            });
+          if (!isValidationPassed) {
+            return;
+          }
 
-            console.log(formData);
+          const formData: IChangeCredentialsReqData = {
+            first_name: '',
+            second_name: '',
+            display_name: '',
+            login: '',
+            email: '',
+            phone: '',
+          };
+
+          formInputs.forEach((node) => {
+            const { name } = node;
+            const { value } = node;
+            if (name in formData) {
+              // @ts-ignore гарантированно есть соответствующее поле в formData
+              formData[name] = value;
+            }
+          });
+
+          try {
+            UsersController.changeCredentials(formData);
+            if (fileInput && fileInput.files && fileInput.files.length > 0) {
+              const file = fileInput.files[0];
+
+              const avatarData = new FormData() as IChangeAvatarReqData;
+              avatarData.append('avatar', file);
+
+              UsersController.changeAvatar(avatarData);
+            }
             toggleModal(this);
+          } catch (err) {
+            console.error('Ошибка при изменении данных профиля:', err);
           }
         }),
         reset: ((e: Event) => {

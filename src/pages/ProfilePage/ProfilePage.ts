@@ -20,6 +20,7 @@ import {
 } from "../../components/partials";
 
 import defaultProfileImg from "../../../images/profile/profileDefault.png";
+import { BASE_URL } from "../../utils/constants/consts";
 
 import type { IBlockProps } from "../../types/services/block/Block";
 import type { FormDataWithInvalidInputLabel } from "../../types/services/api/mockData";
@@ -141,14 +142,14 @@ const ConnectedProfileCredentials = connect((state) => ({
 }))(ProfileCredentials);
 
 const ConnectedProfileHeader = connect((state) => ({
-  profileImg: state.auth?.user?.avatar || defaultProfileImg,
+  profileImg: `${BASE_URL}/resources${state.auth?.user?.avatar}` || defaultProfileImg,
   profileName: state.auth?.user?.display_name || state.auth?.user?.first_name,
 }))(ProfileHeader);
 
 const ConnectedProfileAvatarInput = connect((state) => ({
   name: "avatar",
   id: "avatar",
-  src: state.auth?.user?.avatar || defaultProfileImg,
+  src: `${BASE_URL}/resources${state.auth?.user?.avatar}` || defaultProfileImg,
 }))(FileInput);
 
 class ProfilePage extends Block {
