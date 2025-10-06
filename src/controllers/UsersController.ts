@@ -10,8 +10,8 @@ class UsersController extends Controller {
       const response = await UsersApi.changeCredentials(data);
 
       if (response.status === 200) {
-        const chats = JSON.parse(response.responseText);
-        this.store.set('chats.allChats', chats);
+        const userInfo = JSON.parse(response.responseText);
+        this.store.set('auth.user', userInfo);
       } else if (response.status === 401 || response.status === 400) {
         const { reason } = JSON.parse(response.responseText);
         // TODO: Алерт поменять на более адекватное уведомление
