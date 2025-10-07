@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable max-len */
-import { Block } from "../../services/block";
+import { Block, TemplateRenderer } from "../../services/block";
 import UsersController from "../../controllers/UsersController";
 import AuthController from "../../controllers/AuthController";
 import connect from "../../services/store/connect";
@@ -213,12 +213,8 @@ class ProfilePage extends Block {
           };
 
           formInputs.forEach((node) => {
-            const { name } = node;
-            const { value } = node;
-            if (name in formData) {
-              // @ts-ignore гарантированно есть соответствующее поле в formData
-              formData[name] = value;
-            }
+            // @ts-ignore гарантированно есть инпуты с нужными именами
+            formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
           });
 
           try {
@@ -287,12 +283,8 @@ class ProfilePage extends Block {
           };
 
           formInputs.forEach((node) => {
-            const { name } = node;
-            const { value } = node;
-            if (name in formData) {
-              // @ts-ignore гарантированно есть соответствующее поле в formData
-              formData[name] = value;
-            }
+            // @ts-ignore гарантированно есть инпуты с нужными именами
+            formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
           });
 
           try {

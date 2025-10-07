@@ -15,7 +15,7 @@ class Button extends Block {
                     class="app__main-button"
                     type="{{ type }}"
                     {{#if isLoading }}
-                    style="background-color: grey;"
+                    style="background-color: grey; border: none"
                     disabled
                     {{/if}}
                 >

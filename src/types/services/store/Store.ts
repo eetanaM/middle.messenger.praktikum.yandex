@@ -23,7 +23,7 @@ type TChatDetails = {
     user: Omit<TUserDetails, "id" | "display_name">,
     time: string,
     content: string,
-  }
+  } | null,
 };
 
 interface IState {

@@ -1,6 +1,11 @@
 /* eslint-disable no-alert */
 import ChatsApi from "../services/api/ChatsApi";
-import type { IChatUsersReqData, IDeleteChatReqData, IGetChatUsersReqData } from "../types/services/api/ChatsApi";
+import type {
+  IChatUsersReqData,
+  ICreateChatReqData,
+  IDeleteChatReqData,
+  IGetChatUsersReqData,
+} from "../types/services/api/ChatsApi";
 import { ERoutes } from "../utils/constants/consts";
 import Controller from "./Controller";
 
@@ -28,11 +33,14 @@ class ChatsController extends Controller {
     }
   };
 
-  public createChat = async (data: string) => {
+  public createChat = async (data: ICreateChatReqData) => {
     try {
-      const response = await ChatsApi.createChat({ title: data });
+      const response = await ChatsApi.createChat(data);
       if (response.status === 200) {
+        const chatId = JSON.parse(response.responseText);
         await this.getAllChats();
+        this.store.set('currentChat.id', chatId);
+        console.log(this.store.getState());
       }
       if (response.status === 401 || response.status === 400) {
         const { reason } = JSON.parse(response.responseText);

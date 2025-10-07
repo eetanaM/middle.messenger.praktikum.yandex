@@ -32,7 +32,7 @@ class UsersController extends Controller {
 
       if (response.status === 200) {
         // TODO: Алерт поменять на более адекватное уведомление
-        window.alert("Пароль успешно изменен")
+        window.alert("Пароль успешно изменен");
       } else if (response.status === 401 || response.status === 400) {
         const { reason } = JSON.parse(response.responseText);
         // TODO: Алерт поменять на более адекватное уведомление

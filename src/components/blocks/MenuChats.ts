@@ -1,18 +1,25 @@
 import { Block } from '../../services/block';
 
 import ChatItem from './ChatItem';
+import CredentialsForm from './CredentialsForm';
+import { Button, FormInput } from '../partials';
+
+import { isEqual } from '../../utils/helpers';
+import toggleModal from '../../utils/toggleModal';
+
+import defaultChatImg from '../../../images/profile/avatar.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 import type { TChatDetails } from '../../types/services/store/Store';
-import { isEqual } from '../../utils/helpers';
+import ChatsController from '../../controllers/ChatsController';
 
 const createChatItem = (chatItem: TChatDetails) => new ChatItem({
   chatItemId: chatItem.id,
-  avatarSrc: chatItem.avatar,
+  avatarSrc: chatItem.avatar || defaultChatImg,
   chatName: chatItem.title,
-  lastMessage: chatItem.last_message.content,
-  timeStamp: chatItem.last_message.time,
-  unreadMessagesCount: chatItem.unread_count,
+  lastMessage: chatItem.last_message?.content || "",
+  timeStamp: chatItem.last_message?.time || "",
+  unreadMessagesCount: chatItem.unread_count || 0,
   events: {
     click: ((e: Event) => {
       e.stopPropagation();
@@ -34,19 +41,72 @@ const createChatItem = (chatItem: TChatDetails) => new ChatItem({
     }),
   },
 });
+
 const ChatItemsComponents = (chats: TChatDetails[]) => chats.map(createChatItem);
 
 class MenuChats extends Block {
   constructor(props: IBlockProps) {
     const chats = props.chats as TChatDetails[];
     const isLoading = props.isLoading || true;
-    const isEmpty = props.isEmpty;
+    const { isEmpty } = props;
+    const ChatTitleForm = new CredentialsForm({
+      inputs: [new FormInput({
+        type: "text",
+        name: "title",
+        placeholder: "Название чата",
+      })],
+      SubmitButton: new Button({
+        id: "confirm",
+        type: "submit",
+        textContent: "Подтвердить",
+      }),
+      ResetButton: new Button({
+        id: "reset",
+        type: "reset",
+        textContent: "Отменить",
+      }),
+      events: {
+        submit: ((e: Event) => {
+          e.preventDefault();
+          const form = e.target as HTMLFormElement;
+          const formInputs = form.querySelectorAll('input');
+
+          const formData: { title: string } = {
+            title: '',
+          };
+
+          formInputs.forEach((node) => {
+            // @ts-ignore гарантированно есть инпуты с нужными именами
+            formData[node.name] = node.value;
+          });
+
+          ChatsController.createChat(formData);
+          toggleModal(this);
+        }),
+        reset: ((e: Event) => {
+          e.preventDefault();
+          toggleModal(this);
+        }),
+      },
+    });
 
     super({
       ...props,
       ChatItems: ChatItemsComponents(chats),
       isLoading,
       isEmpty,
+      CreateChatButton: new Button({
+        id: 'create-chat',
+        textContent: 'Создать новый чат',
+        type: "button",
+        events: {
+          click: ((e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleModal(ChatTitleForm);
+          }),
+        },
+      }),
     });
   }
 
@@ -58,7 +118,7 @@ class MenuChats extends Block {
       if (chats && Array.isArray(chats)) {
         this.setList("ChatItems", chats.map(createChatItem));
       }
-      this.setProps({...newProps})
+      this.setProps({ ...newProps });
     }
     return shouldUpdate;
   }
@@ -69,11 +129,8 @@ class MenuChats extends Block {
         {{#if isLoading}}
           <span>Загрузка...</span>
         {{else}}
-          {{#if isEmpty}}
-            <span>Нет чатов</span>
-          {{else}}
-            {{{ blockList "ChatItems" }}}
-          {{/if}}
+          {{{ CreateChatButton }}}
+          {{{ blockList "ChatItems" }}}
         {{/if}}
       </div>
     `;

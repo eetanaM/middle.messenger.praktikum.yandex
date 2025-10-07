@@ -1,5 +1,5 @@
 import testValidation from '../../utils/helpers/testValidation';
-import { Block } from '../../services/block';
+import { Block, TemplateRenderer } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
 
 class SendMessageForm extends Block {
@@ -26,7 +26,7 @@ class SendMessageForm extends Block {
 
           if (isValidationPassed) {
             const formData: { [key: string]: string } = {};
-            formData[messageInput.name] = messageInput.value;
+            formData[messageInput.name] = TemplateRenderer.escapeHtml(messageInput.value).toString();
 
             console.log(formData);
           } else {

@@ -1,4 +1,4 @@
-import { Block } from '../../../services/block';
+import { Block, TemplateRenderer } from '../../../services/block';
 import connect from '../../../services/store/connect';
 
 import { AuthForm } from '../../../components/blocks';
@@ -10,6 +10,7 @@ import { ERoutes } from '../../../utils/constants/consts';
 import type { IBlockProps } from '../../../types/services/block/Block';
 import AuthController from '../../../controllers/AuthController';
 import testValidation from '../../../utils/helpers/testValidation';
+import type { ISignUpReqData } from '../../../types/services/api/AuthApi';
 
 class RegisterPage extends Block {
   constructor(props?: IBlockProps) {
@@ -58,7 +59,6 @@ class RegisterPage extends Block {
             let isValidationPassed = true;
             const form = e.target as HTMLFormElement;
             const formInputs = form.querySelectorAll('input');
-            const signInData: Record<string, string | false> = {};
 
             formInputs.forEach((node) => {
               const inputName = node.name;
@@ -73,19 +73,22 @@ class RegisterPage extends Block {
               }
             });
 
+            const formData: ISignUpReqData = {
+              first_name: '',
+              second_name: '',
+              login: '',
+              phone: '',
+              email: '',
+              password: '',
+            };
+
             if (isValidationPassed) {
               formInputs.forEach((node) => {
-                signInData[node.name] = node.value;
+                // @ts-ignore гарантированно есть инпуты с нужными именами
+                formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
               });
 
-              AuthController.registerUser({
-                first_name: signInData.first_name as string,
-                second_name: signInData.second_name as string,
-                login: signInData.login as string,
-                phone: signInData.phone as string,
-                email: signInData.email as string,
-                password: signInData.password as string,
-              });
+              AuthController.registerUser(formData);
             }
           }),
         },
