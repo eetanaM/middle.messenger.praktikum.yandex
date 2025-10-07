@@ -21,6 +21,7 @@ const MenuHeaderComponent = connect((state) => ({
 const MenuChatsList = connect((state) => ({
   chats: state.chats.allChats,
   isLoading: state.chats.isLoading,
+  isEmpty: state.chats.allChats.length === 0,
 }))(MenuChats);
 
 const SendMessageFormComponent = new SendMessageForm({

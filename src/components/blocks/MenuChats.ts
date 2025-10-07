@@ -39,21 +39,28 @@ const ChatItemsComponents = (chats: TChatDetails[]) => chats.map(createChatItem)
 class MenuChats extends Block {
   constructor(props: IBlockProps) {
     const chats = props.chats as TChatDetails[];
-    const isLoading = props.isLoading as boolean || true;
+    const isLoading = props.isLoading || true;
+    const isEmpty = props.isEmpty;
 
     super({
       ...props,
       ChatItems: ChatItemsComponents(chats),
       isLoading,
+      isEmpty,
     });
   }
 
   override componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps): boolean {
-    const chats = newProps.chats as TChatDetails[];
-    if (chats && Array.isArray(chats)) {
-      this.setList("ChatItems", chats.map(createChatItem));
+    const shouldUpdate = !isEqual(oldProps, newProps);
+
+    if (shouldUpdate) {
+      const chats = newProps.chats as TChatDetails[];
+      if (chats && Array.isArray(chats)) {
+        this.setList("ChatItems", chats.map(createChatItem));
+      }
+      this.setProps({...newProps})
     }
-    return !isEqual(oldProps, newProps);
+    return shouldUpdate;
   }
 
   override render() {
@@ -62,7 +69,11 @@ class MenuChats extends Block {
         {{#if isLoading}}
           <span>Загрузка...</span>
         {{else}}
-          {{{ blockList "ChatItems" }}}
+          {{#if isEmpty}}
+            <span>Нет чатов</span>
+          {{else}}
+            {{{ blockList "ChatItems" }}}
+          {{/if}}
         {{/if}}
       </div>
     `;
