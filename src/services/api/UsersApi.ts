@@ -25,7 +25,7 @@ class UsersApi extends BaseApi {
   }
 
   public changePassword(data: IChangePasswordReqData) {
-    return usersApiInstance.put('/profile', { ...usersOptions, data });
+    return usersApiInstance.put('/password', { ...usersOptions, data });
   }
 
   public findUser(data: ISearchUserReqData) {
