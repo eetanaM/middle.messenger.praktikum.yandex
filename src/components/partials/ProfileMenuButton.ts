@@ -11,11 +11,11 @@ class ProfileMenuButton extends Block {
 
   override render() {
     return `<button 
-                    id="{{ id }}" 
-                    class="{{ class }}"
-                >
-                    {{ textContent }}
-                </button>`;
+              id="{{ id }}" 
+              class="{{ class }}"
+            >
+              {{ textContent }}
+            </button>`;
   }
 }
 

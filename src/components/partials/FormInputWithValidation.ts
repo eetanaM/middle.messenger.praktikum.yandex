@@ -28,8 +28,8 @@ class FormInputWithValidation extends Block {
 
   override render() {
     return `<div class="app__main-input-with-validation">
-                {{{ FormInput }}}
-                {{{ InvalidInput }}}
+              {{{ FormInput }}}
+              {{{ InvalidInput }}}
             </div>`;
   }
 }

@@ -10,17 +10,17 @@ class FileInput extends Block {
 
   override render() {
     return `<div class="app__file-input-with-label">
-                    <input 
-                        type="file" 
-                        name="{{ name }}" 
-                        id="{{ id }}"
-                        class="app__file-input"
-                        accept="image/*"
-                    />
-                    <label for="{{ id }}" class="app__file-input-button">
-                        <img class="app__file-input-image" src="{{ src }}" alt="Profile image" />
-                    </label>
-                </div>`;
+              <input 
+                  type="file" 
+                  name="{{ name }}" 
+                  id="{{ id }}"
+                  class="app__file-input"
+                  accept="image/*"
+              />
+              <label for="{{ id }}" class="app__file-input-button">
+                  <img class="app__file-input-image" src="{{ src }}" alt="Profile image" />
+              </label>
+            </div>`;
   }
 }
 

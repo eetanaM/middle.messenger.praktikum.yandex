@@ -32,7 +32,7 @@ class FormInput extends Block {
               placeholder="{{ placeholder }}"
               class="app__main-input"
               value="{{ value }}"
-          />`;
+            />`;
   }
 }
 

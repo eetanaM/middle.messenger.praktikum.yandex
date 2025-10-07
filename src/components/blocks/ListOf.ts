@@ -1,18 +1,19 @@
 import { Block } from "../../services/block";
 import type { IBlockProps } from '../../types/services/block/Block';
 
-class InvalidInput extends Block {
+class ListOf extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
+      List: props.items,
     });
   }
 
   override render() {
-    return `<p id="{{ name }}" class="app__invalid-input hidden">
-              {{ textContent }}
-            </p>`;
+    return `<div class="wrapper" style="display:flex; flex-direction:column">
+                {{{ blockList "List" }}}
+            </div>`;
   }
 }
 
-export default InvalidInput;
+export default ListOf;

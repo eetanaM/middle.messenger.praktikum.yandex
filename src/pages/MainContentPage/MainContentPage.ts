@@ -32,10 +32,9 @@ const SendMessageFormComponent = new SendMessageForm({
   }),
 });
 
-const ChatDetailsComponent = new ChatDetails({
-  icons: CHAT_MOCK.icons,
-  SendMessageForm: SendMessageFormComponent,
-});
+const ChatDetailsComponent = connect((state) => ({
+  currentChatItemId: state.currentChat?.id || null,
+}))(ChatDetails);
 
 class MainContentPage extends Block {
   constructor(props?: IBlockProps) {
@@ -45,7 +44,10 @@ class MainContentPage extends Block {
       Header: new MenuHeaderComponent(),
       SearchInput: new FormInput({ type: 'text', name: 'search', placeholder: 'Поиск' }),
       MenuChats: new MenuChatsList(),
-      ChatDetails: ChatDetailsComponent,
+      ChatDetails: new ChatDetailsComponent({
+        icons: CHAT_MOCK.icons,
+        SendMessageForm: SendMessageFormComponent,
+      }),
     });
 
     ChatsController.getAllChats();

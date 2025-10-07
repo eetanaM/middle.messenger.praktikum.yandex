@@ -11,11 +11,11 @@ class CredentialsForm extends Block {
 
   override render() {
     return `<form class="credentials__form">
-                    {{{ ProfileAvatarInput }}}
-                    {{{ blockList "inputs" }}}
-                    {{{ SubmitButton }}}
-                    {{{ ResetButton }}}
-                </form>`;
+                {{{ ProfileAvatarInput }}}
+                {{{ blockList "inputs" }}}
+                {{{ SubmitButton }}}
+                {{{ ResetButton }}}
+            </form>`;
   }
 }
 

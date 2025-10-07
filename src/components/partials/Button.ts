@@ -11,16 +11,16 @@ class Button extends Block {
 
   override render() {
     return `<button 
-                    id="{{ id }}" 
-                    class="app__main-button"
-                    type="{{ type }}"
-                    {{#if isLoading }}
-                    style="background-color: grey; border: none"
-                    disabled
-                    {{/if}}
-                >
-                    {{ textContent }}
-                </button>`;
+              id="{{ id }}" 
+              class="app__main-button"
+              type="{{ type }}"
+              {{#if isLoading }}
+              style="background-color: grey; border: none"
+              disabled
+              {{/if}}
+            >
+              {{ textContent }}
+            </button>`;
   }
 }
 

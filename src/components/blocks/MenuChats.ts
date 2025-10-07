@@ -1,4 +1,5 @@
 import { Block } from '../../services/block';
+import ChatsController from '../../controllers/ChatsController';
 
 import ChatItem from './ChatItem';
 import CredentialsForm from './CredentialsForm';
@@ -11,7 +12,6 @@ import defaultChatImg from '../../../images/profile/avatar.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 import type { TChatDetails } from '../../types/services/store/Store';
-import ChatsController from '../../controllers/ChatsController';
 
 const createChatItem = (chatItem: TChatDetails) => new ChatItem({
   chatItemId: chatItem.id,
@@ -26,7 +26,7 @@ const createChatItem = (chatItem: TChatDetails) => new ChatItem({
       e.stopImmediatePropagation();
 
       const chatItemEl = e.currentTarget as HTMLElement;
-      // const currentChatItemId = Number(chatItemEl.id);
+      const currentChatItemId = Number(chatItemEl.id);
       const baseClass = 'chat-item';
       const allChatItems = document.querySelectorAll('.chat-item');
 
@@ -35,9 +35,7 @@ const createChatItem = (chatItem: TChatDetails) => new ChatItem({
       });
       chatItemEl.setAttribute('class', `${baseClass} active`);
 
-      /* ChatDetailsComponent.setProps({
-        currentChatItemId,
-      }); */
+      ChatsController.store.set('currentChat.id', currentChatItemId);
     }),
   },
 });
@@ -124,16 +122,14 @@ class MenuChats extends Block {
   }
 
   override render() {
-    return `
-      <div class="menu__menu-chats">
-        {{#if isLoading}}
-          <span>Загрузка...</span>
-        {{else}}
-          {{{ CreateChatButton }}}
-          {{{ blockList "ChatItems" }}}
-        {{/if}}
-      </div>
-    `;
+    return `<div class="menu__menu-chats">
+              {{#if isLoading}}
+                <span>Загрузка...</span>
+              {{else}}
+                {{{ CreateChatButton }}}
+                {{{ blockList "ChatItems" }}}
+              {{/if}}
+            </div>`;
   }
 }
 
