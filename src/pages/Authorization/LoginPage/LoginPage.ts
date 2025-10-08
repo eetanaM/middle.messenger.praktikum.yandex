@@ -38,7 +38,7 @@ class LoginPage extends Block {
         inputs,
         SubmitButton: new SignInButton({
           id: 'login-button',
-          textContent: TemplateRenderer.escapeHtml('Войти'),
+          textContent: 'Войти',
           type: "submit",
           isLoading: AuthController.store.getState()?.auth?.isLoading,
         }),
@@ -81,7 +81,7 @@ class LoginPage extends Block {
             if (isValidationPassed) {
               formInputs.forEach((node) => {
                 // @ts-ignore гарантированно есть инпуты с нужными именами
-                formData[node.name] = node.value;
+                formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
               });
 
               AuthController.loginUser(formData);

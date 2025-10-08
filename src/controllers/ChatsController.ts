@@ -57,7 +57,7 @@ class ChatsController extends Controller {
     try {
       const response = await ChatsApi.deleteChat(data);
       if (response.status === 200) {
-        this.store.set('currentChat.id', null)
+        this.store.set('currentChat.id', null);
         await this.getAllChats();
       }
       if (response.status === 401 || response.status === 400) {

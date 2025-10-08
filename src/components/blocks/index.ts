@@ -7,3 +7,6 @@ export { default as SendMessageForm } from './SendMessageForm';
 export { default as MenuHeader } from './MenuHeader';
 export { default as MenuChats } from './MenuChats';
 export { default as ProfileHeader } from './ProfileHeader';
+export { default as ListOf } from './ListOf';
+export { default as SearchForm } from './SearchForm';
+export { default as SearchResults } from './SearchResults';

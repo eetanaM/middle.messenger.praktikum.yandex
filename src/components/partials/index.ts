@@ -8,3 +8,4 @@ export { default as FormInputWithValidation } from './FormInputWithValidation';
 export { default as ProfileMenuButton } from './ProfileMenuButton';
 export { default as PreviewLink } from './PreviewLink';
 export { default as MenuHeaderAvatar } from './MenuHeaderAvatar';
+export { default as SearchResultsItem } from './SearchResultsItem';

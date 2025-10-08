@@ -1,4 +1,4 @@
-import { Block } from '../../services/block';
+import { Block, TemplateRenderer } from '../../services/block';
 import connect from '../../services/store/connect';
 import ChatsController from '../../controllers/ChatsController';
 import AuthController from '../../controllers/AuthController';
@@ -13,6 +13,9 @@ import {
 
 import { CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
 import type { IBlockProps } from '../../types/services/block/Block';
+import SearchForm from '../../components/blocks/SearchForm';
+import type { ISearchUserReqData } from '../../types/services/api/UsersApi';
+import UsersController from '../../controllers/UsersController';
 
 const MenuHeaderComponent = connect((state) => ({
   profileName: state.auth.user?.display_name || state.auth.user?.first_name,
@@ -42,7 +45,30 @@ class MainContentPage extends Block {
       ...props,
       events: {},
       Header: new MenuHeaderComponent(),
-      SearchInput: new FormInput({ type: 'text', name: 'search', placeholder: 'Поиск' }),
+      Search: new SearchForm({
+        events: {
+          submit: ((e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const form = e.target as HTMLFormElement;
+            const formInput = form.querySelector('input') as HTMLInputElement;
+
+            const formData: ISearchUserReqData = {
+              login: '',
+            };
+
+            formData.login = TemplateRenderer.escapeHtml(formInput?.value).toString();
+
+            if (formData.login === "") {
+              return;
+            }
+
+            formInput.value = '';
+            UsersController.findUser(formData);
+          }),
+        },
+      }),
       MenuChats: new MenuChatsList(),
       ChatDetails: new ChatDetailsComponent({
         icons: CHAT_MOCK.icons,
@@ -58,9 +84,7 @@ class MainContentPage extends Block {
     return `<main class="main-content">
               <nav class="menu">
                   {{{ Header }}}
-                  <form class="menu__menu-search">
-                      {{{ SearchInput }}}
-                  </form>
+                  {{{ Search }}}
                   {{{ MenuChats }}}
               </nav>
               {{{ ChatDetails }}}

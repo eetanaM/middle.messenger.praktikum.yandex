@@ -50,4 +50,5 @@ export default new Store({
     chatDetails: null,
     chatUsers: [],
   },
+  searchResults: [],
 });

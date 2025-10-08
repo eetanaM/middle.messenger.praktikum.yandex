@@ -16,26 +16,26 @@ class ChatMenuButton extends Block {
       items: [
         new Button({ textContent: "Пользователи чата" }),
         new Button({ textContent: "Добавить пользователя" }),
-        new Button({ 
+        new Button({
           textContent: "Удалить чат",
-          attr: { style: "background-color: red" } ,
+          attr: { style: "background-color: red" },
           events: {
             click: ((e: Event) => {
               e.preventDefault();
               e.stopPropagation();
-  
+
               const state = ChatsController.store.getState();
               const currentChatId = state.currentChat.id;
-  
+
               try {
-                ChatsController.deleteChat({ chatId: currentChatId })
-              } catch (e) {
-                console.log(e)
+                ChatsController.deleteChat({ chatId: currentChatId });
+              } catch (error) {
+                console.log(error);
               } finally {
                 toggleModal(this);
               }
-            })
-          }
+            }),
+          },
         }),
       ],
     });

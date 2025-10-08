@@ -40,10 +40,12 @@ interface IState {
     chatDetails: null,
     chatUsers: Array<Omit<TUserDetails, "phone" | "email"> & { role: string }>,
   },
+  searchResults: TUserDetails[],
 }
 
 export type {
   Indexed,
   IState,
   TChatDetails,
+  TUserDetails,
 };
