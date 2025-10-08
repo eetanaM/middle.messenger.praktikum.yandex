@@ -16,7 +16,12 @@ class SearchForm extends Block {
 
     super({
       ...props,
-      SearchInput: new FormInput({ type: 'text', name: 'search', placeholder: 'Поиск' }),
+      SearchInput: new FormInput({
+        type: 'text',
+        name: 'search',
+        placeholder: 'Поиск',
+        attr: { autocomplete: "off" },
+      }),
       SearchResults: SearchResultsComponent,
     });
   }
