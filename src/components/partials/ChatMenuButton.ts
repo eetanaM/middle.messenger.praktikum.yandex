@@ -1,11 +1,14 @@
 import { Block } from "../../services/block";
+import ChatsController from "../../controllers/ChatsController";
+
+import Button from "./Button";
+import ListOf from "../blocks/ListOf";
+
+import toggleModal from "../../utils/toggleModal";
 
 import menuButtonImg from '../../../images/chat/menu1.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
-import toggleModal from "../../utils/toggleModal";
-import Button from "./Button";
-import ListOf from "../blocks/ListOf";
 
 class ChatMenuButton extends Block {
   constructor(props?: IBlockProps) {
@@ -13,7 +16,27 @@ class ChatMenuButton extends Block {
       items: [
         new Button({ textContent: "Пользователи чата" }),
         new Button({ textContent: "Добавить пользователя" }),
-        new Button({ textContent: "Удалить чат", attr: { style: "background-color: red" } }),
+        new Button({ 
+          textContent: "Удалить чат",
+          attr: { style: "background-color: red" } ,
+          events: {
+            click: ((e: Event) => {
+              e.preventDefault();
+              e.stopPropagation();
+  
+              const state = ChatsController.store.getState();
+              const currentChatId = state.currentChat.id;
+  
+              try {
+                ChatsController.deleteChat({ chatId: currentChatId })
+              } catch (e) {
+                console.log(e)
+              } finally {
+                toggleModal(this);
+              }
+            })
+          }
+        }),
       ],
     });
 

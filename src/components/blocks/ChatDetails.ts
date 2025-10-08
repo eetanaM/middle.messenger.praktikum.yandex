@@ -1,6 +1,8 @@
 import { Block } from "../../services/block";
-import type { IBlockProps } from '../../types/services/block/Block';
+
 import ChatMenuButton from "../partials/ChatMenuButton";
+
+import type { IBlockProps } from '../../types/services/block/Block';
 
 class ChatDetails extends Block {
   constructor(props: IBlockProps) {
