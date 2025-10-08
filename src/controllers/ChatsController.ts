@@ -37,9 +37,7 @@ class ChatsController extends Controller {
     try {
       const response = await ChatsApi.createChat(data);
       if (response.status === 200) {
-        const chatId = JSON.parse(response.responseText)?.id;
         await this.getAllChats();
-        this.store.set('currentChat.id', chatId);
       }
       if (response.status === 401 || response.status === 400) {
         const { reason } = JSON.parse(response.responseText);
@@ -78,6 +76,7 @@ class ChatsController extends Controller {
       if (response.status === 200) {
         const chatUsers = JSON.parse(response.responseText);
         this.store.set('currentChat.chatUsers', chatUsers);
+        console.log(this.store.getState());
       }
       if (response.status === 401 || response.status === 400) {
         const { reason } = JSON.parse(response.responseText);

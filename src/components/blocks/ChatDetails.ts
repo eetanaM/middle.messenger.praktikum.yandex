@@ -3,6 +3,8 @@ import { Block } from "../../services/block";
 import ChatMenuButton from "../partials/ChatMenuButton";
 
 import type { IBlockProps } from '../../types/services/block/Block';
+import ChatsController from "../../controllers/ChatsController";
+import { isEqual } from "../../utils/helpers";
 
 class ChatDetails extends Block {
   constructor(props: IBlockProps) {
@@ -11,6 +13,14 @@ class ChatDetails extends Block {
       MenuButton: new ChatMenuButton(),
       events: {},
     });
+  }
+
+  protected override componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps): boolean {
+    const shouldUpdate = !isEqual(oldProps, newProps);
+    if (shouldUpdate) {
+      ChatsController.getChatUsers({ id: Number(newProps.currentChatItemId) });
+    }
+    return shouldUpdate;
   }
 
   override render() {
