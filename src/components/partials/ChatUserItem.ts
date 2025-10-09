@@ -4,6 +4,7 @@ import defaultAvatar from "../../../images/profile/avatar.png";
 import { BASE_URL } from "../../utils/constants/consts";
 
 import type { IBlockProps } from '../../types/services/block/Block';
+import DeleteButton from "./DeleteButton";
 
 class ChatUserItem extends Block {
   constructor(props: IBlockProps) {
@@ -14,14 +15,17 @@ class ChatUserItem extends Block {
       ...props,
       name,
       avatar: avatarSrc,
+      DeleteButton: new DeleteButton({
+        id: props.chatUserId,
+      }),
     });
   }
 
   override render() {
-    return `<li id={{ chatUserId }} class="app__user-item">
+    return `<li id="user-{{ chatUserId }}" class="app__user-item">
                 <img class="user-item__avatar" src="{{ avatar }}"/>
                 <span class="user-item__name">{{ name }}</span>
-                <button class="user-item__delete-button">X</button>
+                {{{ DeleteButton }}}
             </li>`;
   }
 }

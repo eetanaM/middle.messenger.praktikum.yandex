@@ -1,10 +1,12 @@
 import { Block, TemplateRenderer } from '../../services/block';
+import ChatsController from '../../controllers/ChatsController';
 
 import { Button, FormInput } from '../partials';
 
+import toggleModal from '../../utils/toggleModal';
+
 import type { IBlockProps } from '../../types/services/block/Block';
 import type { IChatUsersReqData } from '../../types/services/api/ChatsApi';
-import ChatsController from '../../controllers/ChatsController';
 
 class AddUserForm extends Block {
   constructor(props: IBlockProps) {
@@ -45,7 +47,13 @@ class AddUserForm extends Block {
           }
 
           formInput.value = '';
-          ChatsController.addChatUsers(formData);
+          try {
+            ChatsController.addChatUsers(formData);
+          } catch (error) {
+            console.log(error);
+          } finally {
+            toggleModal(this);
+          }
         }),
       },
     });

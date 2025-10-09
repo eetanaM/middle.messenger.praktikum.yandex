@@ -94,6 +94,8 @@ class ChatsController extends Controller {
     try {
       const response = await ChatsApi.addUsersToChat(data);
       if (response.status === 200) {
+        // TODO: Алерт поменять на более адекватное уведомление
+        window.alert("Пользователь успешно добавлен");
         this.getChatUsers({ id: data.chatId });
       }
       if (response.status === 401 || response.status === 400) {
@@ -112,6 +114,8 @@ class ChatsController extends Controller {
     try {
       const response = await ChatsApi.deleteUsersFromChat(data);
       if (response.status === 200) {
+        // TODO: Алерт поменять на более адекватное уведомление
+        window.alert("Пользователь успешно удален");
         this.getChatUsers({ id: data.chatId });
       }
       if (response.status === 401 || response.status === 400) {

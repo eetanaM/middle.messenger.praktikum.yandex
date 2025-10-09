@@ -9,3 +9,5 @@ export { default as ProfileMenuButton } from './ProfileMenuButton';
 export { default as PreviewLink } from './PreviewLink';
 export { default as MenuHeaderAvatar } from './MenuHeaderAvatar';
 export { default as SearchResultsItem } from './SearchResultsItem';
+export { default as ChatUserItem } from './ChatUserItem';
+export { default as DeleteButton } from './DeleteButton';

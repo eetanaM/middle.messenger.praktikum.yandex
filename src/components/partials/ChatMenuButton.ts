@@ -4,7 +4,7 @@ import ChatsController from "../../controllers/ChatsController";
 import Button from "./Button";
 import ListOf from "../blocks/ListOf";
 import AddUserForm from "../blocks/AddUserForm";
-import ChatUserItem from "../blocks/ChatUserItem";
+import ChatUserItem from "./ChatUserItem";
 
 import toggleModal from "../../utils/toggleModal";
 
