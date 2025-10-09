@@ -159,6 +159,30 @@
     
 }
 
+.app__user-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    & .user-item__avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 5px 5px;
+        object-fit: cover;
+    }
+
+    & .user-item__delete-button {
+        color: red;
+        font-size: large;
+        border: none;
+        background-color: transparent;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
 /* basic components */
 
 /* authorization page */

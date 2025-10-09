@@ -10,9 +10,9 @@ class ListOf extends Block {
   }
 
   override render() {
-    return `<div class="wrapper" style="display:flex; flex-direction:column">
+    return `<ul class="wrapper" style="display:flex; flex-direction:column">
                 {{{ blockList "List" }}}
-            </div>`;
+            </ul>`;
   }
 }
 
