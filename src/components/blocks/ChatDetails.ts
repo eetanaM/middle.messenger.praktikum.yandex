@@ -1,10 +1,11 @@
 import { Block } from "../../services/block";
+import ChatsController from "../../controllers/ChatsController";
 
 import ChatMenuButton from "../partials/ChatMenuButton";
 
-import type { IBlockProps } from '../../types/services/block/Block';
-import ChatsController from "../../controllers/ChatsController";
 import { isEqual } from "../../utils/helpers";
+
+import type { IBlockProps } from '../../types/services/block/Block';
 
 class ChatDetails extends Block {
   constructor(props: IBlockProps) {

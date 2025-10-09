@@ -20,7 +20,7 @@ class ChatUserItem extends Block {
   override render() {
     return `<li id={{ chatUserId }} class="app__user-item">
                 <img class="user-item__avatar" src="{{ avatar }}"/>
-                <span class="user-item__name">{{ displayName }}</span>
+                <span class="user-item__name">{{ name }}</span>
                 <button class="user-item__delete-button">X</button>
             </li>`;
   }

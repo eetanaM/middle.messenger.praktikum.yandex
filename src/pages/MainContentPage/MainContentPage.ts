@@ -36,7 +36,7 @@ const SendMessageFormComponent = new SendMessageForm({
 });
 
 const ChatDetailsComponent = connect((state) => ({
-  currentChatItemId: state.currentChat?.id || null,
+  currentChatItemId: state.currentChat?.id,
 }))(ChatDetails);
 
 class MainContentPage extends Block {

@@ -7,7 +7,12 @@ import { BASE_URL } from "../../utils/constants/consts";
 
 class SearchResultItem extends Block {
   constructor(props: IBlockProps) {
-    const { avatar, displayName, firstName } = props;
+    const {
+      avatar,
+      displayName,
+      firstName,
+      id,
+    } = props;
     const name = displayName || firstName || "Без имени";
     const avatarSrc = avatar ? `${BASE_URL}/resources${avatar}` : defaultAvatar;
 
@@ -15,6 +20,7 @@ class SearchResultItem extends Block {
       ...props,
       name,
       avatar: avatarSrc,
+      id,
     });
   }
 
@@ -23,6 +29,7 @@ class SearchResultItem extends Block {
       <li class="search-result-item">
         <img class="search-result-item__avatar" src="{{ avatar }}" alt="User avatar" />
         <span class="search-result-item__name">{{ name }}</span>
+        <span class="search-result-item__id">id: {{ id }}</span>
       </li>
     `;
   }

@@ -3,6 +3,8 @@ import ChatsController from "../../controllers/ChatsController";
 
 import Button from "./Button";
 import ListOf from "../blocks/ListOf";
+import AddUserForm from "../blocks/AddUserForm";
+import ChatUserItem from "../blocks/ChatUserItem";
 
 import toggleModal from "../../utils/toggleModal";
 
@@ -10,7 +12,6 @@ import menuButtonImg from '../../../images/chat/menu1.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 import type { TUserDetails } from "../../types/services/store/Store";
-import { ChatUserItem } from "../blocks";
 
 class ChatMenuButton extends Block {
   constructor(props?: IBlockProps) {
@@ -22,6 +23,7 @@ class ChatMenuButton extends Block {
             click: ((e: Event) => {
               e.preventDefault();
               const users = ChatsController.store.getState().currentChat.chatUsers;
+              console.log(users);
               const UsersComponents = users.map((user: TUserDetails) => new ChatUserItem({
                 chatUserId: user.id,
                 avatar: user.avatar,
@@ -36,7 +38,18 @@ class ChatMenuButton extends Block {
             }),
           },
         }),
-        new Button({ textContent: "Добавить пользователя" }),
+        new Button({
+          textContent: "Добавить пользователя",
+          events: {
+            click: ((e: Event) => {
+              e.preventDefault();
+              const FormComponent = new AddUserForm({});
+
+              toggleModal(this);
+              toggleModal(FormComponent);
+            }),
+          },
+        }),
         new Button({
           textContent: "Удалить чат",
           attr: { style: "background-color: red" },

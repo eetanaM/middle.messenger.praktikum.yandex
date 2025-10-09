@@ -11,3 +11,4 @@ export { default as ListOf } from './ListOf';
 export { default as SearchForm } from './SearchForm';
 export { default as SearchResults } from './SearchResults';
 export { default as ChatUserItem } from './ChatUserItem';
+export { default as AddUserForm } from './AddUserForm';

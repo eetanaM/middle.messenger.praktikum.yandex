@@ -16,6 +16,7 @@ class SearchResults extends Block {
         displayName: user.display_name,
         firstName: user.first_name,
         avatar: user.avatar,
+        id: user.id,
       })),
       isVisible: props.isVisible,
       events: {
@@ -34,6 +35,7 @@ class SearchResults extends Block {
         displayName: user.display_name,
         firstName: user.first_name,
         avatar: user.avatar,
+        id: user.id,
       })));
     }
     return true;
