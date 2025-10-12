@@ -213,8 +213,7 @@ class ProfilePage extends Block {
           };
 
           formInputs.forEach((node) => {
-            // @ts-ignore гарантированно есть инпуты с нужными именами
-            formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
+            formData[node.name as keyof IChangeCredentialsReqData] = TemplateRenderer.escapeHtml(node.value).toString();
           });
 
           try {
@@ -283,8 +282,7 @@ class ProfilePage extends Block {
           };
 
           formInputs.forEach((node) => {
-            // @ts-ignore гарантированно есть инпуты с нужными именами
-            formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
+            formData[node.name as keyof IChangePasswordReqData] = TemplateRenderer.escapeHtml(node.value).toString();
           });
 
           try {

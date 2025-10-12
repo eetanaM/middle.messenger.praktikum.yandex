@@ -84,8 +84,7 @@ class RegisterPage extends Block {
 
             if (isValidationPassed) {
               formInputs.forEach((node) => {
-                // @ts-ignore гарантированно есть инпуты с нужными именами
-                formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
+                formData[node.name as keyof ISignUpReqData] = TemplateRenderer.escapeHtml(node.value).toString();
               });
 
               AuthController.registerUser(formData);

@@ -58,7 +58,7 @@ class LoginPage extends Block {
 
             let isValidationPassed = true;
             const form = e.target as HTMLFormElement;
-            const formInputs = form.querySelectorAll('input');
+            const formInputs = form.querySelectorAll<HTMLInputElement>('input');
 
             formInputs.forEach((node) => {
               const inputName = node.name;
@@ -80,8 +80,7 @@ class LoginPage extends Block {
 
             if (isValidationPassed) {
               formInputs.forEach((node) => {
-                // @ts-ignore гарантированно есть инпуты с нужными именами
-                formData[node.name] = TemplateRenderer.escapeHtml(node.value).toString();
+                formData[node.name as keyof ISignInReqData] = TemplateRenderer.escapeHtml(node.value).toString();
               });
 
               AuthController.loginUser(formData);

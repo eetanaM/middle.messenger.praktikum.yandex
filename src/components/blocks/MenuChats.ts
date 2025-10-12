@@ -1,4 +1,4 @@
-import { Block } from '../../services/block';
+import { Block, TemplateRenderer } from '../../services/block';
 import ChatsController from '../../controllers/ChatsController';
 
 import ChatItem from './ChatItem';
@@ -12,6 +12,7 @@ import defaultChatImg from '../../../images/profile/avatar.png';
 
 import type { IBlockProps } from '../../types/services/block/Block';
 import type { TChatDetails } from '../../types/services/store/Store';
+import type { ICreateChatReqData } from '../../types/services/api/ChatsApi';
 
 const createChatItem = (chatItem: TChatDetails) => new ChatItem({
   chatItemId: chatItem.id,
@@ -72,13 +73,12 @@ class MenuChats extends Block {
           const form = e.target as HTMLFormElement;
           const formInputs = form.querySelectorAll('input');
 
-          const formData: { title: string } = {
+          const formData: ICreateChatReqData = {
             title: '',
           };
 
           formInputs.forEach((node) => {
-            // @ts-ignore гарантированно есть инпуты с нужными именами
-            formData[node.name] = node.value;
+            formData[node.name as keyof ICreateChatReqData] = TemplateRenderer.escapeHtml(node.value).toString();
           });
 
           ChatsController.createChat(formData);
