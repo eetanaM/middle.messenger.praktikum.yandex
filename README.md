@@ -19,8 +19,16 @@
 <b>Проект в стадии разработки</b>
 <br>
 <br>
-Текущая версия: <b>0.1.0</b>
+Текущая версия: <b>0.2.0</b>
 <br>
+<br>
+Список изменений, добавленных в последнем патче:
+- небольшие изменения дизайна;
+- подключен backend для регистрации/авторизации учетной записи и управления чатами;
+- подключен сервис отправки сообщений;
+- подключен роутинг;
+- подключено централизованное хранилище;
+- подключен поиск (требует доработки, работает только для поиска 20 первых пользователей соответствующих логину, отображает имя и id для добавления пользователя в чат);
 <hr>
 
 ### Демо проекта:
@@ -68,4 +76,5 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/less/less-plain-wordmark.svg" title="Less" alt="Less" width="40" height="40"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/handlebars/handlebars-original-wordmark.svg" title="Handlebars" alt="Handlebars" width="40" height="40"/>
   <img src="https://github.com/devicons/devicon/blob/master/icons/figma/figma-original.svg" title="Figma" alt="Figma" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/eslint/eslint-original.svg" title="Eslint" alt="Eslint" width="40" height="40"/>&nbsp;
 </div>
