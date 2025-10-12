@@ -30,7 +30,6 @@ class SearchResults extends Block {
 
   override componentDidUpdate(_oldProps: IBlockProps, newProps: IBlockProps): boolean {
     if (Array.isArray(newProps.results)) {
-      console.log(newProps.results);
       this.setList("SearchResultItems", newProps.results.map((user: any) => new SearchResultsItem({
         displayName: user.display_name,
         firstName: user.first_name,

@@ -40,6 +40,10 @@ class ChatsApi extends BaseApi {
   public deleteUsersFromChat(data: IChatUsersReqData) {
     return chatsApiInstance.delete('/users', { ...chatsOptions, data });
   }
+
+  public getToken(id: number) {
+    return chatsApiInstance.post(`/token/${id}`);
+  }
 }
 
 export default new ChatsApi();

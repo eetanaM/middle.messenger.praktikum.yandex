@@ -76,7 +76,6 @@ class ChatsController extends Controller {
       if (response.status === 200) {
         const chatUsers = JSON.parse(response.responseText);
         this.store.set('currentChat.chatUsers', chatUsers);
-        console.log(this.store.getState());
       }
       if (response.status === 401 || response.status === 400) {
         const { reason } = JSON.parse(response.responseText);
@@ -128,6 +127,19 @@ class ChatsController extends Controller {
     } catch (error) {
       this.router.go(ERoutes.BAD_SERVER);
     }
+  };
+
+  public getChatToken = async (chatId: number) => {
+    try {
+      const response = await ChatsApi.getToken(chatId);
+      if (response.status === 200) {
+        const { token } = JSON.parse(response.responseText);
+        return token;
+      }
+    } catch (error) {
+      this.router.go(ERoutes.BAD_SERVER);
+    }
+    return "";
   };
 }
 

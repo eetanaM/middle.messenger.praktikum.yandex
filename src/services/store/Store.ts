@@ -49,6 +49,8 @@ export default new Store({
     id: null,
     chatDetails: null,
     chatUsers: [],
+    messages: [],
   },
   searchResults: [],
+  websocket: null,
 });

@@ -29,6 +29,8 @@ const createChatItem = (chatItem: TChatDetails) => new ChatItem({
       const currentChatItemId = Number(chatItemEl.id);
       const baseClass = 'chat-item';
       const allChatItems = document.querySelectorAll('.chat-item');
+      const chats = ChatsController.store.getState().chats.allChats as TChatDetails[];
+      const chatInfo = chats.find((val) => val.id === currentChatItemId);
 
       allChatItems.forEach((el) => {
         el.setAttribute('class', baseClass);
@@ -36,6 +38,7 @@ const createChatItem = (chatItem: TChatDetails) => new ChatItem({
       chatItemEl.setAttribute('class', `${baseClass} active`);
 
       ChatsController.store.set('currentChat.id', currentChatItemId);
+      ChatsController.store.set('currentChat.chatDetails', { ...chatInfo });
     }),
   },
 });

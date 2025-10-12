@@ -1,41 +1,10 @@
-import testValidation from '../../utils/helpers/testValidation';
-import { Block, TemplateRenderer } from '../../services/block';
+import { Block } from '../../services/block';
 import type { IBlockProps } from '../../types/services/block/Block';
 
 class SendMessageForm extends Block {
   constructor(props: IBlockProps) {
     super({
       ...props,
-      events: {
-        submit: ((e: Event) => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          let isValidationPassed = true;
-          const form = e.target as HTMLFormElement;
-          const messageInput = form.querySelector('input');
-          if (!messageInput) {
-            throw new Error('No message input in DOM');
-          }
-          const inputName = messageInput.name;
-          const inputValue = messageInput.value;
-
-          if (!testValidation(inputName, inputValue)) {
-            isValidationPassed = false;
-          }
-
-          if (isValidationPassed) {
-            const formData: { [key: string]: string } = {};
-            formData[messageInput.name] = TemplateRenderer.escapeHtml(messageInput.value).toString();
-
-            console.log(formData);
-          } else {
-            // Пока не реализовывал отображение подсказки по пустому полю для сообщения
-            // Если потребуется добавлю
-            console.log('Validation failed');
-          }
-        }),
-      },
     });
   }
 
@@ -43,7 +12,7 @@ class SendMessageForm extends Block {
     return `<form action="" class="footer__send-message-form">
                 {{{ FormInput }}}
                 <button type="submit" class="send-message-form__send-button">
-                    <img src={{ icons.sendButton }}  alt="Arrow">
+                    <img src={{ sendButton }}  alt="Arrow">
                 </button>
             </form>`;
   }

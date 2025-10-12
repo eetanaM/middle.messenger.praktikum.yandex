@@ -3,15 +3,12 @@ import connect from '../../services/store/connect';
 import ChatsController from '../../controllers/ChatsController';
 import AuthController from '../../controllers/AuthController';
 
-import { FormInput } from '../../components/partials';
 import {
   ChatDetails,
   MenuChats,
   MenuHeader,
-  SendMessageForm,
 } from '../../components/blocks';
 
-import { CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../services/api/mocks/mockData';
 import type { IBlockProps } from '../../types/services/block/Block';
 import SearchForm from '../../components/blocks/SearchForm';
 import type { ISearchUserReqData } from '../../types/services/api/UsersApi';
@@ -26,17 +23,11 @@ const MenuChatsList = connect((state) => ({
   isLoading: state.chats.isLoading,
 }))(MenuChats);
 
-const SendMessageFormComponent = new SendMessageForm({
-  icons: CHAT_MOCK.icons,
-  FormInput: new FormInput({
-    type: 'text',
-    name: 'message',
-    placeholder: 'Введите сообщение',
-  }),
-});
-
 const ChatDetailsComponent = connect((state) => ({
+  currentUserId: state.auth?.user?.id,
   currentChatItemId: state.currentChat?.id,
+  messages: state.currentChat?.messages,
+  title: state.currentChat?.chatDetails?.title,
 }))(ChatDetails);
 
 class MainContentPage extends Block {
@@ -70,14 +61,11 @@ class MainContentPage extends Block {
         },
       }),
       MenuChats: new MenuChatsList(),
-      ChatDetails: new ChatDetailsComponent({
-        icons: CHAT_MOCK.icons,
-        SendMessageForm: SendMessageFormComponent,
-      }),
+      ChatDetails: new ChatDetailsComponent(),
     });
 
-    ChatsController.getAllChats();
     AuthController.getUser();
+    ChatsController.getAllChats();
   }
 
   override render() {
