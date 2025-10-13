@@ -1,7 +1,6 @@
 import { Block, TemplateRenderer } from '../../services/block';
 import connect from '../../services/store/connect';
 import ChatsController from '../../controllers/ChatsController';
-import AuthController from '../../controllers/AuthController';
 
 import {
   ChatDetails,
@@ -64,7 +63,6 @@ class MainContentPage extends Block {
       ChatDetails: new ChatDetailsComponent(),
     });
 
-    AuthController.getUser();
     ChatsController.getAllChats();
   }
 

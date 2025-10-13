@@ -46,6 +46,7 @@ type TMessage = {
 interface IState {
   auth: {
     isLoading: boolean,
+    isAuthenticated: boolean,
     user: TUserDetails | null,
   },
   chats: {

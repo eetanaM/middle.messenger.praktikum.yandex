@@ -20,6 +20,7 @@ class Store extends EventBus {
     }
 
     super();
+    this.on(StoreEvents.STORE_UPD, () => {});
 
     if (initialState) {
       this.state = initialState;
@@ -39,6 +40,7 @@ class Store extends EventBus {
 export default new Store({
   auth: {
     isLoading: false,
+    isAuthenticated: false,
     user: null,
   },
   chats: {

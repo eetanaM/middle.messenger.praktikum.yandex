@@ -9,7 +9,7 @@ class PreviewLink extends Block {
   }
 
   override render() {
-    return '<li><a data-pagesrc={{ pageSrc }} tabindex="1">{{ textContent }}</a></li>';
+    return '<li><a data-pagesrc="{{ pageSrc }}" tabindex="1">{{ textContent }}</a></li>';
   }
 }
 

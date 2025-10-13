@@ -67,12 +67,17 @@ class ChatDetails extends Block {
   protected override componentDidUpdate(oldProps: IBlockProps, newProps: IBlockProps): boolean {
     const shouldUpdate = !isEqual(oldProps, newProps);
     if (shouldUpdate) {
-      const userId = ChatsController.store.getState().auth.user.id;
+      const { isAuthenticated } = ChatsController.store.getState().auth;
+      if (!isAuthenticated) {
+        return false;
+      }
+      const userId = ChatsController.store.getState().auth?.user?.id;
       const oldChatId = oldProps.currentChatItemId;
       const newChatId = newProps.currentChatItemId;
       const oldWS = ChatsController.store.getState().websocket as WebSocket;
       const oldMessages = oldProps.messages as unknown as TMessage[];
       const newMessages = newProps.messages as unknown as TMessage[];
+
       if (oldMessages.length !== newMessages.length) {
         this.setList("Messages", newMessages.map(createMessagesList));
       }

@@ -10,7 +10,7 @@ class AuthForm extends Block {
 
   override render() {
     return `<form class="authorization__auth-form">
-                <img src={{ logoUrl }} class="app__main-logo" alt="Логотип">
+                <img src="{{ logoUrl }}" class="app__main-logo" alt="Логотип">
                 {{{ blockList "inputs" }}}
                 {{{ SubmitButton }}}
                 {{{ NoAccLink }}}

@@ -19,9 +19,9 @@ class ChatItem extends Block {
   }
 
   override render() {
-    return `<div id={{ chatItemId }} class="chat-item" tabindex="1">
+    return `<div id="{{ chatItemId }}" class="chat-item" tabindex="1">
               <div class="chat-item__avatar">
-                  <img src={{ avatarSrc }} alt="Profile photo">
+                  <img src="{{ avatarSrc }}" alt="Profile photo">
               </div>
               <div class="chat-item__chat-info">
                   <h3 class="chat-info__chat-name">{{ chatName }}</h3>

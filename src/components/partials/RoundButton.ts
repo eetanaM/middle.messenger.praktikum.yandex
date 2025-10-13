@@ -14,7 +14,7 @@ class RoundButton extends Block {
 
   override render() {
     return `<button class="app__nav-button">
-              <img src={{ navButtonSrc }} alt="Back arrow">
+              <img src="{{ navButtonSrc }}" alt="Back arrow">
             </button>`;
   }
 }

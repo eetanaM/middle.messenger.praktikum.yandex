@@ -88,7 +88,7 @@ class ChatMenuButton extends Block {
 
   override render() {
     return `<button class="header__menu-button">
-                <img src={{ menuButton }} alt="Menu button">
+                <img src="{{ menuButton }}" alt="Menu button">
             </button>`;
   }
 }

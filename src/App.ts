@@ -14,7 +14,8 @@ Handlebars.registerHelper('blockList', (listName, context) => {
   return items.map((item) => `<div data-id="list-${listName}-${item._id}"></div>`).join('');
 });
 export default class App {
-  initApp() {
+  async initApp() {
+    await AuthController.getUser();
     AuthController.router
       .use(ERoutes.LOGIN, Pages.LoginPage)
       .use(ERoutes.REGISTER, Pages.RegisterPage)

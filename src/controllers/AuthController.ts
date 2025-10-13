@@ -13,7 +13,7 @@ class AuthController extends Controller {
 
       if (response.status === 200) {
         await this.getUser();
-        this.store.set("isAuthenticated", true);
+        this.store.set("auth.isAuthenticated", true);
         this.router.go(ERoutes.MESSENGER);
       } else if (response.status === 409) {
         const { reason } = JSON.parse(response.responseText);
@@ -36,11 +36,13 @@ class AuthController extends Controller {
 
       if (response.status === 200) {
         await this.getUser();
+        this.store.set('auth.isAuthenticated', true);
         this.router.go(ERoutes.MESSENGER);
       } else if (response.status === 400) {
         const { reason } = JSON.parse(response.responseText);
         if (reason === "User already in system") {
           await this.getUser();
+          this.store.set('auth.isAuthenticated', true);
           this.router.go(ERoutes.MESSENGER);
         }
       } else if (response.status === 401) {
@@ -64,11 +66,10 @@ class AuthController extends Controller {
 
       if (response.status === 200) {
         const userInfo = JSON.parse(response.responseText);
+        this.store.set('auth.isAuthenticated', true);
         this.store.set('auth.user', userInfo);
       } else if (response.status === 401) {
-        const { reason } = JSON.parse(response.responseText);
-        // TODO: Алерт поменять на более адекватное уведомление
-        window.alert(reason);
+        this.router.go(ERoutes.LOGIN);
       } else if (response.status >= 500) {
         this.router.go(ERoutes.BAD_SERVER);
       }
@@ -85,6 +86,7 @@ class AuthController extends Controller {
       const response = await AuthApi.logout();
 
       if (response.status === 200) {
+        this.store.set('auth.isAuthenticated', false);
         this.store.set('auth.user', null);
         this.router.go(ERoutes.LOGIN);
       } else if (response.status >= 500) {

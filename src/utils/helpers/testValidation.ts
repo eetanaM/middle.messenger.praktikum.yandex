@@ -17,6 +17,8 @@ function testValidation(inputType: string, inputText: string) {
       break;
     case 'phone': regexp = /^(\+\d{10,15}|\d{10,15})$/gi;
       break;
+    case 'add-user': regexp = /^\d{1,4}$/gi;
+      break;
     default: regexp = /^(?!\s*$).+/gi;
   }
   return regexp.test(inputText);

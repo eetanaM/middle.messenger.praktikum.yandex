@@ -12,7 +12,7 @@ class SendMessageForm extends Block {
     return `<form action="" class="footer__send-message-form">
                 {{{ FormInput }}}
                 <button type="submit" class="send-message-form__send-button">
-                    <img src={{ sendButton }}  alt="Arrow">
+                    <img src="{{ sendButton }}"  alt="Arrow">
                 </button>
             </form>`;
   }

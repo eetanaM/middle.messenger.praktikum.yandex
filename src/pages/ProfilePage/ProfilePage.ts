@@ -180,7 +180,6 @@ class ProfilePage extends Block {
         submit: ((e: Event) => {
           e.preventDefault();
           e.stopPropagation();
-
           let isValidationPassed = true;
           const form = e.target as HTMLFormElement;
           const formInputs = form.querySelectorAll('.app__main-input') as NodeListOf<HTMLInputElement>;
@@ -200,6 +199,7 @@ class ProfilePage extends Block {
           });
 
           if (!isValidationPassed) {
+            console.log("valid failed");
             return;
           }
 
@@ -345,7 +345,6 @@ class ProfilePage extends Block {
         },
       }),
     });
-    AuthController.getUser();
   }
 
   override render() {

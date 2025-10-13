@@ -18,7 +18,7 @@ class MenuHeaderAvatar extends Block {
 
   override render() {
     return `<div class="menu-header__avatar">
-              <img src={{ profileImgSrc }} alt="Profile photo">
+              <img src="{{ profileImgSrc }}" alt="Profile photo">
             </div>`;
   }
 }
