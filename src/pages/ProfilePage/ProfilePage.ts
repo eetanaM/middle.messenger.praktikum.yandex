@@ -199,7 +199,6 @@ class ProfilePage extends Block {
           });
 
           if (!isValidationPassed) {
-            console.log("valid failed");
             return;
           }
 

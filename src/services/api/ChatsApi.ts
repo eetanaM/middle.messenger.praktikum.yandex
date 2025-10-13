@@ -8,8 +8,6 @@ import type {
 import { BaseApi } from "./BaseApi";
 import HTTPTransport from "./HTTPTransport";
 
-const chatsApiInstance = new HTTPTransport('/chats');
-
 const chatsOptions = {
   headers: {
     Accept: 'application/json',
@@ -17,32 +15,34 @@ const chatsOptions = {
 };
 
 class ChatsApi extends BaseApi {
+  private readonly http = new HTTPTransport('/chats');
+
   public getAllChats(data?: IGetChatsReqData) {
-    return chatsApiInstance.get('/', { ...chatsOptions, data });
+    return this.http.get('/', { ...chatsOptions, data });
   }
 
   public createChat(data: ICreateChatReqData) {
-    return chatsApiInstance.post('/', { ...chatsOptions, data });
+    return this.http.post('/', { ...chatsOptions, data });
   }
 
   public deleteChat(data: IDeleteChatReqData) {
-    return chatsApiInstance.delete('/', { ...chatsOptions, data });
+    return this.http.delete('/', { ...chatsOptions, data });
   }
 
   public getChatUsers(data: IGetChatUsersReqData) {
-    return chatsApiInstance.get(`/${data.id}/users`, { ...chatsOptions, data });
+    return this.http.get(`/${data.id}/users`, { ...chatsOptions, data });
   }
 
   public addUsersToChat(data: IChatUsersReqData) {
-    return chatsApiInstance.put('/users', { ...chatsOptions, data });
+    return this.http.put('/users', { ...chatsOptions, data });
   }
 
   public deleteUsersFromChat(data: IChatUsersReqData) {
-    return chatsApiInstance.delete('/users', { ...chatsOptions, data });
+    return this.http.delete('/users', { ...chatsOptions, data });
   }
 
   public getToken(id: number) {
-    return chatsApiInstance.post(`/token/${id}`);
+    return this.http.post(`/token/${id}`);
   }
 }
 

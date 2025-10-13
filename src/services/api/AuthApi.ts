@@ -2,8 +2,6 @@ import type { ISignInReqData, ISignUpReqData } from "../../types/services/api/Au
 import { BaseApi } from "./BaseApi";
 import HTTPTransport from "./HTTPTransport";
 
-const authApiInstance = new HTTPTransport('/auth');
-
 const authOptions = {
   headers: {
     Accept: 'application/json',
@@ -11,20 +9,22 @@ const authOptions = {
 };
 
 class AuthApi extends BaseApi {
+  private readonly http = new HTTPTransport('/auth');
+
   public signUp(data: ISignUpReqData) {
-    return authApiInstance.post('/signup', { ...authOptions, data });
+    return this.http.post('/signup', { ...authOptions, data });
   }
 
   public signIn(data: ISignInReqData) {
-    return authApiInstance.post('/signin', { ...authOptions, data });
+    return this.http.post('/signin', { ...authOptions, data });
   }
 
   public logout() {
-    return authApiInstance.post('/logout', { ...authOptions });
+    return this.http.post('/logout', { ...authOptions });
   }
 
   public getUser() {
-    return authApiInstance.get('/user', { ...authOptions });
+    return this.http.get('/user', { ...authOptions });
   }
 }
 

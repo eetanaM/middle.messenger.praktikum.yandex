@@ -5,8 +5,8 @@ import TemplateRenderer from './TemplateRenderer';
 import merge from '../../utils/helpers/merge';
 import { isEqual } from '../../utils/helpers';
 
-import {
-  type IBlock, type IBlockEvents, type IBlockProps, type TEventHandlersList, type TBlockPropValue,
+import type {
+  IBlock, IBlockEvents, IBlockProps, TEventHandlersList, TBlockPropValue,
 } from '../../types/services/block/Block';
 import type { Callback } from '../../types/services/block/EventBus';
 

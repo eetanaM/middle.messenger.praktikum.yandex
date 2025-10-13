@@ -7,8 +7,6 @@ import type {
 import { BaseApi } from "./BaseApi";
 import HTTPTransport from "./HTTPTransport";
 
-const usersApiInstance = new HTTPTransport('/user');
-
 const usersOptions = {
   headers: {
     Accept: 'application/json',
@@ -16,20 +14,22 @@ const usersOptions = {
 };
 
 class UsersApi extends BaseApi {
+  private readonly http = new HTTPTransport('/user');
+
   public changeCredentials(data: IChangeCredentialsReqData) {
-    return usersApiInstance.put('/profile', { ...usersOptions, data });
+    return this.http.put('/profile', { ...usersOptions, data });
   }
 
   public changeAvatar(data: IChangeAvatarReqData) {
-    return usersApiInstance.put('/profile/avatar', { ...usersOptions, data });
+    return this.http.put('/profile/avatar', { ...usersOptions, data });
   }
 
   public changePassword(data: IChangePasswordReqData) {
-    return usersApiInstance.put('/password', { ...usersOptions, data });
+    return this.http.put('/password', { ...usersOptions, data });
   }
 
   public findUser(data: ISearchUserReqData) {
-    return usersApiInstance.post('/search', { ...usersOptions, data });
+    return this.http.post('/search', { ...usersOptions, data });
   }
 }
 
