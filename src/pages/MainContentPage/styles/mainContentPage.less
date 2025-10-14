@@ -2,8 +2,8 @@
 @import "../../../styles/mixins.less";
 
 .main-content {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     background-color: @main-layout-bgc;
     display: flex;
 }
@@ -14,13 +14,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    text-align: center;
 
     &__header {
-        position: relative;
         background-color: @dark-layout-bgc;
         height: 100px;
         width: 100%;
+        margin-bottom: 5px;
         text-align: center;
         line-height: 100px;
         border-radius: 0 0 5px 5px;
@@ -53,32 +53,23 @@
     }
 
     &__messages-container {
-        flex-grow: 1;
+        flex: 1 1 auto;
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: end;
+        min-height: 0;
         padding: 0 45px;
+        overflow-y: auto;
 
         .messages-container__day-messages {
             display: flex;
             flex-direction: column;
             width: 100%;
 
-            .day-messages__date-stamp {
-                align-self: center;
-                color: @date-stamp-font-color;
-                font-size: 12px;
-                font-weight: 500;
-                margin-bottom: 30px;
-            }
-
             .day-messages__message {
                 position: relative;
                 height: fit-content;
                 min-width: 125px;
                 max-width: 600px;
-                padding: 15px;
+                padding: 20px;
                 background-color: @main-layout-bgc;
                 margin-bottom: 35px;
                 font-size: 12px;
@@ -104,6 +95,7 @@
     }
 
     &__footer {
+        flex-shrink: 0;
         height: 70px;
         width: 100%;
         background: @dark-layout-bgc;
@@ -168,7 +160,13 @@
             & img {
                 height: 100%;
                 width: 100%;
+                border-radius: 5px;
                 object-fit: cover;
+            }
+
+            &:hover {
+                cursor: pointer;
+                border-color: rgb(220 125 0);
             }
         }
 
@@ -183,6 +181,7 @@
     &__menu-search {
         .mainContentMenuBlock;
 
+        position: relative;
         height: 40px;
         min-height: 40px;
         padding: 4px 8px;
@@ -194,7 +193,71 @@
             border-radius: 10px;
             font-size: 18px;
         }
+
+        & .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            max-height: 350px;
+            overflow-y: auto;
+            z-index: 999;
+            box-shadow: 0 4px 8px rgba(0 0 0 / 10%);
+
+            &.hidden {
+                display: none;
+            }
+
+            &__list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .search-result-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 12px;
+                cursor: pointer;
+                transition: background 0.2s;
+
+                &:hover {
+                    background: #f2f2f2;
+                }
+
+                &__avatar {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                &__name {
+                    font-size: 14px;
+                    color: #333;
+                }
+
+                &__id {
+                    font-size: 10px;
+                    color: #525050;
+                }
+            }
+        }
 /* stylelint-enable no-descending-specificity */
+    }
+
+    &__menu-chats {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        & > button {
+            margin: 5px;
+        }
     }
 
     & > .app__main-link {

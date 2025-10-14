@@ -1,9 +1,9 @@
-import Block from '../../utils/Block';
-import type { IBlockProps } from '../../utils/types/Block';
-import testValidation from '../../utils/api/testValidation';
+import testValidation from '../../utils/helpers/testValidation';
+import { Block } from '../../services/block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class FormInput extends Block {
-  constructor(props: IBlockProps) {
+class FormInput extends Block {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
       events: {
@@ -15,10 +15,8 @@ export default class FormInput extends Block {
             const invalidInputLabel = document.getElementById(inputName);
 
             if (inputValue === '' || testValidation(inputName, inputValue)) {
-              console.log('Validation passed on input: ', inputName);
               invalidInputLabel?.setAttribute('class', 'app__invalid-input hidden');
             } else {
-              console.log('Validation failed on input: ', inputName);
               invalidInputLabel?.setAttribute('class', 'app__invalid-input');
             }
           }
@@ -33,6 +31,9 @@ export default class FormInput extends Block {
               name="{{ name }}" 
               placeholder="{{ placeholder }}"
               class="app__main-input"
-          />`;
+              value="{{ value }}"
+            />`;
   }
 }
+
+export default FormInput;

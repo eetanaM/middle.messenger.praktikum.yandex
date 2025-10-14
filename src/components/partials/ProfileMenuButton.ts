@@ -1,9 +1,9 @@
-import Block from '../../utils/Block';
+import { Block } from "../../services/block";
 
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class ProfileMenuButton extends Block {
-  constructor(props: IBlockProps) {
+class ProfileMenuButton extends Block {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
     });
@@ -11,10 +11,12 @@ export default class ProfileMenuButton extends Block {
 
   override render() {
     return `<button 
-                    id="{{ id }}" 
-                    class="{{ class }}"
-                >
-                    {{ textContent }}
-                </button>`;
+              id="{{ id }}" 
+              class="{{ class }}"
+            >
+              {{ textContent }}
+            </button>`;
   }
 }
+
+export default ProfileMenuButton;

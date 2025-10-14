@@ -1,22 +1,27 @@
-import Block from '../../utils/Block';
+import { Block } from "../../services/block";
 
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class Button extends Block {
-  constructor(props: IBlockProps) {
+class Button extends Block {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
-      events: {},
     });
   }
 
   override render() {
     return `<button 
-                    id="{{ id }}" 
-                    class="app__main-button"
-                    type="{{ type }}"
-                >
-                    {{ textContent }}
-                </button>`;
+              id="{{ id }}" 
+              class="app__main-button"
+              type="{{ type }}"
+              {{#if isLoading }}
+              style="background-color: grey; border: none"
+              disabled
+              {{/if}}
+            >
+              {{ textContent }}
+            </button>`;
   }
 }
+
+export default Button;

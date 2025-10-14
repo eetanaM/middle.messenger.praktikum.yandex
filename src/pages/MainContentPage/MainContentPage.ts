@@ -1,99 +1,83 @@
-import Block from '../../utils/Block';
+import { Block, TemplateRenderer } from '../../services/block';
+import connect from '../../services/store/connect';
+import ChatsController from '../../controllers/ChatsController';
 
-import { FormInput, MainLink } from '../../components/partials';
-import { ChatDetails, ChatItem, SendMessageForm } from '../../components/blocks';
+import {
+  ChatDetails,
+  MenuChats,
+  MenuHeader,
+} from '../../components/blocks';
 
-import { MAIN_CONTENT_TEMPLATE_DATA as MOCK, CHAT_DETAILS_TEMPLATE_DATA as CHAT_MOCK } from '../../utils/api/mocks/mockData';
-import * as ENV from '../../utils/constants/consts';
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../types/services/block/Block';
+import SearchForm from '../../components/blocks/SearchForm';
+import type { ISearchUserReqData } from '../../types/services/api/UsersApi';
+import UsersController from '../../controllers/UsersController';
 
-export default class MainContentPage extends Block {
-  constructor(props: IBlockProps) {
-    let currentChatItemId: number | null = null;
-    const SendMessageFormComponent = new SendMessageForm({
-      icons: CHAT_MOCK.icons,
-      FormInput: new FormInput({
-        type: 'text',
-        name: 'message',
-        placeholder: 'Введите сообщение',
-      }),
-    });
+const MenuHeaderComponent = connect((state) => ({
+  profileName: state.auth.user?.display_name || state.auth.user?.first_name,
+}))(MenuHeader);
 
-    const ChatDetailsComponent = new ChatDetails({
-      icons: CHAT_MOCK.icons,
-      SendMessageForm: SendMessageFormComponent,
-    });
+const MenuChatsList = connect((state) => ({
+  chats: state.chats.allChats,
+  isLoading: state.chats.isLoading,
+}))(MenuChats);
 
-    const chatItemsComponents = MOCK.chatItems.map((chatItem) => new ChatItem({
-      chatItemId: chatItem.chatItemId,
-      avatarSrc: chatItem.avatarSrc,
-      chatName: chatItem.chatName,
-      lastMessage: chatItem.lastMessage,
-      timeStamp: chatItem.timeStamp,
-      disabled: chatItem.disabled,
-      unreadMessagesCount: chatItem.unreadMessagesCount,
-      events: {
-        click: ((e: Event) => {
-          e.stopPropagation();
-          e.stopImmediatePropagation();
+const ChatDetailsComponent = connect((state) => ({
+  currentUserId: state.auth?.user?.id,
+  currentChatItemId: state.currentChat?.id,
+  messages: state.currentChat?.messages,
+  title: state.currentChat?.chatDetails?.title,
+}))(ChatDetails);
 
-          const chatItemEl = e.currentTarget as HTMLElement;
-          currentChatItemId = Number(chatItemEl.id);
-          const baseClass = 'chat-item';
-          const allChatItems = document.querySelectorAll('.chat-item');
-
-          allChatItems.forEach((el) => {
-            el.setAttribute('class', baseClass);
-          });
-          chatItemEl.setAttribute('class', `${baseClass} active`);
-
-          ChatDetailsComponent.setProps({
-            currentChatItemId,
-          });
-        }),
-      },
-    }));
-
+class MainContentPage extends Block {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
       events: {},
-      profileImgSrc: MOCK.profileImgSrc,
-      SearchInput: new FormInput({
-        ...MOCK.searchInput.inputData,
-      }),
-      ChatItems: chatItemsComponents,
-      PreviewLink: new MainLink({
-        href: MOCK.preview.href,
-        id: MOCK.preview.id,
-        textContent: MOCK.preview.textContent,
-        appEl: props.appEl,
+      Header: new MenuHeaderComponent(),
+      Search: new SearchForm({
         events: {
-          click: ((e: Event) => {
+          submit: ((e: Event) => {
             e.preventDefault();
-            this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE);
+            e.stopPropagation();
+
+            const form = e.target as HTMLFormElement;
+            const formInput = form.querySelector('input') as HTMLInputElement;
+
+            const formData: ISearchUserReqData = {
+              login: '',
+            };
+
+            formData.login = TemplateRenderer.escapeHtml(formInput?.value).toString();
+
+            if (formData.login === "") {
+              return;
+            }
+
+            formInput.value = '';
+            UsersController.findUser(formData);
           }),
         },
       }),
-      ChatDetails: ChatDetailsComponent,
+      MenuChats: new MenuChatsList(),
+      ChatDetails: new ChatDetailsComponent(),
     });
+
+    ChatsController.getAllChats();
   }
 
   override render() {
     return `<main class="main-content">
-                    <nav class="menu">
-                        <div class="menu__menu-header">
-                            <div class="menu-header__avatar">
-                                <img src={{ profileImgSrc }} alt="Profile photo">
-                            </div>
-                            <span class="menu-header__profile-name">Profile Name</span>
-                        </div>
-                        <form class="menu__menu-search">
-                            {{{ SearchInput }}}
-                        </form>
-                        {{{ blockList "ChatItems" }}}
-                        {{{ PreviewLink }}}
-                    </nav>
-                    {{{ ChatDetails }}}
-                </main>`;
+              <nav class="menu">
+                  {{{ Header }}}
+                  {{{ Search }}}
+                  {{{ MenuChats }}}
+              </nav>
+              {{{ ChatDetails }}}
+          </main>`;
   }
 }
+
+export default MainContentPage;
+
+export type TMainContentPage = typeof MainContentPage;

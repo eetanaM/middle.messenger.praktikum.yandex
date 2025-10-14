@@ -1,8 +1,8 @@
-import Block from '../../utils/Block';
-import type { IBlockProps } from '../../utils/types/Block';
+import { Block } from "../../services/block";
+import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class MainLink extends Block {
-  constructor(props: IBlockProps) {
+class MainLink extends Block {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
     });
@@ -12,3 +12,5 @@ export default class MainLink extends Block {
     return '<a href="{{ href }}" id="{{ id }}" class="app__main-link">{{ textContent }}</a>';
   }
 }
+
+export default MainLink;

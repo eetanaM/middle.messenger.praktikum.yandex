@@ -1,9 +1,11 @@
-export const PAGES = {
-  PREVIEW_PAGE: 'preview',
-  LOGIN_PAGE: 'authorization',
-  REGISTER_PAGE: 'registration',
-  MAIN_CONTENT_PAGE: 'mainContent',
-  PROFILE_PAGE: 'profile',
-  NOT_FOUND_PAGE: 'notFound',
-  BAD_SERVER_PAGE: 'badServer',
-};
+export enum ERoutes {
+  LOGIN = '/',
+  REGISTER = '/sign-up',
+  MESSENGER = '/messenger',
+  PROFILE = '/settings',
+  BAD_SERVER = '/server-error',
+  NOT_FOUND = '/*',
+}
+export const rootBlockQuery = '#app';
+export const BASE_URL = 'https://ya-praktikum.tech/api/v2';
+export const WS_BASE_URL = 'wss://ya-praktikum.tech/ws/chats/';

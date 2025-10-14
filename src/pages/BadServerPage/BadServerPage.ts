@@ -1,25 +1,24 @@
-import Block from '../../utils/Block';
+import { Block } from '../../services/block';
+import { BaseController } from '../../controllers/Controller';
 
 import { MainLink } from '../../components/partials';
 
-import { BAD_SERVER_TEMPLATE_DATA as MOCK } from '../../utils/api/mocks/mockData';
-import * as ENV from '../../utils/constants/consts';
+import { BAD_SERVER_TEMPLATE_DATA as MOCK } from '../../services/api/mocks/mockData';
 
-import type { IBlockProps } from '../../utils/types/Block';
+import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class BadServerPage extends Block {
-  constructor(props: IBlockProps) {
+class BadServerPage extends Block {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
       notFoundLogoSrc: MOCK.notFoundLogoSrc,
       events: {},
-      PreviewLink: new MainLink({
-        ...MOCK.preview,
-        appEl: props.appEl,
+      BackLink: new MainLink({
+        ...MOCK.back,
         events: {
           click: ((e: Event) => {
             e.preventDefault();
-            this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE);
+            BaseController.router.back();
           }),
         },
       }),
@@ -37,8 +36,12 @@ export default class BadServerPage extends Block {
                         <p>Internal server error</p>
                     </div>
                     <nav>
-                        {{{ PreviewLink }}}
+                        {{{ BackLink }}}
                     </nav>
                 </main>`;
   }
 }
+
+export default BadServerPage;
+
+export type TBadServerPage = typeof BadServerPage;

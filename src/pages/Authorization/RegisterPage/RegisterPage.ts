@@ -1,15 +1,19 @@
-import Block from '../../../utils/Block';
+import { Block, TemplateRenderer } from '../../../services/block';
+import connect from '../../../services/store/connect';
 
 import { AuthForm } from '../../../components/blocks';
 import { Button, FormInputWithValidation, MainLink } from '../../../components/partials';
 
-import { REGISTER_TEMPLATE_DATA as MOCK } from '../../../utils/api/mocks/mockData';
-import * as ENV from '../../../utils/constants/consts';
+import { REGISTER_TEMPLATE_DATA as MOCK } from '../../../services/api/mocks/mockData';
+import { ERoutes } from '../../../utils/constants/consts';
 
-import type { IBlockProps } from '../../../utils/types/Block';
+import type { IBlockProps } from '../../../types/services/block/Block';
+import AuthController from '../../../controllers/AuthController';
+import testValidation from '../../../utils/helpers/testValidation';
+import type { ISignUpReqData } from '../../../types/services/api/AuthApi';
 
-export default class RegisterPage extends Block {
-  constructor(props: IBlockProps) {
+class RegisterPage extends Block {
+  constructor(props?: IBlockProps) {
     const inputs = MOCK.inputs.map((input) => new FormInputWithValidation({
       input: {
         type: input.inputData.type,
@@ -22,41 +26,82 @@ export default class RegisterPage extends Block {
       },
     }));
 
+    const SignUpButton = connect((state) => ({
+      isLoading: state.auth.isLoading,
+    }))(Button);
+
     super({
       ...props,
       events: {},
       AuthForm: new AuthForm({
         logoUrl: MOCK.logoUrl,
         inputs,
-        SubmitButton: new Button(MOCK.button),
+        SubmitButton: new SignUpButton({
+          id: 'register-button',
+          textContent: 'Зарегистрироваться',
+          type: "submit",
+          isLoading: AuthController.store.getState()?.auth?.isLoading,
+        }),
         AlreadyHasAccLink: new MainLink({
           ...MOCK.link,
-          appEl: props.appEl,
           events: {
             click: (e: Event) => {
               e.preventDefault();
-              this._appElement.changePage(ENV.PAGES.LOGIN_PAGE);
+              AuthController.router.go(ERoutes.LOGIN);
             },
           },
         }),
-        PreviewLink: new MainLink({
-          ...MOCK.preview,
-          appEl: props.appEl,
-          events: {
-            click: (e: Event) => {
-              e.preventDefault();
-              this._appElement.changePage(ENV.PAGES.PREVIEW_PAGE);
-            },
-          },
-        }),
-        events: {},
+        events: {
+          submit: ((e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let isValidationPassed = true;
+            const form = e.target as HTMLFormElement;
+            const formInputs = form.querySelectorAll('input');
+
+            formInputs.forEach((node) => {
+              const inputName = node.name;
+              const inputValue = node.value;
+              const invalidInputLabel = document.getElementById(inputName);
+
+              if (testValidation(inputName, inputValue)) {
+                invalidInputLabel?.setAttribute('class', 'app__invalid-input hidden');
+              } else {
+                invalidInputLabel?.setAttribute('class', 'app__invalid-input');
+                isValidationPassed = false;
+              }
+            });
+
+            const formData: ISignUpReqData = {
+              first_name: '',
+              second_name: '',
+              login: '',
+              phone: '',
+              email: '',
+              password: '',
+            };
+
+            if (isValidationPassed) {
+              formInputs.forEach((node) => {
+                formData[node.name as keyof ISignUpReqData] = TemplateRenderer.escapeHtml(node.value).toString();
+              });
+
+              AuthController.registerUser(formData);
+            }
+          }),
+        },
       }),
     });
   }
 
   override render() {
     return `<main class="authorization">
-                    {{{ AuthForm }}}
-                </main>`;
+                {{{ AuthForm }}}
+            </main>`;
   }
 }
+
+export default RegisterPage;
+
+export type TRegisterPage = typeof RegisterPage;

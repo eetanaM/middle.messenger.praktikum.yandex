@@ -1,25 +1,27 @@
-import Block from '../../utils/Block';
-import type { IBlockProps } from '../../utils/types/Block';
+import { Block } from "../../services/block";
+import type { IBlockProps } from '../../types/services/block/Block';
 
-export default class FileInput extends Block {
-  constructor(props: IBlockProps) {
+class FileInput extends Block {
+  constructor(props?: IBlockProps) {
     super({
       ...props,
-      events: {},
     });
   }
 
   override render() {
     return `<div class="app__file-input-with-label">
-                    <input 
-                        type="file" 
-                        name="{{ name }}" 
-                        id="{{ id }}"
-                        class="app__file-input"
-                    />
-                    <label for="{{ id }}" class="app__file-input-button">
-                        <img class="app__file-input-image" src="{{ src }}" alt="Profile image" />
-                    </label>
-                </div>`;
+              <input 
+                  type="file" 
+                  name="{{ name }}" 
+                  id="{{ id }}"
+                  class="app__file-input"
+                  accept="image/*"
+              />
+              <label for="{{ id }}" class="app__file-input-button">
+                  <img class="app__file-input-image" src="{{ src }}" alt="Profile image" />
+              </label>
+            </div>`;
   }
 }
+
+export default FileInput;

@@ -1,0 +1,155 @@
+import logo from '../../../../images/logo/logo.png';
+import notFoundLogoSrc from '../../../../images/logo/logo404.png';
+import menuButton from '../../../../images/chat/menu1.png';
+import mockImg from '../../../../images/chat/mockimage.png';
+import paperClip from '../../../../images/chat/paperclip.png';
+import sendButton from '../../../../images/chat/send.png';
+
+import { TemplateRenderer } from '../../block';
+
+import type {
+  AuthDataTemplate, ChatDetailsDataTemplate, ErrorPageDataTemplate,
+} from '../../../types/services/api/mockData';
+
+export const LOGIN_TEMPLATE_DATA: AuthDataTemplate = {
+  logoUrl: logo,
+  inputs: [
+    {
+      inputData: {
+        type: 'text', name: 'login', placeholder: 'Email/Login',
+      },
+      invalidInputData: {
+        name: 'login',
+        // eslint-disable-next-line max-len
+        textContent: 'Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой',
+      },
+    },
+    {
+      inputData: {
+        type: 'password', name: 'password', placeholder: 'Пароль',
+      },
+      invalidInputData: {
+        name: 'password',
+        // eslint-disable-next-line max-len
+        textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра',
+      },
+    },
+  ],
+  button: {
+    id: 'login-button',
+    textContent: TemplateRenderer.escapeHtml('Войти'),
+    type: "submit",
+  },
+  link: {
+    href: '#',
+    id: 'no-acc',
+    textContent: TemplateRenderer.escapeHtml('Нет аккаунта?'),
+  },
+};
+
+export const REGISTER_TEMPLATE_DATA: AuthDataTemplate = {
+  logoUrl: logo,
+  inputs: [
+    {
+      inputData: {
+        type: 'email', name: 'email', placeholder: 'Email',
+      },
+      invalidInputData: {
+        name: 'email',
+        textContent: 'Неверный формат ввода. Допустимый формат ввода: example@mail.com',
+      },
+    },
+    {
+      inputData: {
+        type: 'login', name: 'login', placeholder: 'Логин',
+      },
+      invalidInputData: {
+        name: 'login',
+        // eslint-disable-next-line max-len
+        textContent: 'Неверный формат ввода. Поле должно содержать 3 до 20 символов, без пробелов, без спецсимволов (кроме нижнего подчеркивания и дефиса), хотя бы с 1 латинской буквой',
+      },
+    },
+    {
+      inputData: {
+        type: 'text', name: 'first_name', placeholder: 'Имя',
+      },
+      invalidInputData: {
+        name: 'first_name',
+        // eslint-disable-next-line max-len
+        textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
+      },
+    },
+    {
+      inputData: {
+        type: 'text', name: 'second_name', placeholder: 'Фамилия',
+      },
+      invalidInputData: {
+        name: 'second_name',
+        // eslint-disable-next-line max-len
+        textContent: 'Неверный формат ввода. Поле не должно содержать пробелов, цифр и спецсимволов (кроме дефиса), первая буква - заглавная',
+      },
+    },
+    {
+      inputData: {
+        type: 'tel', name: 'phone', placeholder: 'Телефон',
+      },
+      invalidInputData: {
+        name: 'phone',
+        // eslint-disable-next-line max-len
+        textContent: 'Неверный формат ввода. Поле должно содержать от 10 до 15 цифр. Допустимый формат ввода: 123456789 / +123456789',
+      },
+    },
+    {
+      inputData: {
+        type: 'password', name: 'password', placeholder: 'Пароль',
+      },
+      invalidInputData: {
+        name: 'password',
+        // eslint-disable-next-line max-len
+        textContent: 'Неверный формат ввода. Поле должно содержать от 8 до 40 символов, обязательно хотя бы одна заглавная буква и цифра.',
+      },
+    },
+  ],
+  button: {
+    id: 'register-button',
+    textContent: TemplateRenderer.escapeHtml('Зарегистрироваться'),
+    type: "submit",
+  },
+  link: {
+    href: '#',
+    id: 'no-acc',
+    textContent: TemplateRenderer.escapeHtml('Уже есть аккаунт?'),
+  },
+};
+
+export const CHAT_DETAILS_TEMPLATE_DATA: ChatDetailsDataTemplate = {
+  form: {
+    inputData: {
+      type: 'text', name: 'message', placeholder: 'Введите сообщение...',
+    },
+  },
+  icons: {
+    menuButton,
+    mockImg,
+    sendButton,
+    paperClip,
+  },
+};
+
+export const NOT_FOUND_TEMPLATE_DATA: ErrorPageDataTemplate = {
+  notFoundLogoSrc,
+  back: {
+    href: '/',
+    id: 'preview',
+    textContent: TemplateRenderer.escapeHtml('Вернуться назад'),
+  },
+};
+
+export const BAD_SERVER_TEMPLATE_DATA: ErrorPageDataTemplate = {
+  notFoundLogoSrc,
+  back: {
+    href: '/',
+    id: 'back',
+    textContent: TemplateRenderer.escapeHtml('Вернуться назад'),
+  },
+};
