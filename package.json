@@ -6,6 +6,11 @@
   "engines": {
     "node": ">=20.11.1"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all lint"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -26,6 +31,7 @@
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-plugin-import": "^2.25.2",
     "globals": "^16.4.0",
+    "husky": "^9.1.7",
     "less": "^4.4.1",
     "postcss-less": "^6.0.0",
     "stylelint": "^16.24.0",
