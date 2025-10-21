@@ -95,7 +95,7 @@ class ChatDetails extends Block {
         ChatsController.getChatToken(Number(newChatId)).then((res) => {
           token = res;
           const websocket = new WebSocket(`${WS_BASE_URL}${userId}/${newChatId}/${token}`);
-          let intervalId: number;
+          let intervalId: NodeJS.Timeout;
           const pinger = () => {
             websocket.send(JSON.stringify({
               type: "ping",
