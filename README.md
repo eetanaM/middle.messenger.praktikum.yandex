@@ -19,16 +19,12 @@
 <b>Проект в стадии разработки</b>
 <br>
 <br>
-Текущая версия: <b>0.2.0</b>
+Текущая версия: <b>0.3.0</b>
 <br>
 <br>
 Список изменений, добавленных в последнем патче:
-- небольшие изменения дизайна;
-- подключен backend для регистрации/авторизации учетной записи и управления чатами;
-- подключен сервис отправки сообщений;
-- подключен роутинг;
-- подключено централизованное хранилище;
-- подключен поиск (требует доработки, работает только для поиска 20 первых пользователей соответствующих логину, отображает имя и id для добавления пользователя в чат);
+- добавлены юнит-тесты для Block, Router, HTTPTransport;
+- добавлен pre-commit хук для валидации кода;
 <hr>
 
 ### Демо проекта:
@@ -49,21 +45,44 @@
 `npm install`
 <br>
 <br>
-Для запуска проекта в dev режиме:
+<br>
+**Для запуска проекта в dev режиме**:
 <br>
 `npm run dev`
 <br>
 <br>
-Для сборки проекта и запуска express сервера:
+**Для сборки проекта и запуска express сервера**:
 <br>
 `npm run start`
 <br>
 <br>
-Для сборки готового для деплоя проекта:
+**Для сборки готового для деплоя проекта**:
 <br>
 `npm run build`
 <br>
-
+<br>
+**Для запуска проверок линтеров**:
+<br>
+`npm run lint`
+<br>
+<br>
+**Для запуска Jest-тестов**:
+<br>
+`npm run test`
+<br>
+<br>
+### Автоматическая валидация кода :
+**В проекте используется менеджер Git-хуков Husky, и настроена автоматическая проверка линтером и запуск тестов перед коммитом**
+<br>
+Для управления pre-commit сценариями, внесите требуемые изменения в файл: `.husky/pre-commit`
+<br>
+<br>
+Сценарии по умолчанию:
+<br>
+```
+npm run lint
+npm run test
+```
 <hr>
 
 ### Технологический стек:
@@ -77,4 +96,5 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/handlebars/handlebars-original-wordmark.svg" title="Handlebars" alt="Handlebars" width="40" height="40"/>
   <img src="https://github.com/devicons/devicon/blob/master/icons/figma/figma-original.svg" title="Figma" alt="Figma" width="40" height="40"/>&nbsp;
   <img src="https://github.com/devicons/devicon/blob/master/icons/eslint/eslint-original.svg" title="Eslint" alt="Eslint" width="40" height="40"/>&nbsp;
+  <img src="https://github.com/devicons/devicon/blob/master/icons/jest/jest-plain.svg" title="Jest" alt="Jest" width="40" height="40"/>&nbsp;
 </div>
